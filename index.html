@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:#1A110B;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth}
+*{box-sizing:border-box}
+a{color:#F3A712;text-decoration:none}
+a:hover{color:#F1E8D8}
+input,select,textarea,button{font-family:inherit}
+</style>
+</helmet>
+<div style="font-family:'Archivo',sans-serif;color:#F1E8D8;background:#1A110B">
+
+<!-- HERO -->
+<section data-screen-label="01 Hero" onMouseMove="{{ onHeroMove }}" style="position:relative;height:{{ heroH }};min-height:640px;overflow:hidden;background:#1A110B">
+  <nav style="position:absolute;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:20px 5vw">
+    <a href="#" style="display:flex;align-items:center;gap:14px;color:#F1E8D8">
+      <img src="assets/logo.png" alt="Deux B Street food" style="width:{{ logoW }};height:auto;display:block;filter:drop-shadow(0 6px 14px rgba(0,0,0,.4))">
+    </a>
+    <div style="display:flex;align-items:center;gap:32px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-stretch:85%;font-weight:600">
+      <sc-if value="{{ notMob }}" hint-placeholder-val="{{ true }}">
+        <a href="#burger" onClick="{{ goCompose }}" style="color:#F1E8D8" style-hover="color:#F3A712">Composer</a>
+        <a href="#carte" style="color:#F1E8D8" style-hover="color:#F3A712">La carte</a>
+        <a href="#evenements" style="color:#F1E8D8" style-hover="color:#F3A712">Événements</a>
+      </sc-if>
+      <a href="#burger" onClick="{{ goCompose }}" style="display:flex;align-items:center;gap:10px;background:#F3A712;color:#1A110B;padding:13px 20px;border-radius:999px" style-hover="background:#F1E8D8;color:#1A110B">Commander <span style="font-size:16px;line-height:1">→</span></a>
+      <sc-if value="{{ mob }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ openMenu }}" aria-label="Menu" style="width:46px;height:46px;margin-left:-22px;padding:0;border:1.5px solid #F1E8D8;border-radius:0;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer">
+          <span style="display:block;width:20px;height:2px;background:#F1E8D8"></span>
+          <span style="display:block;width:20px;height:2px;background:#F1E8D8"></span>
+          <span style="display:block;width:20px;height:2px;background:#F1E8D8"></span>
+        </button>
+      </sc-if>
+    </div>
+  </nav>
+
+  <div style="position:absolute;left:0;right:0;top:{{ t1Top }};z-index:1;text-align:center;font-weight:900;font-stretch:62%;font-size:min(23vw,32vh);line-height:.82;letter-spacing:-.01em;text-transform:uppercase;color:#F1E8D8;white-space:nowrap">Le burger</div>
+
+  <div style="position:absolute;left:0;top:0;width:100%;height:100%;z-index:2;pointer-events:none">
+    <div style="position:absolute;left:0;top:0;width:{{ heroShadowW }};height:70px;transform:{{ heroShadowTf }};opacity:{{ heroOp }};border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.7),rgba(0,0,0,0));transition:transform 1.2s cubic-bezier(.2,.8,.2,1), opacity 1.2s ease"></div>
+    <div style="position:absolute;left:0;top:0;width:{{ heroW }};transform:{{ heroTf }};transition:transform 1.2s cubic-bezier(.2,.8,.2,1)">
+      <img src="assets/burger-full.png" alt="Burger Deux B" style="display:block;width:100%;height:auto;opacity:{{ heroOp }};transform:{{ heroInTf }};transition:transform 1.4s cubic-bezier(.2,.8,.2,1), opacity .9s ease;filter:drop-shadow(0 30px 40px rgba(0,0,0,.45))">
+    </div>
+  </div>
+
+  <div style="position:absolute;left:0;right:0;bottom:{{ t2Bottom }};z-index:3;text-align:center;font-weight:900;font-stretch:62%;font-size:min(23vw,32vh);line-height:.82;letter-spacing:-.01em;text-transform:uppercase;color:transparent;-webkit-text-stroke:2px #F1E8D8;white-space:nowrap;pointer-events:none">qui roule.</div>
+
+  <sc-if value="{{ mob }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;left:5vw;right:5vw;bottom:22px;z-index:10;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-stretch:85%;color:#BCA996">
+        <span style="display:flex;align-items:center;gap:8px;color:#F1E8D8"><span style="width:7px;height:7px;border-radius:50%;background:#F3A712"></span>Tournée des villages · Pain maison</span>
+        <span>Jussac · Marmanhac · Reilhac · Naucelles</span>
+      </div>
+      <a href="#burger" onClick="{{ goCompose }}" style="display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 22px;border-radius:999px;background:#F3A712;color:#1A110B;font-weight:800;font-size:15px;letter-spacing:.1em;text-transform:uppercase">Compose ton burger <span style="font-size:20px;line-height:1">→</span></a>
+    </div>
+  </sc-if>
+  <sc-if value="{{ notMob }}" hint-placeholder-val="{{ true }}">
+  <div style="position:absolute;left:5vw;right:5vw;bottom:28px;z-index:10;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-stretch:85%;color:#BCA996">
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <span style="color:#F1E8D8">Pain burger fait maison</span>
+      <span>Fromages du Cantal · Sauces maison</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:6px;text-align:right">
+      <span style="display:flex;align-items:center;gap:8px;justify-content:flex-end;color:#F1E8D8"><span style="width:8px;height:8px;border-radius:50%;background:#F3A712"></span>Tournée des villages</span>
+      <span>Jussac · Marmanhac · Reilhac · Naucelles</span>
+    </div>
+  </div>
+  </sc-if>
+</section>
+
+
+<!-- COMPOSE -->
+<section id="burger" data-screen-label="02 Compose ton burger" ref="{{ explRef }}" style="position:relative;height:240vh;background:#F1E8D8;color:#1A110B">
+  <div style="position:sticky;top:0;height:{{ stageH }};overflow:hidden">
+    <div style="position:absolute;left:5vw;top:{{ textTop }};transform:{{ textTf }};width:{{ textW }};z-index:6;display:flex;flex-direction:column;gap:{{ textGap }}">
+      <div style="font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-stretch:85%;font-weight:600;color:#6B4A35">Couche par couche</div>
+      <h2 style="margin:0;font-weight:900;font-stretch:62%;font-size:clamp(52px,7vw,112px);line-height:.86;text-transform:uppercase;letter-spacing:-.01em">Compose<br>ton <span style="font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;font-stretch:100%;letter-spacing:0">burger.</span></h2>
+      <sc-if value="{{ isWide }}" hint-placeholder-val="{{ true }}">
+        <p style="margin:0;font-size:17px;line-height:1.55;color:#4A3426;max-width:34ch;text-wrap:pretty">Change chaque couche avec les flèches, choisis la quantité et commande. Ton burger est prêt quand tu arrives au camion.</p>
+        <div style="display:flex;flex-direction:column;gap:10px;opacity:{{ panelOp }};pointer-events:{{ panelPe }};transition:opacity .3s ease">
+          <div style="display:flex;gap:8px;align-items:stretch">
+            <button onClick="{{ toggleFries }}" style="flex:1;min-width:0;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 8px 0 18px;height:52px;border-radius:999px;border:1.5px solid #1A110B;background:{{ friesBg }};color:#1A110B;font-weight:700;font-size:14px;cursor:pointer;white-space:nowrap">
+              <span>Avec frites</span>
+              <span style="height:36px;min-width:36px;padding:0 10px;border-radius:999px;background:{{ friesDot }};color:{{ friesDotFg }};display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800">{{ friesMark }}</span>
+            </button>
+            <div style="display:flex;align-items:center;gap:2px;border:1.5px solid #1A110B;border-radius:999px;padding:4px;height:52px">
+              <button onClick="{{ bDec }}" aria-label="Moins" style="width:42px;height:42px;border-radius:50%;border:none;background:transparent;font-size:20px;cursor:pointer;color:#1A110B;padding:0" style-hover="background:rgba(26,17,11,.08)">−</button>
+              <span style="width:24px;text-align:center;font-weight:800;font-size:17px;font-variant-numeric:tabular-nums">{{ bQty }}</span>
+              <button onClick="{{ bInc }}" aria-label="Plus" style="width:42px;height:42px;border-radius:50%;border:none;background:#1A110B;color:#F1E8D8;font-size:20px;cursor:pointer;padding:0" style-hover="background:#F3A712;color:#1A110B">+</button>
+            </div>
+          </div>
+          <button onClick="{{ openSheet }}" style="height:58px;border-radius:999px;border:none;background:#1A110B;color:#F1E8D8;display:flex;align-items:center;justify-content:space-between;padding:0 10px 0 24px;cursor:pointer;font-weight:800;font-size:15px;letter-spacing:.1em;text-transform:uppercase" style-hover="background:#33231A">
+            <span>Commander</span>
+            <span style="height:42px;padding:0 16px;border-radius:999px;background:#F3A712;color:#1A110B;display:flex;align-items:center;font-weight:900;font-stretch:70%;font-size:22px;letter-spacing:0;font-variant-numeric:tabular-nums">{{ bTotal }}</span>
+          </button>
+        </div>
+      </sc-if>
+    </div>
+
+    <div style="position:absolute;left:0;top:0;width:100%;height:100%">
+      <div style="position:absolute;left:0;top:0;width:{{ shadowW }};height:50px;transform:{{ shadowTf }};border-radius:50%;background:radial-gradient(closest-side,rgba(60,35,20,.35),rgba(60,35,20,0))"></div>
+      <sc-for list="{{ stageLayers }}" as="l" hint-placeholder-count="0">
+        <div style="position:absolute;left:0;top:0;width:{{ l.w }};z-index:{{ l.z }};transform:{{ l.tf }}">
+          <img src="{{ l.src }}" alt="{{ l.alt }}" style="display:block;width:100%;height:auto;opacity:{{ l.op }};transform:{{ l.bumpTf }};transition:{{ l.trans }};filter:drop-shadow(0 14px 18px rgba(70,40,20,.22))">
+        </div>
+      </sc-for>
+      <sc-for list="{{ arrows }}" as="a" hint-placeholder-count="0">
+        <button onClick="{{ a.prev }}" aria-label="Option précédente" style="position:absolute;left:0;top:0;z-index:9;width:34px;height:34px;padding:0;transform:{{ a.ltf }};opacity:{{ a.op }};pointer-events:{{ a.pe }};border-radius:50%;border:1px solid rgba(26,17,11,.25);background:rgba(250,245,235,.7);color:#1A110B;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:opacity .35s ease, background .2s ease" style-hover="background:#1A110B;color:#F1E8D8;border-color:#1A110B"><svg width="12" height="12" viewBox="0 0 12 12" style="display:block"><path d="M7.5 2.5 4 6l3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+        <button onClick="{{ a.next }}" aria-label="Option suivante" style="position:absolute;left:0;top:0;z-index:9;width:34px;height:34px;padding:0;transform:{{ a.rtf }};opacity:{{ a.op }};pointer-events:{{ a.pe }};border-radius:50%;border:1px solid rgba(26,17,11,.25);background:rgba(250,245,235,.7);color:#1A110B;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:opacity .35s ease, background .2s ease" style-hover="background:#1A110B;color:#F1E8D8;border-color:#1A110B"><svg width="12" height="12" viewBox="0 0 12 12" style="display:block"><path d="M4.5 2.5 8 6 4.5 9.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+      </sc-for>
+      <sc-if value="{{ showLabels }}" hint-placeholder-val="{{ true }}">
+        <sc-for list="{{ stageLabels }}" as="lb" hint-placeholder-count="0">
+          <div style="position:absolute;left:0;top:0;z-index:8;transform:{{ lb.tf }};opacity:{{ lb.op }};display:flex;align-items:center;gap:12px;pointer-events:none">
+            <span style="height:1px;width:{{ lb.lineW }};background:#1A110B;flex-shrink:0"></span>
+            <div style="display:flex;flex-direction:column;gap:3px;width:{{ lb.textW }}">
+              <span style="display:flex;gap:8px;white-space:nowrap;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:#6B4A35;font-weight:600"><span>{{ lb.cat }}</span><span style="font-variant-numeric:tabular-nums;opacity:.75">{{ lb.count }}</span></span>
+              <span style="font-weight:800;font-stretch:75%;font-size:{{ lb.fs }};text-transform:uppercase;letter-spacing:.03em;line-height:1.05">{{ lb.name }}</span>
+            </div>
+          </div>
+        </sc-for>
+      </sc-if>
+    </div>
+
+    <sc-if value="{{ narrowStage }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;left:5vw;right:5vw;bottom:18px;z-index:10">
+        <div style="display:flex;flex-direction:column;gap:10px;opacity:{{ panelOp }};pointer-events:{{ panelPe }};transition:opacity .3s ease">
+          <div style="display:flex;gap:8px;align-items:stretch">
+            <button onClick="{{ toggleFries }}" style="flex:1;min-width:0;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 8px 0 18px;height:52px;border-radius:999px;border:1.5px solid #1A110B;background:{{ friesBg }};color:#1A110B;font-weight:700;font-size:14px;cursor:pointer;white-space:nowrap">
+              <span>Avec frites</span>
+              <span style="height:36px;min-width:36px;padding:0 10px;border-radius:999px;background:{{ friesDot }};color:{{ friesDotFg }};display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800">{{ friesMark }}</span>
+            </button>
+            <div style="display:flex;align-items:center;gap:2px;border:1.5px solid #1A110B;border-radius:999px;padding:4px;height:52px">
+              <button onClick="{{ bDec }}" aria-label="Moins" style="width:42px;height:42px;border-radius:50%;border:none;background:transparent;font-size:20px;cursor:pointer;color:#1A110B;padding:0" style-hover="background:rgba(26,17,11,.08)">−</button>
+              <span style="width:24px;text-align:center;font-weight:800;font-size:17px;font-variant-numeric:tabular-nums">{{ bQty }}</span>
+              <button onClick="{{ bInc }}" aria-label="Plus" style="width:42px;height:42px;border-radius:50%;border:none;background:#1A110B;color:#F1E8D8;font-size:20px;cursor:pointer;padding:0" style-hover="background:#F3A712;color:#1A110B">+</button>
+            </div>
+          </div>
+          <button onClick="{{ openSheet }}" style="height:58px;border-radius:999px;border:none;background:#1A110B;color:#F1E8D8;display:flex;align-items:center;justify-content:space-between;padding:0 10px 0 24px;cursor:pointer;font-weight:800;font-size:15px;letter-spacing:.1em;text-transform:uppercase" style-hover="background:#33231A">
+            <span>Commander</span>
+            <span style="height:42px;padding:0 16px;border-radius:999px;background:#F3A712;color:#1A110B;display:flex;align-items:center;font-weight:900;font-stretch:70%;font-size:22px;letter-spacing:0;font-variant-numeric:tabular-nums">{{ bTotal }}</span>
+          </button>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ isWide }}" hint-placeholder-val="{{ true }}">
+      <div style="position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:9;display:flex;align-items:center;gap:14px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:#6B4A35;opacity:{{ hintOp }}">
+        <span>Faites défiler</span>
+        <span style="width:80px;height:2px;background:rgba(26,17,11,.15);border-radius:2px;overflow:hidden;display:block"><span style="display:block;height:100%;width:{{ progW }};background:#1A110B"></span></span>
+      </div>
+    </sc-if>
+  </div>
+</section>
+
+<!-- CARTE -->
+<section id="carte" data-screen-label="03 La carte" style="background:#1A110B;color:#F1E8D8;padding:clamp(72px,10vw,120px) 0;overflow:hidden;display:flex;flex-direction:column;gap:clamp(28px,4vw,56px)">
+  <div style="padding:0 5vw;display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap">
+    <h2 style="margin:0;font-weight:900;font-stretch:62%;font-size:clamp(84px,13vw,220px);line-height:.78;text-transform:uppercase;letter-spacing:-.015em">La carte</h2>
+    <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#BCA996;padding-bottom:8px">3 tickets · au camion</span>
+  </div>
+  <div style="display:flex;gap:{{ rcGap }};justify-content:{{ rcJust }};align-items:flex-start;overflow-x:{{ rcOverflow }};scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:{{ rcPad }}">
+      <div style="position:relative;flex:{{ rcFlex }};max-width:{{ rcMax }};min-width:0;scroll-snap-align:center;transform:rotate({{ rot1 }});filter:drop-shadow(0 24px 30px rgba(0,0,0,.5));transition:transform .5s cubic-bezier(.2,.8,.2,1)" style-hover="transform:rotate(0deg) translateY(-8px)">
+        <div style="position:relative;background:#FBF7EE;color:#1A110B;padding:40px 24px 46px;font-family:'IBM Plex Mono',monospace;font-size:13.5px;line-height:1.5;display:flex;flex-direction:column;gap:16px;-webkit-mask:conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) top/14px 51% repeat-x,conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/14px 51% repeat-x;mask:conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) top/14px 51% repeat-x,conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/14px 51% repeat-x">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:1px;text-align:center">
+            <span style="font-weight:700;font-size:14px;letter-spacing:.12em">DEUX B · STREET FOOD</span>
+            <span style="font-size:11.5px;white-space:nowrap">14 AV. DES RAUX · 15250 JUSSAC</span>
+            <span style="font-size:11.5px;white-space:nowrap">TÉL. 06 61 99 88 33</span>
+          </div>
+          <div style="border-top:1.5px dashed rgba(26,17,11,.45)"></div>
+          <div style="display:flex;justify-content:space-between;gap:10px;font-size:11.5px;text-transform:uppercase;white-space:nowrap"><span>Ticket n°01/03</span><span>Sur place · à emporter</span></div>
+          <span style="align-self:flex-start;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:62%;font-size:54px;line-height:.85;text-transform:uppercase;letter-spacing:-.005em">Burgers</span>
+          <div style="display:flex;flex-direction:column;gap:9px">
+          <div style="display:flex;flex-direction:column;gap:1px">
+            <div style="display:flex;align-items:baseline;gap:8px"><span style="font-weight:700;text-transform:uppercase;white-space:nowrap;background:linear-gradient(transparent 50%,#F3A712 50%,#F3A712 94%,transparent 94%);padding:0 4px;margin:0 -4px;">Le 12 Balles</span><span style="flex:1;min-width:12px;border-bottom:1.5px dotted rgba(26,17,11,.4);transform:translateY(-4px)"></span><span style="font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap">12,00</span></div>
+            <span style="font-size:12px;color:#5A4334;padding-left:14px">burger maison + frites</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1px">
+            <div style="display:flex;align-items:baseline;gap:8px"><span style="font-weight:700;text-transform:uppercase;white-space:nowrap;">Burger</span><span style="flex:1;min-width:12px;border-bottom:1.5px dotted rgba(26,17,11,.4);transform:translateY(-4px)"></span><span style="font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap">10,00</span></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1px">
+            <div style="display:flex;align-items:baseline;gap:8px"><span style="font-weight:700;text-transform:uppercase;white-space:nowrap;">B-Croc</span><span style="flex:1;min-width:12px;border-bottom:1.5px dotted rgba(26,17,11,.4);transform:translateY(-4px)"></span><span style="font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap">6,00</span></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1px">
+            <div style="display:flex;align-items:baseline;gap:8px"><span style="font-weight:700;text-transform:uppercase;white-space:nowrap;">B-Wrap</span><span style="flex:1;min-width:12px;border-bottom:1.5px dotted rgba(26,17,11,.4);transform:translateY(-4px)"></span><span style="font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap">5,00</span></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1px">
+            <div style="display:flex;align-items:baseline;gap:8px"><span style="font-weight:700;text-transform:uppercase;white-space:nowrap;">Frites</span><span style="flex:1;min-width:12px;border-bottom:1.5px dotted rgba(26,17,11,.4);transform:translateY(-4px)"></span><span style="font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap">3,00</span></div>
+          </div>
+          </div>
+          <div style="border-top:1.5px dashed rgba(26,17,11,.45)"></div>
+          <div style="display:flex;flex-direction:column;gap:3px"><span style="font-size:11px;font-weight:700;letter-spacing:.14em">FROMAGE AU CHOIX</span><span style="font-size:12.5px;color:#4A3426">Cantal · Cheddar · Bleu · Chèvre · St-Nectaire · fromage du mois</span></div>
+          <div style="display:flex;flex-direction:column;gap:3px"><span style="font-size:11px;font-weight:700;letter-spacing:.14em">SAUCES MAISON</span><span style="font-size:12.5px;color:#4A3426">Pays Vert (crème, ail, fines herbes) · Basque · Poivre · Cantalou</span></div>
+          <div style="border-top:1.5px dashed rgba(26,17,11,.45)"></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+            <span style="font-size:12px;font-weight:700;letter-spacing:.1em">*** MERCI · BON APPÉTIT ***</span>
+            <div style="width:78%;height:42px;background:repeating-linear-gradient(90deg,#1A110B 0 2px,transparent 2px 4px,#1A110B 4px 5px,transparent 5px 8px,#1A110B 8px 11px,transparent 11px 12px,#1A110B 12px 13px,transparent 13px 17px)"></div>
+          </div>
+          <div style="position:absolute;top:150px;right:14px;width:76px;height:76px;border-radius:50%;border:2px solid rgba(26,17,11,.7);display:flex;align-items:center;justify-content:center;text-align:center;transform:rotate(14deg);font-family:'Archivo',sans-serif;font-weight:900;font-stretch:70%;font-size:12px;line-height:1.05;letter-spacing:.06em;color:rgba(26,17,11,.75)"><span style="border-top:1px solid rgba(26,17,11,.5);border-bottom:1px solid rgba(26,17,11,.5);padding:4px 0">PAIN<br>FAIT<br>MAISON</span></div>
+        </div>
+      </div>
+      <div style="position:relative;flex:{{ rcFlex }};max-width:{{ rcMax }};min-width:0;scroll-snap-align:center;transform:rotate({{ rot2 }});filter:drop-shadow(0 24px 30px rgba(0,0,0,.5));transition:transform .5s cubic-bezier(.2,.8,.2,1)" style-hover="transform:rotate(0deg) translateY(-8px)">
+        <div style="position:relative;background:#FBF7EE;color:#1A110B;padding:40px 24px 46px;font-family:'IBM Plex Mono',monospace;font-size:13.5px;line-height:1.5;display:flex;flex-direction:column;gap:16px;-webkit-mask:conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) top/14px 51% repeat-x,conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/14px 51% repeat-x;mask:conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) top/14px 51% repeat-x,conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/14px 51% repeat-x">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:1px;text-align:center">
+            <span style="font-weight:700;font-size:14px;letter-spacing:.12em">DEUX B · STREET FOOD</span>
+            <span style="font-size:11.5px;white-space:nowrap">14 AV. DES RAUX · 15250 JUSSAC</span>
+            <span style="font-size:11.5px;white-space:nowrap">TÉL. 06 61 99 88 33</span>
+          </div>
+          <div style="border-top:1.5px dashed rgba(26,17,11,.45)"></div>
+          <div style="display:flex;justify-content:space-between;gap:10px;font-size:11.5px;text-transform:uppercase;white-space:nowrap"><span>Ticket n°02/03</span><span>Sur place · à emporter</span></div>
+          <span style="align-self:flex-start;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:62%;font-size:54px;line-height:.85;text-transform:uppercase;letter-spacing:-.005em">Nuggets<br>& p'tits</span>
+          <div style="display:flex;flex-direction:column;gap:9px">
+          <div style="display:flex;flex-direction:column;gap:1px">
+            <div style="display:flex;align-items:baseline;gap:8px"><span style="font-weight:700;text-transform:uppercase;white-space:nowrap;">Nuggets ×6</span><span style="flex:1;min-width:12px;border-bottom:1.5px dotted rgba(26,17,11,.4);transform:translateY(-4px)"></span><span style="font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap">5,00</span></div>
+            <span style="font-size:12px;color:#5A4334;padding-left:14px">maison</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1px">
+            <div style="display:flex;align-items:baseline;gap:8px"><span style="font-weight:700;text-transform:uppercase;white-space:nowrap;">Nuggets ×10</span><span style="flex:1;min-width:12px;border-bottom:1.5px dotted rgba(26,17,11,.4);transform:translateY(-4px)"></span><span style="font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap">8,00</span></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1px">
+            <div style="display:flex;align-items:baseline;gap:8px"><span style="font-weight:700;text-transform:uppercase;white-space:nowrap;">Nuggets ×20</span><span style="flex:1;min-width:12px;border-bottom:1.5px dotted rgba(26,17,11,.4);transform:translateY(-4px)"></span><span style="font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap">11,00</span></div>
+          </div>
+          </div>
+          <div style="border-top:1.5px dashed rgba(26,17,11,.45)"></div>
+          <div style="display:flex;flex-direction:column;gap:1px">
+            <div style="display:flex;align-items:baseline;gap:8px"><span style="font-weight:700;text-transform:uppercase;white-space:nowrap;background:linear-gradient(transparent 50%,#F3A712 50%,#F3A712 94%,transparent 94%);padding:0 4px;margin:0 -4px;">Lou Pitiou</span><span style="flex:1;min-width:12px;border-bottom:1.5px dotted rgba(26,17,11,.4);transform:translateY(-4px)"></span><span style="font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap">9,80</span></div>
+            <span style="font-size:12px;color:#5A4334;padding-left:14px">menu enfant : B-Croc ou nuggets, frites, B-Tea, moelleux ou B-Nut</span>
+          </div>
+          <div style="border-top:1.5px dashed rgba(26,17,11,.45)"></div>
+          <div style="display:flex;flex-direction:column;gap:1px">
+            <div style="display:flex;align-items:baseline;gap:8px"><span style="font-weight:700;text-transform:uppercase;white-space:nowrap;">Pizzas Ø31</span><span style="flex:1;min-width:12px;border-bottom:1.5px dotted rgba(26,17,11,.4);transform:translateY(-4px)"></span><span style="font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap">dès 11,50</span></div>
+            <span style="font-size:12px;color:#5A4334;padding-left:14px">10 recettes, jusqu'à 13,50</span>
+          </div>
+          <div style="border-top:1.5px dashed rgba(26,17,11,.45)"></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+            <span style="font-size:12px;font-weight:700;letter-spacing:.1em">*** MERCI · BON APPÉTIT ***</span>
+            <div style="width:78%;height:42px;background:repeating-linear-gradient(90deg,#1A110B 0 2px,transparent 2px 4px,#1A110B 4px 5px,transparent 5px 8px,#1A110B 8px 11px,transparent 11px 12px,#1A110B 12px 13px,transparent 13px 17px)"></div>
+          </div>
+        </div>
+      </div>
+      <div style="position:relative;flex:{{ rcFlex }};max-width:{{ rcMax }};min-width:0;scroll-snap-align:center;transform:rotate({{ rot3 }});filter:drop-shadow(0 24px 30px rgba(0,0,0,.5));transition:transform .5s cubic-bezier(.2,.8,.2,1)" style-hover="transform:rotate(0deg) translateY(-8px)">
+        <div style="position:relative;background:#FBF7EE;color:#1A110B;padding:40px 24px 46px;font-family:'IBM Plex Mono',monospace;font-size:13.5px;line-height:1.5;display:flex;flex-direction:column;gap:16px;-webkit-mask:conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) top/14px 51% repeat-x,conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/14px 51% repeat-x;mask:conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) top/14px 51% repeat-x,conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/14px 51% repeat-x">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:1px;text-align:center">
+            <span style="font-weight:700;font-size:14px;letter-spacing:.12em">DEUX B · STREET FOOD</span>
+            <span style="font-size:11.5px;white-space:nowrap">14 AV. DES RAUX · 15250 JUSSAC</span>
+            <span style="font-size:11.5px;white-space:nowrap">TÉL. 06 61 99 88 33</span>
+          </div>
+          <div style="border-top:1.5px dashed rgba(26,17,11,.45)"></div>
+          <div style="display:flex;justify-content:space-between;gap:10px;font-size:11.5px;text-transform:uppercase;white-space:nowrap"><span>Ticket n°03/03</span><span>Sur place · à emporter</span></div>
+          <span style="align-self:flex-start;font-family:'Archivo',sans-serif;font-weight:900;font-stretch:62%;font-size:54px;line-height:.85;text-transform:uppercase;letter-spacing:-.005em">Desserts<br>& suppl.</span>
+          <div style="display:flex;flex-direction:column;gap:9px">
+          <div style="display:flex;flex-direction:column;gap:1px">
+            <div style="display:flex;align-items:baseline;gap:8px"><span style="font-weight:700;text-transform:uppercase;white-space:nowrap;">Tiramisu</span><span style="flex:1;min-width:12px;border-bottom:1.5px dotted rgba(26,17,11,.4);transform:translateY(-4px)"></span><span style="font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap">4,00</span></div>
+            <span style="font-size:12px;color:#5A4334;padding-left:14px">spéculos ou Nutella</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1px">
+            <div style="display:flex;align-items:baseline;gap:8px"><span style="font-weight:700;text-transform:uppercase;white-space:nowrap;">Moelleux</span><span style="flex:1;min-width:12px;border-bottom:1.5px dotted rgba(26,17,11,.4);transform:translateY(-4px)"></span><span style="font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap">4,00</span></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1px">
+            <div style="display:flex;align-items:baseline;gap:8px"><span style="font-weight:700;text-transform:uppercase;white-space:nowrap;">B-Nut</span><span style="flex:1;min-width:12px;border-bottom:1.5px dotted rgba(26,17,11,.4);transform:translateY(-4px)"></span><span style="font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap">4,00</span></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1px">
+            <div style="display:flex;align-items:baseline;gap:8px"><span style="font-weight:700;text-transform:uppercase;white-space:nowrap;">Panna cotta</span><span style="flex:1;min-width:12px;border-bottom:1.5px dotted rgba(26,17,11,.4);transform:translateY(-4px)"></span><span style="font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap">4,00</span></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1px">
+            <div style="display:flex;align-items:baseline;gap:8px"><span style="font-weight:700;text-transform:uppercase;white-space:nowrap;">Dessert du mois</span><span style="flex:1;min-width:12px;border-bottom:1.5px dotted rgba(26,17,11,.4);transform:translateY(-4px)"></span><span style="font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap">4,00</span></div>
+          </div>
+          </div>
+          <div style="border-top:1.5px dashed rgba(26,17,11,.45)"></div>
+          <span style="font-size:11px;font-weight:700;letter-spacing:.14em">SUPPLÉMENTS</span>
+          <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;flex-direction:column;gap:1px">
+            <div style="display:flex;align-items:baseline;gap:8px"><span style="font-weight:700;text-transform:uppercase;white-space:nowrap;">Croustifade</span><span style="flex:1;min-width:12px;border-bottom:1.5px dotted rgba(26,17,11,.4);transform:translateY(-4px)"></span><span style="font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap">3,00</span></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1px">
+            <div style="display:flex;align-items:baseline;gap:8px"><span style="font-weight:700;text-transform:uppercase;white-space:nowrap;">Steak ou poulet</span><span style="flex:1;min-width:12px;border-bottom:1.5px dotted rgba(26,17,11,.4);transform:translateY(-4px)"></span><span style="font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap">3,50</span></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1px">
+            <div style="display:flex;align-items:baseline;gap:8px"><span style="font-weight:700;text-transform:uppercase;white-space:nowrap;">Bacon</span><span style="flex:1;min-width:12px;border-bottom:1.5px dotted rgba(26,17,11,.4);transform:translateY(-4px)"></span><span style="font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap">1,50</span></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1px">
+            <div style="display:flex;align-items:baseline;gap:8px"><span style="font-weight:700;text-transform:uppercase;white-space:nowrap;">Fromage</span><span style="flex:1;min-width:12px;border-bottom:1.5px dotted rgba(26,17,11,.4);transform:translateY(-4px)"></span><span style="font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap">1,50</span></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1px">
+            <div style="display:flex;align-items:baseline;gap:8px"><span style="font-weight:700;text-transform:uppercase;white-space:nowrap;">Pot de sauce</span><span style="flex:1;min-width:12px;border-bottom:1.5px dotted rgba(26,17,11,.4);transform:translateY(-4px)"></span><span style="font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap">0,80</span></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1px">
+            <div style="display:flex;align-items:baseline;gap:8px"><span style="font-weight:700;text-transform:uppercase;white-space:nowrap;">Œuf</span><span style="flex:1;min-width:12px;border-bottom:1.5px dotted rgba(26,17,11,.4);transform:translateY(-4px)"></span><span style="font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap">0,50</span></div>
+          </div>
+          </div>
+          <div style="border-top:1.5px dashed rgba(26,17,11,.45)"></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+            <span style="font-size:12px;font-weight:700;letter-spacing:.1em">*** MERCI · BON APPÉTIT ***</span>
+            <div style="width:78%;height:42px;background:repeating-linear-gradient(90deg,#1A110B 0 2px,transparent 2px 4px,#1A110B 4px 5px,transparent 5px 8px,#1A110B 8px 11px,transparent 11px 12px,#1A110B 12px 13px,transparent 13px 17px)"></div>
+          </div>
+        </div>
+      </div>
+  </div>
+  <sc-if value="{{ rcNarrow }}" hint-placeholder-val="{{ false }}">
+    <span style="text-align:center;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#BCA996">← Glisse pour voir les tickets →</span>
+  </sc-if>
+</section>
+
+<!-- EVENEMENTS -->
+<section id="evenements" data-screen-label="04 Événements" style="background:#FAF5EB;color:#1A110B;padding:clamp(72px,10vw,120px) 5vw;display:flex;flex-wrap:wrap;gap:clamp(36px,5vw,64px);align-items:flex-start">
+  <div style="flex:1 1 320px;max-width:460px;display:flex;flex-direction:column;gap:clamp(20px,3vw,28px);position:{{ leftPos }};top:40px">
+    <div style="font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:#6B4A35">Mariages · Anniversaires · Entreprises</div>
+    <h2 style="margin:0;font-weight:900;font-stretch:62%;font-size:clamp(60px,7vw,112px);line-height:.86;text-transform:uppercase;letter-spacing:-.01em">Le camion<br><span style="font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;text-transform:none;font-stretch:100%;letter-spacing:0">vient chez vous.</span></h2>
+    <p style="margin:0;font-size:17px;line-height:1.55;color:#4A3426;text-wrap:pretty">Pour vos événements, on installe le camion sur place et on prépare les burgers devant vos invités. Dites-nous en un peu plus, on vous rappelle avec un devis.</p>
+    <div style="font-size:15px;color:#4A3426">Plus rapide ? <a href="tel:0661998833" style="color:#1A110B;font-weight:700;border-bottom:1.5px solid #F3A712">06 61 99 88 33</a></div>
+  </div>
+
+  <div style="flex:1.4 1 420px;min-width:0;background:#FFFFFF;border:1.5px solid #1A110B;border-radius:24px;overflow:clip;box-shadow:{{ cardShadow }}">
+    <sc-if value="{{ evNotSent }}" hint-placeholder-val="{{ true }}">
+      <div style="padding:{{ cardPad }};display:flex;flex-direction:column;gap:28px">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <span style="font-weight:800;font-stretch:75%;font-size:17px;text-transform:uppercase;letter-spacing:.04em">1. L'événement</span>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <sc-for list="{{ evTypes }}" as="c" hint-placeholder-count="4">
+              <button onClick="{{ c.pick }}" style="padding:12px 16px;border-radius:999px;border:1.5px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};cursor:pointer;font-size:14px;font-weight:600;white-space:nowrap">{{ c.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px">
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#6B4A35;font-weight:600">Date<input type="date" style="width:100%;min-width:0;padding:14px 16px;border-radius:12px;border:1.5px solid rgba(26,17,11,.25);font-size:16px;background:#FAF5EB;color:#1A110B;outline:none;letter-spacing:0;text-transform:none;font-weight:400" style-focus="border-color:#1A110B"></label>
+          <label style="display:flex;flex-direction:column;gap:6px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#6B4A35;font-weight:600">Commune<input placeholder="Ex. Aurillac" style="width:100%;min-width:0;padding:14px 16px;border-radius:12px;border:1.5px solid rgba(26,17,11,.25);font-size:16px;background:#FAF5EB;color:#1A110B;outline:none;letter-spacing:0;text-transform:none;font-weight:400" style-focus="border-color:#1A110B"></label>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <span style="font-weight:800;font-stretch:75%;font-size:17px;text-transform:uppercase;letter-spacing:.04em">2. Nombre d'invités</span>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <sc-for list="{{ guestOpts }}" as="c" hint-placeholder-count="4">
+              <button onClick="{{ c.pick }}" style="padding:12px 16px;border-radius:999px;border:1.5px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};cursor:pointer;font-size:14px;font-weight:600;white-space:nowrap">{{ c.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font-weight:800;font-stretch:75%;font-size:17px;text-transform:uppercase;letter-spacing:.04em">3. Vos coordonnées</span>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px">
+            <input placeholder="Nom et prénom" type="text" style="width:100%;min-width:0;padding:15px 16px;border-radius:12px;border:1.5px solid rgba(26,17,11,.25);font-size:16px;background:#FAF5EB;color:#1A110B;outline:none" style-focus="border-color:#1A110B">
+            <input placeholder="Téléphone" type="tel" style="width:100%;min-width:0;padding:15px 16px;border-radius:12px;border:1.5px solid rgba(26,17,11,.25);font-size:16px;background:#FAF5EB;color:#1A110B;outline:none" style-focus="border-color:#1A110B">
+          </div>
+          <input placeholder="Email" type="email" style="width:100%;min-width:0;padding:15px 16px;border-radius:12px;border:1.5px solid rgba(26,17,11,.25);font-size:16px;background:#FAF5EB;color:#1A110B;outline:none" style-focus="border-color:#1A110B">
+          <textarea placeholder="Votre projet en quelques mots (horaires, formule, nombre de burgers…)" rows="3" style="padding:15px 16px;border-radius:12px;border:1.5px solid rgba(26,17,11,.25);font-size:16px;background:#FAF5EB;color:#1A110B;outline:none;resize:vertical" style-focus="border-color:#1A110B"></textarea>
+        </div>
+      </div>
+      <div style="position:sticky;bottom:0;z-index:4;background:#1A110B;color:#F1E8D8;padding:{{ barPad }};display:flex;align-items:center;justify-content:space-between;gap:16px">
+        <span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#BCA996;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ evSummary }}</span>
+        <button onClick="{{ evSubmit }}" style="padding:0 24px;min-height:52px;border-radius:999px;border:none;background:#F3A712;color:#1A110B;font-weight:800;font-size:15px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:12px;white-space:nowrap;flex-shrink:0" style-hover="background:#F1E8D8">Demander un devis <span style="font-size:18px">→</span></button>
+      </div>
+    </sc-if>
+    <sc-if value="{{ evSent }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:{{ sentPad }};display:flex;flex-direction:column;align-items:flex-start;gap:22px;min-height:420px;justify-content:center">
+        <span style="width:56px;height:56px;border-radius:50%;background:#F3A712;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:800">✓</span>
+        <h3 style="margin:0;font-weight:900;font-stretch:62%;font-size:clamp(48px,12vw,72px);line-height:.9;text-transform:uppercase">Demande envoyée</h3>
+        <p style="margin:0;font-size:18px;line-height:1.55;color:#4A3426;max-width:40ch">Merci ! On revient vers vous très vite pour votre {{ evTypeLower }}.</p>
+        <button onClick="{{ evReset }}" style="padding:14px 22px;border-radius:999px;border:1.5px solid #1A110B;background:transparent;color:#1A110B;font-weight:700;font-size:14px;cursor:pointer" style-hover="background:#1A110B;color:#F1E8D8">Nouvelle demande</button>
+      </div>
+    </sc-if>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer data-screen-label="05 Footer" style="background:#1A110B;padding:clamp(64px,8vw,90px) 5vw 32px;display:flex;flex-direction:column;gap:64px;overflow:hidden">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:40px;font-size:16px;line-height:1.6">
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <span style="font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#BCA996">Le camion</span>
+      <span>14 av. des Raux<br>15250 Jussac</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <span style="font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#BCA996">Contact</span>
+      <a href="tel:0661998833" style="color:#F1E8D8">06 61 99 88 33</a>
+      <a href="mailto:contact@les-deux-b.com" style="color:#F1E8D8">contact@les-deux-b.com</a>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <span style="font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#BCA996">Événementiel</span>
+      <span>Mariages, fêtes, réceptions : le camion se déplace chez vous.</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <span style="font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#BCA996">Suivre</span>
+      <a href="#" style="color:#F1E8D8">Instagram</a>
+      <a href="#" style="color:#F1E8D8">Facebook</a>
+    </div>
+  </div>
+  <div style="font-family:'Instrument Serif',serif;font-style:italic;font-size:min(34vw,420px);line-height:.75;color:#F3A712;letter-spacing:-.02em;white-space:nowrap">Deux B</div>
+  <div style="display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#BCA996">
+    <span>Restauration rapide · Sur place ou à emporter</span>
+    <span>© 2026 Deux B Street Food</span>
+  </div>
+</footer>
+<sc-if value="{{ mob }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;left:0;top:0;right:0;bottom:0;z-index:90;background:#1A110B;color:#F1E8D8;display:flex;flex-direction:column;gap:22px;padding:20px 5vw 28px;overflow:auto;opacity:{{ menuOp }};pointer-events:{{ menuPe }};transition:opacity .35s ease">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px">
+      <img src="assets/logo.png" alt="Deux B Street food" style="width:64px;height:auto;display:block">
+      <button onClick="{{ closeMenu }}" aria-label="Fermer le menu" style="width:46px;height:46px;padding:0;border:1.5px solid #F1E8D8;border-radius:0;background:transparent;color:#F1E8D8;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative">
+        <span style="position:absolute;width:20px;height:2px;background:#F1E8D8;transform:rotate(45deg)"></span>
+        <span style="position:absolute;width:20px;height:2px;background:#F1E8D8;transform:rotate(-45deg)"></span>
+      </button>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:22px">
+      <span style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#BCA996;font-weight:600">Menu</span>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <a href="#burger" onClick="{{ menuCompose }}" style="aspect-ratio:1/1;display:flex;flex-direction:column;justify-content:space-between;padding:16px;background:#F3A712;color:#1A110B;border:1.5px solid #F3A712;opacity:{{ menuTileOp }};transform:{{ menuTile1 }};transition:transform .55s cubic-bezier(.2,.8,.2,1) 60ms, opacity .4s ease 60ms">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500">01</span>
+            <span style="font-size:20px;line-height:1">↗</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <span style="font-weight:900;font-stretch:62%;font-size:clamp(34px,10vw,44px);line-height:.86;text-transform:uppercase">Compose<br>ton burger</span>
+            <span style="font-size:12px;letter-spacing:.06em;opacity:.75">Commander en ligne</span>
+          </div>
+        </a>
+        <a href="#carte" onClick="{{ closeMenu }}" style="aspect-ratio:1/1;display:flex;flex-direction:column;justify-content:space-between;padding:16px;background:#F1E8D8;color:#1A110B;border:1.5px solid #F1E8D8;opacity:{{ menuTileOp }};transform:{{ menuTile2 }};transition:transform .55s cubic-bezier(.2,.8,.2,1) 120ms, opacity .4s ease 120ms">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500">02</span>
+            <span style="font-size:20px;line-height:1">↗</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <span style="font-weight:900;font-stretch:62%;font-size:clamp(34px,10vw,44px);line-height:.86;text-transform:uppercase">La<br>carte</span>
+            <span style="font-size:12px;letter-spacing:.06em;opacity:.75">Les 3 tickets</span>
+          </div>
+        </a>
+        <a href="#evenements" onClick="{{ closeMenu }}" style="aspect-ratio:1/1;display:flex;flex-direction:column;justify-content:space-between;padding:16px;background:transparent;color:#F1E8D8;border:1.5px solid rgba(241,232,216,.4);opacity:{{ menuTileOp }};transform:{{ menuTile3 }};transition:transform .55s cubic-bezier(.2,.8,.2,1) 180ms, opacity .4s ease 180ms">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500">03</span>
+            <span style="font-size:20px;line-height:1">↗</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <span style="font-weight:900;font-stretch:62%;font-size:clamp(34px,10vw,44px);line-height:.86;text-transform:uppercase">Événe-<br>ments</span>
+            <span style="font-size:12px;letter-spacing:.06em;opacity:.75">Mariages, fêtes</span>
+          </div>
+        </a>
+        <a href="tel:0661998833" onClick="{{ closeMenu }}" style="aspect-ratio:1/1;display:flex;flex-direction:column;justify-content:space-between;padding:16px;background:transparent;color:#F1E8D8;border:1.5px solid rgba(241,232,216,.4);opacity:{{ menuTileOp }};transform:{{ menuTile4 }};transition:transform .55s cubic-bezier(.2,.8,.2,1) 240ms, opacity .4s ease 240ms">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500">04</span>
+            <span style="font-size:20px;line-height:1">↗</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <span style="font-weight:900;font-stretch:62%;font-size:clamp(34px,10vw,44px);line-height:.86;text-transform:uppercase">Appeler</span>
+            <span style="font-size:12px;letter-spacing:.06em;opacity:.75">06 61 99 88 33</span>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#BCA996">
+      <span style="line-height:1.6">14 av. des Raux<br>15250 Jussac</span>
+      <div style="display:flex;gap:16px"><a href="#" style="color:#F1E8D8">Instagram</a><a href="#" style="color:#F1E8D8">Facebook</a></div>
+    </div>
+  </div>
+</sc-if>
+<sc-if value="{{ sheetOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeSheet }}" style="position:fixed;left:0;top:0;right:0;bottom:0;z-index:100;background:rgba(26,17,11,.6);display:flex;align-items:{{ sheetAlign }};justify-content:center;padding:{{ sheetOuterPad }}">
+    <div onClick="{{ stopProp }}" style="width:100%;max-width:520px;max-height:{{ sheetMaxH }};overflow:auto;background:#FAF5EB;color:#1A110B;border-radius:{{ sheetRadius }};display:flex;flex-direction:column">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 20px 0 24px">
+        <span style="font-weight:900;font-stretch:62%;font-size:40px;line-height:.9;text-transform:uppercase">Ta commande</span>
+        <button onClick="{{ closeSheet }}" aria-label="Fermer" style="width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(26,17,11,.2);background:transparent;font-size:20px;cursor:pointer;color:#1A110B;padding:0">×</button>
+      </div>
+      <sc-if value="{{ orderNotSent }}" hint-placeholder-val="{{ true }}">
+        <div style="padding:20px 24px 24px;display:flex;flex-direction:column;gap:24px">
+          <div style="display:flex;gap:14px;align-items:center;padding:14px;border-radius:16px;background:#FFFFFF;border:1.5px solid #1A110B">
+            <img src="assets/burger-full.png" alt="" style="width:64px;height:auto;flex-shrink:0">
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px">
+              <span style="font-weight:800;font-size:16px">{{ recapTitle }}</span>
+              <span style="font-size:13px;line-height:1.4;color:#6B4A35">{{ recapLine }}</span>
+            </div>
+            <span style="font-weight:900;font-stretch:70%;font-size:24px;font-variant-numeric:tabular-nums;white-space:nowrap">{{ bTotal }}</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px"><span style="font-weight:800;font-stretch:75%;font-size:17px;text-transform:uppercase;letter-spacing:.04em">Arrêt du camion</span><span style="font-size:12px;color:#6B4A35">Planning d'exemple</span></div>
+            <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">
+              <sc-for list="{{ stops }}" as="s" hint-placeholder-count="4">
+                <button onClick="{{ s.pick }}" style="text-align:left;padding:12px 14px;border-radius:12px;border:1.5px solid {{ s.bd }};background:{{ s.bg }};color:{{ s.fg }};cursor:pointer;display:flex;flex-direction:column;gap:2px">
+                  <span style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.75">{{ s.day }}</span>
+                  <span style="font-weight:800;font-size:16px">{{ s.label }}</span>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <span style="font-weight:800;font-stretch:75%;font-size:17px;text-transform:uppercase;letter-spacing:.04em">Heure de retrait</span>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <sc-for list="{{ slots }}" as="c" hint-placeholder-count="4">
+              <button onClick="{{ c.pick }}" style="padding:12px 16px;border-radius:999px;border:1.5px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }};cursor:pointer;font-size:14px;font-weight:600;white-space:nowrap">{{ c.label }}</button>
+            </sc-for>
+          </div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px">
+            <input placeholder="Prénom" type="text" style="width:100%;min-width:0;padding:15px 16px;border-radius:12px;border:1.5px solid rgba(26,17,11,.25);font-size:16px;background:#FAF5EB;color:#1A110B;outline:none" style-focus="border-color:#1A110B">
+            <input placeholder="Téléphone" type="tel" style="width:100%;min-width:0;padding:15px 16px;border-radius:12px;border:1.5px solid rgba(26,17,11,.25);font-size:16px;background:#FAF5EB;color:#1A110B;outline:none" style-focus="border-color:#1A110B">
+          </div>
+        </div>
+        <div style="position:sticky;bottom:0;padding:14px 24px 20px;background:#FAF5EB;border-top:1px solid rgba(26,17,11,.12)">
+          <button onClick="{{ submitOrder }}" style="width:100%;height:58px;border-radius:999px;border:none;background:#F3A712;color:#1A110B;display:flex;align-items:center;justify-content:space-between;padding:0 24px;cursor:pointer;font-weight:800;font-size:15px;letter-spacing:.1em;text-transform:uppercase" style-hover="background:#1A110B;color:#F1E8D8"><span>Valider la commande</span><span style="font-weight:900;font-stretch:70%;font-size:22px;letter-spacing:0">{{ bTotal }}</span></button>
+        </div>
+      </sc-if>
+      <sc-if value="{{ orderSent }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:28px 24px 32px;display:flex;flex-direction:column;align-items:flex-start;gap:18px">
+          <span style="width:52px;height:52px;border-radius:50%;background:#F3A712;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800">✓</span>
+          <p style="margin:0;font-size:18px;line-height:1.55;color:#4A3426">C'est noté ! {{ recapTitle }} prêt à <strong>{{ slot }}</strong> au camion, à <strong>{{ stop }}</strong>. Paiement sur place.</p>
+          <button onClick="{{ closeSheet }}" style="height:52px;padding:0 24px;border-radius:999px;border:1.5px solid #1A110B;background:#1A110B;color:#F1E8D8;font-weight:700;font-size:14px;cursor:pointer">Parfait</button>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showLabels&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Burger&quot;},&quot;heroParallax&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Hero&quot;}}">
+const IMG = {
+  cheese: { Cheddar: 'assets/layer-b.png', Bleu: 'assets/bleu.png' },
+  meat: { 'Steak haché': 'assets/steak.png', 'Poulet pané': 'assets/poulet.png' }
+};
+// Only options with a photo are shown in the composer — add a photo to IMG to enable more.
+const CHEESES = ['Cheddar', 'Bleu', 'Cantal', 'Chèvre', 'St-Nectaire'].filter(c => IMG.cheese[c]);
+const MEATS = ['Steak haché', 'Poulet pané', 'Croustifade'].filter(m => IMG.meat[m]);
+const SAUCES = ['La Pays Vert', 'La Basque', 'La Poivre', 'La Cantalou'];
+const LAYERS = [
+  { key: 'top', cat: 'Pain', img: 'assets/bun-top.png', a: -0.50, b: -1.42, s: 1.0, z: 5, opts: [{ label: 'Burger maison' }] },
+  { key: 'salad', cat: 'Salade', img: 'assets/layer-a.png', a: -0.25, b: -0.76, s: 1.06, z: 4, opts: [{ label: 'Salade fraîche' }, { label: 'Sans salade', hide: true }] },
+  { key: 'cheese', cat: 'Fromage', img: 'assets/layer-b.png', a: -0.03, b: -0.13, s: 0.96, z: 3, opts: CHEESES.map(c => ({ label: c, img: IMG.cheese[c] })) },
+  { key: 'meat', cat: 'Viande', img: 'assets/steak.png', a: 0.17, b: 0.50, s: 0.92, z: 2, opts: MEATS.map(m => ({ label: m, img: IMG.meat[m] })) },
+  { key: 'bottom', cat: 'Sauce maison', img: 'assets/bun-bottom.png', a: 0.43, b: 1.14, s: 1.0, z: 1, opts: SAUCES.map(s => ({ label: s })) }
+];
+const STOPS = [
+  { label: 'Jussac', day: 'Mardi' }, { label: 'Marmanhac', day: 'Mercredi' },
+  { label: 'Reilhac', day: 'Jeudi' }, { label: 'Naucelles', day: 'Vendredi' }
+];
+const SLOTS = ['18:30', '18:45', '19:00', '19:15', '19:30', '19:45', '20:00', '20:30', '21:00'];
+const EV_TYPES = ['Mariage', 'Anniversaire', 'Entreprise', 'Fête de village', 'Autre'];
+const GUESTS = ['Moins de 50', '50 – 100', '100 – 200', 'Plus de 200'];
+const PRICE = 10, FRIES = 2;
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const lerp = (a, b, t) => a + (b - a) * t;
+const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+const eur = n => n.toFixed(2).replace('.', ',').replace(',00', '') + ' €';
+
+class Component extends DCLogic {
+  explRef = React.createRef();
+  state = {
+    vw: window.innerWidth, vh: window.innerHeight, p: 0, heroIn: false, introDone: false, mx: 0, my: 0,
+    opts: { top: 0, salad: 0, cheese: 0, meat: 0, bottom: 0 }, bump: {}, bQty: 1, fries: true,
+    menuOpen: false, sheetOpen: false, orderSent: false, stop: 'Jussac', slot: '19:15',
+    evType: 'Mariage', guests: '50 – 100', evSent: false
+  };
+  componentDidMount() {
+    this.onScroll = () => {
+      if (this.raf) return;
+      this.raf = requestAnimationFrame(() => {
+        this.raf = null;
+        const el = this.explRef.current; if (!el) return;
+        const r = el.getBoundingClientRect();
+        const p = clamp(-r.top / (r.height - window.innerHeight));
+        if (Math.abs(p - this.state.p) > 0.001) this.setState({ p });
+      });
+    };
+    this.onResize = () => {
+      const w = window.innerWidth, h = window.innerHeight;
+      if (w !== this.state.vw || Math.abs(h - this.state.vh) > 160) this.setState({ vw: w, vh: h }, this.onScroll);
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true, capture: true });
+    window.addEventListener('resize', this.onResize);
+    this.t1 = setTimeout(() => this.setState({ heroIn: true }), 150);
+    this.t2 = setTimeout(() => this.setState({ introDone: true }), 1900);
+    this.onScroll();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll, { capture: true });
+    window.removeEventListener('resize', this.onResize);
+    clearTimeout(this.t1); clearTimeout(this.t2);
+    document.body.style.overflow = '';
+  }
+  chips(list, cur, key) {
+    return list.map(l => {
+      const label = typeof l === 'string' ? l : l.label;
+      const on = label === cur;
+      return { label, day: l.day || '', bg: on ? '#1A110B' : '#FFFFFF', fg: on ? '#F1E8D8' : '#1A110B', bd: on ? '#1A110B' : 'rgba(26,17,11,.2)', pick: () => this.setState({ [key]: label }) };
+    });
+  }
+  cycle(key, dir) {
+    const L = LAYERS.find(l => l.key === key), n = L.opts.length;
+    this.setState(s => ({ opts: { ...s.opts, [key]: (s.opts[key] + dir + n) % n }, bump: { ...s.bump, [key]: dir } }));
+    clearTimeout(this['bt' + key]);
+    this['bt' + key] = setTimeout(() => this.setState(s => ({ bump: { ...s.bump, [key]: 0 } })), 40);
+  }
+  goComposeFn() {
+    const el = this.explRef.current; if (!el) return;
+    const top = el.getBoundingClientRect().top + window.scrollY + (el.offsetHeight - window.innerHeight) * 0.6;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }
+  setMenu(open) {
+    document.body.style.overflow = open ? 'hidden' : '';
+    this.setState({ menuOpen: open });
+  }
+  setSheet(open) {
+    document.body.style.overflow = open ? 'hidden' : '';
+    this.setState({ sheetOpen: open, orderSent: false });
+  }
+  renderVals() {
+    const { vw, vh, p, heroIn, introDone, mx, my, opts, bump, bQty, fries } = this.state;
+    const mob = vw < 700;
+    const parallax = (this.props.heroParallax ?? true) && !mob;
+    const heroHpx = Math.max(mob ? 600 : 640, vh);
+
+    // Hero burger
+    const hw = mob ? Math.min(vw * 0.9, heroHpx * 0.46) : Math.min(540, heroHpx * 0.5, vw * 0.72), hh = hw * 1145 / 1374;
+    const hcx = vw / 2, hcy = heroHpx * (mob ? 0.45 : 0.52);
+    const px = parallax && introDone ? mx * 14 : 0, py = parallax && introDone ? my * 10 : 0;
+    const heroTf = `translate(${hcx - hw / 2 + px}px, ${hcy - hh / 2 + py}px) rotate(${parallax && introDone ? mx * 2.5 : 0}deg)`;
+    const heroInTf = heroIn ? 'translateY(0) scale(1)' : 'translateY(-60px) scale(.92)';
+    const hsw = hw * 0.95;
+    const heroShadowTf = `translate(${hcx - hsw / 2 + px * .4}px, ${hcy + hh / 2 - 46}px)`;
+
+    // Compose stage
+    const wide = vw >= 900;
+    const textW = wide ? Math.min(400, vw * 0.3) : vw * 0.9;
+    let W, cx, cy, lxc, rxc, labelX, lineW, labelW;
+    if (wide) {
+      labelW = 220;
+      const free = vw - vw * 0.1 - textW - (labelW + 80);
+      W = Math.min(540, vh * 0.46, free * 0.7);
+      cx = Math.max(vw * 0.05 + textW + free * 0.5, vw * 0.05 + textW + 40 + 34 + 30 + W * 0.53);
+      cy = vh * 0.5;
+      lxc = cx - W * 0.53 - 30; rxc = cx + W * 0.53 + 30;
+      labelX = rxc + 17 + 14; lineW = 26;
+      labelW = Math.max(130, Math.min(220, vw * 0.97 - labelX - 38));
+    } else {
+      const textBottom = 190, avail = vh - textBottom - 150;
+      W = Math.min(vw * 0.42, avail / 1.78, 300);
+      cx = vw * 0.04 + 17 + 20 + W / 2;
+      cy = textBottom + avail / 2 + 0.14 * (W / 2);
+      lxc = cx - W * 0.5 - 20; rxc = cx + W * 0.5 + 20;
+      labelX = rxc + 17 + 6; lineW = 0;
+      labelW = vw - labelX - vw * 0.04 - 12;
+    }
+    const H = W / 2;
+    const e = ease(clamp((p - 0.04) / 0.5));
+    const ready = e > 0.85;
+    const stageLayers = LAYERS.map(l => {
+      const w = W * l.s, y = lerp(l.a, l.b, e), o = l.opts[opts[l.key]], d = bump[l.key] || 0;
+      return { alt: l.cat, z: l.z, w: w + 'px', src: (o && o.img) || l.img,
+        tf: `translate(${cx - w / 2}px, ${cy + y * H - w / 4}px)`,
+        op: o && o.hide ? 0 : 1,
+        bumpTf: d ? `translateX(${d * 36}px) scale(.94)` : 'none',
+        trans: d ? 'none' : 'transform .45s cubic-bezier(.2,.8,.2,1), opacity .35s ease' };
+    });
+    const arrows = LAYERS.filter(l => l.opts.length > 1).map(l => {
+      const y = cy + lerp(l.a, l.b, e) * H;
+      return { ltf: `translate(${lxc - 17}px, ${y - 17}px)`, rtf: `translate(${rxc - 17}px, ${y - 17}px)`,
+        op: ready ? 1 : 0, pe: ready ? 'auto' : 'none',
+        prev: () => this.cycle(l.key, -1), next: () => this.cycle(l.key, 1) };
+    });
+    const stageLabels = LAYERS.map((l, i) => {
+      const y = cy + lerp(l.a, l.b, e) * H, op = clamp((e - 0.45 - i * 0.07) / 0.25);
+      return { cat: l.cat, name: l.opts[opts[l.key]].label, count: l.opts.length > 1 ? `${opts[l.key] + 1}/${l.opts.length}` : '', op,
+        tf: `translate(${labelX}px, calc(${y}px - 50%))`,
+        lineW: lineW * op + 'px', textW: labelW + 'px', fs: wide ? '17px' : '14px' };
+    });
+    const sw = W;
+    const pick = k => { const L = LAYERS.find(l => l.key === k); return L.opts[opts[k]].label; };
+    const unit = PRICE + (fries ? FRIES : 0), total = unit * bQty;
+    const panelOp = wide ? 1 : clamp((e - 0.55) / 0.3);
+
+    // Receipts
+    const rcNarrow = vw < 960;
+
+    return {
+      heroH: heroHpx + 'px', mob, notMob: !mob, logoW: mob ? '64px' : '92px',
+      t1Top: mob ? '18%' : '13%', t2Bottom: mob ? '24%' : '9%',
+      onHeroMove: ev => this.setState({ mx: ev.clientX / vw * 2 - 1, my: ev.clientY / vh * 2 - 1 }),
+      heroW: hw + 'px', heroTf, heroInTf, heroOp: heroIn ? 1 : 0, heroShadowW: hsw + 'px', heroShadowTf,
+      goCompose: ev => { if (ev) ev.preventDefault(); this.goComposeFn(); },
+      openMenu: () => this.setMenu(true), closeMenu: () => this.setMenu(false),
+      menuOp: this.state.menuOpen ? 1 : 0, menuPe: this.state.menuOpen ? 'auto' : 'none', menuTileOp: this.state.menuOpen ? 1 : 0,
+      menuTile1: this.state.menuOpen ? 'none' : 'translateY(24px)', menuTile2: this.state.menuOpen ? 'none' : 'translateY(24px)',
+      menuTile3: this.state.menuOpen ? 'none' : 'translateY(24px)', menuTile4: this.state.menuOpen ? 'none' : 'translateY(24px)',
+      menuCompose: ev => { if (ev) ev.preventDefault(); this.setMenu(false); setTimeout(() => this.goComposeFn(), 60); },
+      explRef: this.explRef, stageH: vh + 'px',
+      isWide: wide, narrowStage: !wide, textW: textW + 'px', textGap: wide ? '22px' : '14px',
+      textTop: wide ? '50%' : '64px', textTf: wide ? 'translateY(-50%)' : 'none',
+      stageLayers, arrows, stageLabels, showLabels: this.props.showLabels ?? true,
+      shadowW: sw + 'px', shadowTf: `translate(${cx - sw / 2}px, ${cy + lerp(0.43, 1.14, e) * H + H * 0.3}px)`,
+      hintOp: 1 - clamp((p - 0.5) / 0.15), progW: clamp(p / 0.54) * 100 + '%',
+      panelOp, panelPe: panelOp > 0.5 ? 'auto' : 'none',
+      friesBg: fries ? '#FFFFFF' : 'transparent', friesDot: fries ? '#F3A712' : 'transparent', friesDotFg: '#1A110B', friesMark: fries ? '✓' : '+2 €',
+      toggleFries: () => this.setState(s => ({ fries: !s.fries })),
+      bQty, bInc: () => this.setState(s => ({ bQty: Math.min(20, s.bQty + 1) })), bDec: () => this.setState(s => ({ bQty: Math.max(1, s.bQty - 1) })),
+      bTotal: eur(total),
+      openSheet: () => this.setSheet(true), closeSheet: () => this.setSheet(false), stopProp: ev => ev.stopPropagation(),
+      sheetOpen: this.state.sheetOpen, orderSent: this.state.orderSent, orderNotSent: !this.state.orderSent,
+      submitOrder: () => this.setState({ orderSent: true }),
+      sheetAlign: mob ? 'flex-end' : 'center', sheetOuterPad: mob ? '0' : '24px', sheetMaxH: mob ? '90vh' : '86vh', sheetRadius: mob ? '24px 24px 0 0' : '24px',
+      recapTitle: `${bQty} × Burger${fries ? ' + frites' : ''}`,
+      recapLine: [pick('cheese'), pick('meat'), pick('bottom'), opts.salad ? 'sans salade' : null].filter(Boolean).join(' · '),
+      stops: this.chips(STOPS, this.state.stop, 'stop'), slots: this.chips(SLOTS, this.state.slot, 'slot'),
+      stop: this.state.stop, slot: this.state.slot,
+      rcNarrow, rcGap: rcNarrow ? '18px' : '36px', rcJust: rcNarrow ? 'flex-start' : 'center', rcOverflow: rcNarrow ? 'auto' : 'visible',
+      rcPad: rcNarrow ? '24px 11vw 40px' : '24px 5vw 32px', rcFlex: rcNarrow ? '0 0 min(78vw,360px)' : '1 1 0', rcMax: rcNarrow ? 'none' : '380px',
+      rot1: rcNarrow ? '-1.5deg' : '-2.5deg', rot2: rcNarrow ? '1deg' : '1.5deg', rot3: rcNarrow ? '-1deg' : '-1deg',
+      leftPos: mob ? 'static' : 'sticky', cardShadow: mob ? '6px 6px 0 #1A110B' : '10px 10px 0 #1A110B',
+      cardPad: mob ? '22px 18px' : '32px', barPad: mob ? '12px 12px 12px 18px' : '20px 28px', sentPad: mob ? '48px 24px' : '64px 40px',
+      evTypes: this.chips(EV_TYPES, this.state.evType, 'evType'), guestOpts: this.chips(GUESTS, this.state.guests, 'guests'),
+      evSummary: mob ? this.state.evType : `${this.state.evType} · ${this.state.guests} invités`,
+      evSent: this.state.evSent, evNotSent: !this.state.evSent, evTypeLower: this.state.evType === 'Autre' ? 'événement' : this.state.evType.toLowerCase(),
+      evSubmit: () => this.setState({ evSent: true }), evReset: () => this.setState({ evSent: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

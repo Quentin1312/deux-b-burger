@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La boutique de Jussac · Pizzas & burgers · Deux B</title>
+<meta name="description" content="La boutique Deux B à Jussac : 10 pizzas Ø31, la pizza à composer, les burgers maison et un distributeur ouvert 24h/24. 14 av. des Raux, 15250 Jussac.">
+<link rel="icon" href="img/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+<style>
+.bhero{padding:clamp(48px,7vw,96px) 0 clamp(56px,8vw,110px);border-bottom:1.5px solid var(--ink)}
+.bhero__grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.9fr);gap:clamp(32px,5vw,80px);align-items:end}
+.bhero h1{font-size:clamp(78px,11vw,180px)}
+.bhero h1 .it{--stroke:var(--tomato)}
+.bhero__txt{display:flex;flex-direction:column;gap:26px}
+.sign{justify-self:end;position:relative;width:min(100%,380px);padding-top:58px}
+.sign::before,.sign::after{content:"";position:absolute;top:0;width:2px;height:62px;background:var(--ink);transform-origin:top}
+.sign::before{left:28%;transform:rotate(18deg)}.sign::after{right:28%;transform:rotate(-18deg)}
+.sign__nail{position:absolute;top:-6px;left:50%;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:var(--ink)}
+.sign__card{background:var(--ink);color:var(--paper);padding:26px 26px 22px;border-radius:6px;transform:rotate(-2deg);box-shadow:0 18px 30px rgba(27,19,14,.25)}
+.sign__state{font-weight:900;font-stretch:62%;font-size:64px;line-height:.85;text-transform:uppercase;color:var(--mustard)}
+.sign__card p{margin:10px 0 18px;font-family:var(--mono);font-size:13px;color:#CDBDA8}
+.sign__days{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;font-family:var(--mono);font-size:11px;text-align:center}
+.sign__days span{padding:7px 0;border:1px solid rgba(242,234,220,.25)}
+.sign__days span.o{background:var(--mustard);border-color:var(--mustard);color:var(--ink);font-weight:700}
+.sign__days span.t{outline:2px solid var(--paper);outline-offset:1px}
+.sign__legend{display:flex;gap:16px;margin-top:12px;font-family:var(--mono);font-size:11px;color:#B9A58F}
+.sign__legend i{display:inline-block;width:10px;height:10px;background:var(--mustard);margin-right:6px;vertical-align:-1px}
+.callrow{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px}
+.callrow small{font-family:var(--mono);font-size:12px;color:var(--muted);max-width:30ch;line-height:1.4}
+@media (max-width:860px){.bhero__grid{grid-template-columns:1fr}.sign{justify-self:start}}
+
+/* Pizzas */
+.pz-filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.chip{height:42px;padding:0 16px;border-radius:999px;border:1.5px solid rgba(242,234,220,.35);background:transparent;color:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+.chip:hover{border-color:var(--paper)}
+.chip[aria-pressed=true]{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.pz-list{display:grid;grid-template-columns:1fr 1fr;column-gap:clamp(32px,5vw,80px);border-top:1.5px solid var(--paper)}
+.pz{display:grid;grid-template-columns:44px 1fr auto;gap:4px 16px;align-items:baseline;padding:20px 0 22px;border-bottom:1px solid rgba(242,234,220,.16);transition:opacity .3s}
+.pz.dim{opacity:.18}
+.pz__n{font-family:var(--mono);font-size:12px;color:#B9A58F}
+.pz h3{margin:0;font-weight:900;font-stretch:62%;font-size:clamp(34px,3.6vw,48px);line-height:.9;text-transform:uppercase}
+.pz__p{font-weight:900;font-stretch:70%;font-size:26px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pz__i{grid-column:2/4;font-family:var(--mono);font-size:13px;color:#CDBDA8;line-height:1.5}
+.pz__b{display:inline-block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;border-radius:3px;margin-right:8px;vertical-align:1px;font-weight:700}
+.pz__b.tomate{background:var(--tomato);color:#fff}.pz__b.creme{background:#EFE6D2;color:var(--ink)}
+@media (max-width:860px){.pz-list{grid-template-columns:1fr}.pz{grid-template-columns:34px 1fr auto}}
+
+/* Composer */
+.cmp{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(32px,5vw,80px);align-items:start}
+.cmp__steps{display:flex;flex-direction:column;gap:30px}
+.step h3{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:0 0 12px;font-weight:900;font-stretch:70%;font-size:22px;text-transform:uppercase;letter-spacing:.02em}
+.step h3 small{font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.04em;text-transform:none;color:var(--muted)}
+.opts{display:flex;flex-wrap:wrap;gap:7px}
+.opt{position:relative;height:40px;padding:0 14px;border-radius:999px;border:1.5px solid rgba(27,19,14,.22);background:var(--card);font-size:14px;font-weight:600;cursor:pointer;transition:background .15s,border-color .15s,color .15s}
+.opt:hover{border-color:var(--ink)}
+.opt[aria-pressed=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.opt[data-free]::after{content:attr(data-free);position:absolute;top:-8px;right:-4px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.04em;background:var(--mustard);color:var(--ink);padding:2px 6px;border-radius:3px}
+.cmp__out{position:sticky;top:96px;display:flex;flex-direction:column;gap:20px}
+.pizza-svg{width:100%;max-width:420px;align-self:center;filter:drop-shadow(0 22px 24px rgba(27,19,14,.25))}
+.pizza-svg g.tp > *{transition:opacity .3s}
+.recap{background:var(--card);border:1.5px solid var(--ink);padding:18px 20px;font-family:var(--mono);font-size:13px;line-height:1.55}
+.recap__row{display:flex;justify-content:space-between;gap:12px}
+.recap__row.tot{border-top:1.5px dashed rgba(27,19,14,.45);margin-top:10px;padding-top:10px;font-weight:700;font-size:15px}
+.recap__row.tot b{font-family:var(--cond);font-weight:900;font-stretch:70%;font-size:34px;line-height:1}
+.recap__note{font-size:12px;color:var(--muted);margin-top:12px}
+.cmp__bar{display:none}
+@media (max-width:860px){.cmp{grid-template-columns:1fr}.cmp__out{position:static}.pizza-svg{max-width:300px}
+  .cmp__bar{display:flex;position:sticky;bottom:12px;z-index:5;justify-content:space-between;align-items:center;gap:12px;background:var(--ink);color:var(--paper);border-radius:999px;padding:8px 8px 8px 20px;font-family:var(--mono);font-size:13px;text-decoration:none;box-shadow:0 10px 24px rgba(27,19,14,.3)}
+  .cmp__bar b{font-family:var(--cond);font-weight:900;font-stretch:70%;font-size:22px;background:var(--mustard);color:var(--ink);border-radius:999px;padding:6px 14px}}
+
+/* Accès */
+.acces{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:clamp(28px,4vw,64px);align-items:stretch}
+.acces dl{margin:0;display:grid;grid-template-columns:110px 1fr;gap:0;border-top:1.5px solid var(--ink)}
+.acces dt,.acces dd{margin:0;padding:16px 0;border-bottom:1px solid var(--line)}
+.acces dt{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding-top:19px}
+.acces dd{font-weight:700;font-size:18px}
+.acces dd small{display:block;font-weight:400;font-size:14px;color:var(--ink-2)}
+.map{position:relative;display:block;border:1.5px solid var(--ink);box-shadow:8px 8px 0 var(--ink);text-decoration:none;align-self:start}
+.map svg{display:block;width:100%;height:auto}
+.map__cta{position:absolute;right:14px;bottom:14px;background:var(--ink);color:var(--paper);font-weight:800;font-size:13px;letter-spacing:.1em;text-transform:uppercase;padding:10px 16px;border-radius:999px;transition:background .2s,color .2s}
+.map:hover .map__cta{background:var(--mustard);color:var(--ink)}
+@media (max-width:860px){.acces{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div data-site-header data-page="boutique"></div>
+
+<main>
+<section class="bhero">
+  <div class="wrap bhero__grid">
+    <div class="bhero__txt">
+      <h1 class="display">Pizzas<br>& burgers <span class="it">à Jussac.</span></h1>
+      <p class="lead">Dix pizzas Ø31 sur pâte maison, celle que vous composez vous-même, et les burgers du camion. Pas de commande en ligne : un coup de fil, on prépare, vous passez récupérer.</p>
+      <div class="callrow">
+        <a class="btn" href="tel:+33661998833">Appeler · 06 61 99 88 33</a>
+        <small>Sur place ou à emporter. Paiement à la boutique.</small>
+      </div>
+    </div>
+    <div class="sign" aria-live="polite">
+      <span class="sign__nail"></span>
+      <div class="sign__card">
+        <div class="sign__state" data-sign-state>Ouvert</div>
+        <p data-sign-txt></p>
+        <div class="sign__days" data-sign-days></div>
+        <div class="sign__legend"><span><i></i>Burgers & pizzas</span><span>Autres jours : distributeur</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec on-dark" id="pizzas">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="display">Nos<br>pizzas <span class="it" style="--stroke:var(--mustard);font-size:.5em">Ø31</span></h2>
+      <p class="lead" style="max-width:32ch">Emmental et mozzarella sur toutes, sauf mention contraire. Les fromages viennent des fromageries du coin.</p>
+    </div>
+    <div class="pz-filters" role="group" aria-label="Filtrer les pizzas">
+      <button class="chip" data-f="all" aria-pressed="true">Toutes · 10</button>
+      <button class="chip" data-f="tomate" aria-pressed="false">Base tomate</button>
+      <button class="chip" data-f="creme" aria-pressed="false">Base crème</button>
+      <button class="chip" data-f="veg" aria-pressed="false">Sans viande</button>
+      <button class="chip" data-f="cantal" aria-pressed="false">Fromages d'ici</button>
+    </div>
+    <div class="pz-list" data-pizzas></div>
+  </div>
+</section>
+
+<section class="sec" id="composer" style="background:var(--paper-2)">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="display">Votre<br>pizza <span class="it" style="--stroke:var(--tomato)">à vous.</span></h2>
+      <p class="lead" style="max-width:36ch">13 € la pizza Ø31 avec la base, 3 ingrédients et le fromage à gratiner. Composez-la ici, puis dictez-la-nous au téléphone.</p>
+    </div>
+    <div class="cmp">
+      <div class="cmp__steps"><div data-steps style="display:flex;flex-direction:column;gap:30px"></div><a class="cmp__bar" href="#pizza-apercu" data-bar></a></div>
+      <div class="cmp__out" id="pizza-apercu">
+        <svg class="pizza-svg" viewBox="0 0 400 400" role="img" aria-label="Aperçu de votre pizza" data-pizza></svg>
+        <div class="recap" data-recap></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec on-dark" id="burgers">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="display">Et les<br>burgers</h2>
+      <p class="lead" style="max-width:34ch">La même carte que Léon le camion, avec le pain qu'on cuit ici même.</p>
+    </div>
+    <div class="tickets" data-tickets></div>
+    <p class="swipe">← Glissez pour voir les tickets →</p>
+  </div>
+</section>
+
+<section class="sec" id="acces">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="display">Passer<br>nous voir</h2></div>
+    <div class="acces">
+      <dl>
+        <dt>Adresse</dt><dd>14 av. des Raux<small>15250 Jussac · à 10 min d'Aurillac</small></dd>
+        <dt>Boutique</dt><dd>Mardi, vendredi, samedi<small>Burgers & pizzas, sur place ou à emporter</small></dd>
+        <dt>Distributeur</dt><dd>24h/24, 7j/7<small>Juste à côté de la boutique</small></dd>
+        <dt>Commander</dt><dd><a href="tel:+33661998833" style="text-decoration:none">06 61 99 88 33</a><small>Par téléphone uniquement</small></dd>
+      </dl>
+      <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=14+avenue+des+Raux+15250+Jussac" target="_blank" rel="noopener" aria-label="Ouvrir l'itinéraire vers la boutique dans Google Maps">
+        <svg viewBox="0 0 600 380" role="img" aria-label="Plan schématique de Jussac : la boutique Deux B sur la D922">
+          <rect width="600" height="380" fill="#FBF7EE"/>
+          <g fill="none" stroke="#1B130E" stroke-width="2.5" stroke-linecap="round">
+            <path d="M20 120 C140 150 220 190 330 200 S470 205 520 250 L560 360"/>
+            <path d="M318 200 L330 40"/><path d="M250 186 L190 300"/><path d="M290 196 L300 330"/><path d="M420 204 L548 168"/>
+          </g>
+          <path d="M20 120 C140 150 220 190 330 200 S470 205 520 250 L560 360" fill="none" stroke="#1D6973" stroke-width="7" opacity=".18"/>
+          <g font-family="IBM Plex Mono, monospace" font-size="12" fill="#1B130E">
+            <text x="40" y="104">← MAURIAC / ST-CERNIN</text>
+            <text x="338" y="44">MARMANHAC ↑</text>
+            <text x="470" y="160">REILHAC →</text>
+            <text x="468" y="340" text-anchor="end">NAUCELLES / AURILLAC ↓</text>
+            <text x="120" y="318">Terrain de foot</text>
+            <text x="250" y="350">Salle polyvalente</text>
+            <text x="96" y="160" transform="rotate(14 96 160)" fill="#4A3A2E">D922</text>
+            <text x="540" y="300" transform="rotate(68 540 300)" fill="#4A3A2E">D922</text>
+          </g>
+          <text x="420" y="122" font-family="Archivo, sans-serif" font-weight="900" font-size="34" font-stretch="62%" fill="#1B130E" letter-spacing="2">JUSSAC</text>
+          <g transform="translate(232 178) rotate(45)"><rect x="-22" y="-22" width="44" height="44" fill="#E9A21B" stroke="#1B130E" stroke-width="2.5"/></g>
+          <text x="232" y="183" text-anchor="middle" font-family="Archivo, sans-serif" font-weight="900" font-size="15" font-stretch="70%">2B</text>
+          <g font-family="IBM Plex Mono, monospace" font-size="12"><rect x="150" y="214" width="166" height="26" fill="#1B130E"/><text x="233" y="231" text-anchor="middle" fill="#F2EADC">14 AV. DES RAUX</text></g>
+        </svg>
+        <span class="map__cta">Itinéraire ↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+
+<div data-site-footer></div>
+<script src="js/site.js"></script>
+<script>
+const PIZZAS = [
+  { n: 'Classique', p: '11,50', b: 'tomate', i: 'Jambon, champignons, emmental, mozzarella', t: [] },
+  { n: 'Végé', p: '11,50', b: 'tomate', i: 'Courgettes, poivrons marinés, champignons, oignons, emmental, mozzarella', t: ['veg'] },
+  { n: 'Auvergnate', p: '12,50', b: 'creme', i: 'Jambon de pays, patates, cantal', t: ['cantal'] },
+  { n: 'Locale', p: '13,00', b: 'tomate', i: 'Bleu, cantal, St-Nectaire, Rocamadour', t: ['veg', 'cantal'] },
+  { n: '3 Fromages', p: '13,00', b: 'tomate', i: 'Rocamadour, emmental, mozzarella bufflonne', t: ['veg'] },
+  { n: 'Roca', p: '13,00', b: 'creme', i: 'Rocamadour, miel, emmental, mozzarella', t: ['veg'] },
+  { n: 'Tartiflette', p: '13,00', b: 'creme', i: 'Reblochon, lardons, patates, emmental, mozzarella', t: [] },
+  { n: 'Piquante', p: '13,00', b: 'tomate', i: 'Chorizo, poivrons, paprika, emmental, mozzarella', t: [] },
+  { n: 'Indienne', p: '13,50', b: 'creme', i: 'Poulet, lardons, champignons, curry, emmental, mozzarella', t: [] },
+  { n: 'Burger', p: '13,50', b: 'tomate', i: 'Steak haché, cheddar, oignons, cornichons, emmental, mozzarella', t: [] }
+];
+document.querySelector('[data-pizzas]').innerHTML = PIZZAS.map((z, k) =>
+  `<article class="pz" data-tags="${z.b} ${z.t.join(' ')}"><span class="pz__n">${String(k + 1).padStart(2, '0')}</span><h3>${z.n}</h3><span class="pz__p">${z.p} €</span>
+   <p class="pz__i" style="margin:0"><span class="pz__b ${z.b}">${z.b === 'creme' ? 'crème' : 'tomate'}</span>${z.i}</p></article>`).join('');
+document.querySelectorAll('[data-f]').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('[data-f]').forEach(x => x.setAttribute('aria-pressed', x === b));
+  document.querySelectorAll('.pz').forEach(p => p.classList.toggle('dim', b.dataset.f !== 'all' && !p.dataset.tags.split(' ').includes(b.dataset.f)));
+}));
+
+// Panneau ouvert / fermé
+(() => {
+  const t = todayIdx(), p = PLANNING[t];
+  document.querySelector('[data-sign-state]').textContent = p.shop === 'open' ? 'Ouvert' : 'Distributeur';
+  document.querySelector('[data-sign-txt]').textContent = p.shop === 'open'
+    ? `${p.d} : burgers & pizzas à la boutique.` : `${p.d} : boutique fermée, distributeur ouvert 24h/24.`;
+  document.querySelector('[data-sign-days]').innerHTML = PLANNING.map((d, i) =>
+    `<span class="${d.shop === 'open' ? 'o' : ''}${i === t ? ' t' : ''}" title="${d.d}">${d.d.slice(0, 2)}</span>`).join('');
+})();
+
+// Pizza à composer
+const CAT = {
+  base: { label: 'La base', note: 'incluse', items: ['Crème', 'Tomate', 'Rosée'], single: true },
+  viande: { label: 'Viandes', price: 1.9, items: ['Jambon blanc', 'Lardons', 'Jambon de pays', 'Bacon', 'Poulet', 'Merguez', 'Kebab', 'Viande hachée', 'Chorizo', 'Magret de canard'] },
+  fromage: { label: 'Fromages', price: 1.5, items: ['Bleu', 'Cantal', 'Rocamadour', 'St-Nectaire', 'Mozza', 'Reblochon', 'Fromage du mois'] },
+  legume: { label: 'Légumes', price: 0.9, items: ['Courgettes', 'Oignons', 'Champignons', 'Poivrons', 'Ravioles', 'Pomme de terre', 'Fondue de poireaux', 'Marinade'] },
+  plus: { label: "P'tit plus", price: 0.9, items: ['Œuf', 'Oignons frits', 'Miel', 'Cornichons'] },
+  finir: { label: 'Pour finir', note: '1 inclus, puis +0,90 €', items: ['Mozza', 'Emmental râpé', 'Cheddar râpé', 'Cantal râpé'] },
+  epices: { label: 'Épices', note: 'offertes', items: ['Poivre', 'Curry', 'Paprika', "Piment d'Espelette"] }
+};
+const INGR = ['viande', 'fromage', 'legume', 'plus'];
+const st = { base: 'Tomate', picks: [], finir: ['Mozza'], epices: [] };
+const euro = n => n.toFixed(2).replace('.', ',') + ' €';
+
+function price() {
+  let total = 13;
+  st.picks.forEach((p, i) => { if (i >= 3) total += CAT[p.c].price; });
+  total += Math.max(0, st.finir.length - 1) * 0.9;
+  return total;
+}
+function renderSteps() {
+  const el = document.querySelector('[data-steps]');
+  const freeLeft = Math.max(0, 3 - st.picks.length);
+  el.innerHTML = Object.entries(CAT).map(([c, d], si) => {
+    const isIng = INGR.includes(c);
+    const note = isIng ? `+${d.price.toFixed(2).replace('.', ',')} € au-delà de 3` : d.note;
+    const opts = d.items.map(it => {
+      let on, free = '';
+      if (c === 'base') on = st.base === it;
+      else if (isIng) { const k = st.picks.findIndex(p => p.c === c && p.n === it); on = k >= 0; if (on) free = k < 3 ? 'inclus' : '+' + d.price.toFixed(2).replace('.', ','); }
+      else on = st[c].includes(it);
+      return `<button class="opt" aria-pressed="${on}" data-c="${c}" data-n="${it}"${free ? ` data-free="${free}"` : ''}>${it}</button>`;
+    }).join('');
+    const head = c === 'viande' ? `<p class="kicker" style="margin:4px 0 -10px">Vos 3 ingrédients · ${freeLeft ? `encore ${freeLeft} inclus` : 'les suivants sont en supplément'}</p>` : '';
+    return `${head}<div class="step"><h3>${d.label}<small>${note}</small></h3><div class="opts">${opts}</div></div>`;
+  }).join('');
+}
+document.querySelector('[data-steps]').addEventListener('click', e => {
+  const b = e.target.closest('.opt'); if (!b) return;
+  const { c, n } = b.dataset;
+  if (c === 'base') st.base = n;
+  else if (INGR.includes(c)) { const k = st.picks.findIndex(p => p.c === c && p.n === n); k >= 0 ? st.picks.splice(k, 1) : st.picks.push({ c, n }); }
+  else { const a = st[c], k = a.indexOf(n); k >= 0 ? a.splice(k, 1) : a.push(n); }
+  update();
+});
+
+// Dessin : chaque ingrédient a sa forme, placée de façon stable (même pizza = même dessin)
+const LOOK = {
+  'Jambon blanc': ['blob', '#E9A9A0'], 'Lardons': ['rect', '#B0574A'], 'Jambon de pays': ['blob', '#9E3B33'], 'Bacon': ['strip', '#A8443A'],
+  'Poulet': ['blob', '#E8C99A'], 'Merguez': ['disc', '#8E2E22'], 'Kebab': ['strip', '#8A5A3A'], 'Viande hachée': ['crumb', '#6E3B26'],
+  'Chorizo': ['disc', '#B5362A'], 'Magret de canard': ['strip', '#7A2B2B'],
+  'Bleu': ['crumb', '#D9DCCB'], 'Cantal': ['rect', '#F1D99A'], 'Rocamadour': ['disc', '#F7F1E1'], 'St-Nectaire': ['rect', '#E9D2A6'],
+  'Mozza': ['blob', '#FBF8EE'], 'Reblochon': ['blob', '#F3E3BA'], 'Fromage du mois': ['rect', '#EFD08A'],
+  'Courgettes': ['disc', '#7FA650'], 'Oignons': ['ring', '#E8D9E8'], 'Champignons': ['mush', '#C9AE8E'], 'Poivrons': ['strip', '#D6452E'],
+  'Ravioles': ['rect', '#F3E6C2'], 'Pomme de terre': ['blob', '#E9C877'], 'Fondue de poireaux': ['strip', '#B8C98A'], 'Marinade': ['strip', '#C9772E'],
+  'Œuf': ['egg', '#fff'], 'Oignons frits': ['crumb', '#C98A3A'], 'Miel': ['drip', '#E7A928'], 'Cornichons': ['disc', '#6E8A3A']
+};
+const BASES = { 'Tomate': '#C2412D', 'Crème': '#F4EAD5', 'Rosée': '#E08A73' };
+function rnd(seed) { let s = seed; return () => (s = (s * 9301 + 49297) % 233280) / 233280; }
+function hash(str) { let h = 7; for (const ch of str) h = (h * 31 + ch.charCodeAt(0)) % 100000; return h; }
+function shape(kind, x, y, r, col, rot) {
+  const t = `transform="rotate(${rot} ${x} ${y})"`;
+  switch (kind) {
+    case 'disc': return `<circle cx="${x}" cy="${y}" r="${r}" fill="${col}" stroke="rgba(0,0,0,.18)" stroke-width="1.5"/>`;
+    case 'ring': return `<circle cx="${x}" cy="${y}" r="${r}" fill="none" stroke="${col}" stroke-width="3.5"/>`;
+    case 'rect': return `<rect x="${x - r}" y="${y - r * .7}" width="${r * 2}" height="${r * 1.4}" rx="2" fill="${col}" stroke="rgba(0,0,0,.12)" ${t}/>`;
+    case 'strip': return `<rect x="${x - r * 1.5}" y="${y - 3.5}" width="${r * 3}" height="7" rx="3.5" fill="${col}" ${t}/>`;
+    case 'crumb': return `<circle cx="${x}" cy="${y}" r="${r * .45}" fill="${col}"/><circle cx="${x + r * .6}" cy="${y + r * .3}" r="${r * .35}" fill="${col}"/><circle cx="${x - r * .4}" cy="${y + r * .5}" r="${r * .3}" fill="${col}"/>`;
+    case 'mush': return `<path d="M${x - r} ${y} a${r} ${r * .8} 0 0 1 ${r * 2} 0 z" fill="${col}" ${t}/><rect x="${x - r * .3}" y="${y}" width="${r * .6}" height="${r * .7}" fill="${col}" ${t}/>`;
+    case 'egg': return `<ellipse cx="${x}" cy="${y}" rx="${r * 1.6}" ry="${r * 1.3}" fill="#fff" ${t}/><circle cx="${x}" cy="${y}" r="${r * .6}" fill="#F0B323"/>`;
+    case 'drip': return `<path d="M${x - r * 1.6} ${y} q${r * .8} ${-r} ${r * 1.6} 0 t${r * 1.6} 0" fill="none" stroke="${col}" stroke-width="3" stroke-linecap="round" opacity=".85" ${t}/>`;
+    default: return `<ellipse cx="${x}" cy="${y}" rx="${r * 1.2}" ry="${r * .85}" fill="${col}" stroke="rgba(0,0,0,.1)" ${t}/>`;
+  }
+}
+function drawPizza() {
+  const svg = document.querySelector('[data-pizza]');
+  let g = `<circle cx="200" cy="200" r="192" fill="#D79B55"/><circle cx="200" cy="200" r="192" fill="none" stroke="#B87A3A" stroke-width="4" stroke-dasharray="2 9" opacity=".6"/>
+    <circle cx="200" cy="200" r="168" fill="#E8B672"/><circle cx="200" cy="200" r="160" fill="${BASES[st.base]}"/>`;
+  const gratin = st.finir.length;
+  for (let k = 0; k < gratin * 26; k++) {
+    const R = rnd(hash('g' + k)); const a = R() * 6.283, d = Math.sqrt(R()) * 150;
+    g += `<rect x="${200 + Math.cos(a) * d}" y="${200 + Math.sin(a) * d}" width="12" height="3" rx="1.5" fill="${st.finir.includes('Cheddar râpé') && k % 2 ? '#E9A23A' : '#F6E7B8'}" transform="rotate(${R() * 180} ${200 + Math.cos(a) * d} ${200 + Math.sin(a) * d})" opacity=".9"/>`;
+  }
+  st.picks.forEach(p => {
+    const [kind, col] = LOOK[p.n] || ['blob', '#ccc']; const R = rnd(hash(p.n));
+    for (let k = 0; k < 9; k++) { const a = R() * 6.283, d = 18 + Math.sqrt(R()) * 128; g += shape(kind, 200 + Math.cos(a) * d, 200 + Math.sin(a) * d, 9 + R() * 4, col, R() * 180); }
+  });
+  st.epices.forEach(s => { const R = rnd(hash(s)); for (let k = 0; k < 40; k++) { const a = R() * 6.283, d = Math.sqrt(R()) * 155; g += `<circle cx="${200 + Math.cos(a) * d}" cy="${200 + Math.sin(a) * d}" r="1.3" fill="${s === 'Poivre' ? '#222' : '#A0321C'}"/>`; } });
+  svg.innerHTML = g;
+}
+function renderRecap() {
+  const ing = st.picks.map(p => p.n).join(', ') || 'sans ingrédient';
+  const extra = Math.max(0, st.picks.length - 3);
+  const msg = `Pizza perso base ${st.base.toLowerCase()} : ${ing}${st.finir.length ? ', gratinée ' + st.finir.join(' + ').toLowerCase() : ''}${st.epices.length ? ', ' + st.epices.join(', ').toLowerCase() : ''}`;
+  document.querySelector('[data-recap]').innerHTML = `
+    <div class="recap__row"><span>Pizza Ø31, base ${st.base.toLowerCase()}</span><span>13,00 €</span></div>
+    ${st.picks.slice(3).map(p => `<div class="recap__row"><span>+ ${p.n}</span><span>${euro(CAT[p.c].price)}</span></div>`).join('')}
+    ${st.finir.slice(1).map(f => `<div class="recap__row"><span>+ ${f}</span><span>0,90 €</span></div>`).join('')}
+    <div class="recap__row"><span>${st.picks.length} ingrédient${st.picks.length > 1 ? 's' : ''}${extra ? ` (dont ${extra} en plus)` : ''}</span><span></span></div>
+    <div class="recap__row tot" data-tot><span>Total</span><b>${euro(price())}</b></div>
+    <p class="recap__note">« ${msg} »<br>Dites-nous ça au <a href="tel:+33661998833">06 61 99 88 33</a>, on la prépare.</p>`;
+}
+function update() { renderSteps(); drawPizza(); renderRecap();
+  document.querySelector('[data-bar]').innerHTML = `<span>${st.picks.length} ingr. · voir ma pizza ↓</span><b>${euro(price())}</b>`; }
+update();
+</script>
+</body>
+</html>

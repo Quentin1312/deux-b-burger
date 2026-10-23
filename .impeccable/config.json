@@ -1,0 +1,44 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "tiny-text",
+        "value": "*",
+        "files": [
+          "boutique.html"
+        ],
+        "createdAt": "2026-10-23T21:43:50.996Z",
+        "reason": "Claude: 11px only on uppercase mono micro-labels (ticket meta, legends), not body copy"
+      },
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "*.html"
+        ],
+        "createdAt": "2026-10-23T21:48:13.839Z",
+        "reason": "Claude: crème = papier kraft du dépliant imprimé Deux B (charte existante du client)"
+      },
+      {
+        "rule": "shape-assembled-illustration",
+        "value": "*",
+        "files": [
+          "boutique.html"
+        ],
+        "createdAt": "2026-10-23T21:48:34.811Z",
+        "reason": "Claude: aperçu de pizza dessiné en direct par le composeur, fonctionnel"
+      },
+      {
+        "rule": "repeating-stripes-gradient",
+        "value": "*",
+        "files": [
+          "*.html"
+        ],
+        "createdAt": "2026-10-23T21:48:35.155Z",
+        "reason": "Claude: code-barres des tickets de caisse et pointillés de route, motifs signifiants"
+      }
+    ]
+  }
+}

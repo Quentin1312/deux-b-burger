@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Léon le camion · Food truck burgers dans le Cantal · Deux B</title>
+<meta name="description" content="Léon, le food truck Type H de Deux B, fait la tournée des villages autour d'Aurillac avec ses burgers maison. Planning de la semaine, carte et événements (mariages, anniversaires, entreprises).">
+<link rel="icon" href="img/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+<style>
+.chero{background:var(--teal);color:#F4EFE6;padding:clamp(48px,7vw,96px) 0 0;overflow:hidden;position:relative}
+.chero__grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:end}
+.chero h1{font-size:clamp(96px,15vw,250px);line-height:.8;padding-top:.14em}
+.chero h1 .it{display:block;font-size:.5em;--stroke:var(--mustard);margin-top:.08em}
+.chero .lead{color:#D8E6E4}
+.chero .kicker{color:#D3E6E4}
+.chero__txt{display:flex;flex-direction:column;gap:26px;padding-bottom:clamp(40px,6vw,80px)}
+.chero__logo{width:min(440px,100%);justify-self:end;margin-bottom:-12%;transform:rotate(6deg);filter:drop-shadow(0 30px 40px rgba(0,0,0,.35))}
+.road{height:18px;background:repeating-linear-gradient(90deg,var(--mustard) 0 48px,transparent 48px 84px) center/100% 4px no-repeat,var(--teal-dk)}
+@media (max-width:860px){.chero__grid{grid-template-columns:1fr}.chero__logo{width:60%;justify-self:end;margin:-30px 0 -16%}}
+
+.stops{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(16px,2vw,24px)}
+.stop{position:relative;background:var(--card);border:1.5px solid var(--ink);padding:26px 26px 24px;display:flex;flex-direction:column;gap:14px;box-shadow:8px 8px 0 var(--ink)}
+.stop.is-today{box-shadow:8px 8px 0 var(--mustard)}
+.stop__day{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;display:flex;justify-content:space-between;gap:10px}
+.stop__day b{background:var(--ink);color:var(--paper);padding:2px 8px;letter-spacing:.1em}
+.stop__day .new{background:var(--tomato);color:#fff;padding:2px 8px;font-weight:700}
+.stop h3{margin:0;font-weight:900;font-stretch:62%;font-size:clamp(64px,7vw,96px);line-height:.82;text-transform:uppercase}
+.stop p{margin:0;font-size:17px;color:var(--ink-2)}
+.stop a{font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border-bottom:1.5px solid var(--mustard);align-self:flex-start;margin-top:auto}
+.stop--off{background:transparent;border-style:dashed;box-shadow:none;justify-content:center}
+.stop--off h3{font-size:clamp(40px,4vw,56px);color:var(--muted)}
+
+/* Burger en éclaté */
+.anat{position:relative;height:250vh}
+.anat__stage{position:sticky;top:72px;height:calc(100vh - 72px);overflow:hidden}
+.anat__txt{position:absolute;left:var(--gut);top:50%;transform:translateY(-50%);width:min(380px,30vw);display:flex;flex-direction:column;gap:20px;z-index:5}
+.anat__txt .display{font-size:clamp(56px,6.5vw,104px)}
+.anat__layer{position:absolute;left:0;top:0;will-change:transform}
+.anat__layer img{width:100%;filter:drop-shadow(0 14px 18px rgba(70,40,20,.22));transition:opacity .3s,transform .35s cubic-bezier(.2,.8,.2,1)}
+.anat__shadow{position:absolute;left:0;top:0;height:46px;border-radius:50%;background:radial-gradient(closest-side,rgba(60,35,20,.32),transparent)}
+.lbl{position:absolute;left:0;top:0;display:flex;align-items:center;gap:12px;z-index:6;transition:opacity .2s}
+.lbl__line{height:1px;background:var(--ink);flex-shrink:0}
+.lbl__box{display:flex;flex-direction:column;gap:2px;min-width:0}
+.lbl__cat{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.lbl__name{display:flex;align-items:center;gap:8px;font-weight:900;font-stretch:72%;font-size:20px;text-transform:uppercase;line-height:1.05;white-space:nowrap}
+.lbl__desc{font-size:13.5px;color:var(--ink-2);line-height:1.35;max-width:26ch}
+.sw{width:28px;height:28px;border-radius:50%;border:1.5px solid rgba(27,19,14,.3);background:var(--card);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:14px;line-height:1;padding:0;flex-shrink:0}
+.sw:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.anat__prog{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);display:flex;gap:12px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.anat__prog span{display:block;width:80px;height:2px;background:var(--line)}
+.anat__prog i{display:block;height:100%;background:var(--ink);width:0}
+@media (max-width:899px){
+  .anat__txt{top:20px;transform:none;width:auto;right:var(--gut);gap:10px}
+  .anat__txt .lead{display:none}
+  .lbl__desc{display:none}
+  .lbl__name{font-size:13.5px;gap:6px}
+  .lbl{gap:6px}
+  .sw{width:26px;height:26px;font-size:13px}
+}
+
+/* Événements */
+.evt{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(36px,5vw,72px);align-items:start}
+.evt__l{position:sticky;top:110px;display:flex;flex-direction:column;gap:24px}
+.evt__l .display{font-size:clamp(64px,7.5vw,120px)}
+.evt__l ul{list-style:none;margin:0;padding:0;font-size:16px;color:var(--ink-2)}
+.evt__l li{padding:10px 0;border-bottom:1px solid var(--line)}
+.evt__l li::before{content:"→ ";color:var(--tomato);font-weight:700}
+.form{background:#fff;border:1.5px solid var(--ink);border-radius:20px;box-shadow:10px 10px 0 var(--ink);overflow:hidden}
+.form__body{padding:clamp(22px,3vw,34px);display:flex;flex-direction:column;gap:26px}
+.form h3{margin:0 0 12px;font-weight:900;font-stretch:72%;font-size:18px;text-transform:uppercase;letter-spacing:.04em}
+.form .opts{display:flex;flex-wrap:wrap;gap:8px}
+.form .opt{height:44px;padding:0 16px;border-radius:999px;border:1.5px solid rgba(27,19,14,.2);background:#fff;font-size:14px;font-weight:600;cursor:pointer}
+.form .opt[aria-pressed=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.form label{display:flex;flex-direction:column;gap:6px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.form input,.form textarea{width:100%;min-width:0;padding:14px 16px;border-radius:12px;border:1.5px solid rgba(27,19,14,.22);font-size:16px;background:var(--paper);color:var(--ink);outline:none;letter-spacing:0;text-transform:none;font-weight:400}
+.form input:focus,.form textarea:focus{border-color:var(--ink)}
+.form ::placeholder{color:#6A5A4C;opacity:1}
+.form textarea{resize:vertical;min-height:96px}
+.form__bar{position:sticky;bottom:0;background:var(--ink);color:var(--paper);padding:16px clamp(16px,2.4vw,28px);display:flex;align-items:center;justify-content:space-between;gap:14px}
+.form__bar span{font-family:var(--mono);font-size:12px;color:#B9A58F;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.form__ok{display:none;padding:clamp(40px,5vw,64px);flex-direction:column;gap:18px;align-items:flex-start}
+.form.sent .form__body,.form.sent .form__bar{display:none}
+.form.sent .form__ok{display:flex}
+.form__ok b{font-weight:900;font-stretch:62%;font-size:clamp(48px,6vw,72px);text-transform:uppercase;line-height:.9}
+@media (max-width:860px){.evt{grid-template-columns:1fr}.evt__l{position:static}.form{box-shadow:6px 6px 0 var(--ink)}}
+</style>
+</head>
+<body>
+<div data-site-header data-page="camion"></div>
+
+<main>
+<section class="chero">
+  <div class="wrap chero__grid">
+    <div class="chero__txt">
+      <h1 class="display">Léon <span class="it">le camion.</span></h1>
+      <p class="lead">Un Type H façon 2021, prénommé Léon. Il fait la tournée des villages autour de Jussac avec les burgers de la boutique, et se déplace aussi pour vos fêtes.</p>
+      <div class="today" data-today></div>
+    </div>
+    <img class="chero__logo" src="img/logo.webp" alt="Logo Deux B Street food : burger, montagnes et camion Type H" width="500" height="490">
+  </div>
+  <div class="road" aria-hidden="true"></div>
+</section>
+
+<section class="sec" id="tournee">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="display">La<br>tournée</h2>
+      <p class="lead" style="max-width:36ch">Les arrêts changent selon les semaines. Celui-ci est le planning en cours ; le reste du temps, Léon est en cuisine ou en événement.</p>
+    </div>
+    <div class="stops" data-stops></div>
+  </div>
+</section>
+
+<section class="anat" id="burger" aria-label="Ce qu'il y a dans un burger Deux B">
+  <div class="anat__stage" data-stage>
+    <div class="anat__txt">
+      <h2 class="display">Ce qu'il y a <span class="it">dedans.</span></h2>
+      <p class="lead">Faites défiler : le burger s'ouvre. Changez le fromage ou la viande avec les flèches.</p>
+    </div>
+    <div class="anat__shadow" data-shadow></div>
+    <div data-layers></div>
+    <div data-labels></div>
+    <div class="anat__prog"><em style="font-style:normal">Défilez</em><span><i data-prog></i></span></div>
+  </div>
+</section>
+
+<section class="sec on-dark" id="carte">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="display">La carte<br>de Léon</h2>
+      <p class="lead" style="max-width:32ch">Sur place ou à emporter, on paie au camion. Pour les pizzas, c'est à la <a href="boutique.html#pizzas" style="color:var(--mustard)">boutique de Jussac</a>.</p>
+    </div>
+    <div class="tickets" data-tickets></div>
+    <p class="swipe">← Glissez pour voir les tickets →</p>
+  </div>
+</section>
+
+<section class="sec" id="evenements">
+  <div class="wrap evt">
+    <div class="evt__l">
+      <h2 class="display">Léon vient<br><span class="it" style="--stroke:var(--tomato)">chez vous.</span></h2>
+      <p class="lead">On installe le camion sur place et on prépare devant vos invités. Burgers, mais pas seulement : on s'adapte.</p>
+      <ul>
+        <li>Une porte ouverte avec des mignardises</li>
+        <li>Un brunch le lendemain du mariage</li>
+        <li>L'anniversaire, la fête de village, le repas d'équipe</li>
+      </ul>
+      <p style="margin:0">Plus rapide ? <a href="tel:+33661998833" style="font-weight:700;text-decoration:none;border-bottom:1.5px solid var(--mustard)">06 61 99 88 33</a></p>
+    </div>
+
+    <form class="form" data-ev-form novalidate>
+      <div class="form__body">
+        <div><h3>1. L'événement</h3><div class="opts" data-group="type"></div></div>
+        <div class="fgrid">
+          <label>Date<input type="date" name="date"></label>
+          <label>Commune<input name="commune" placeholder="Ex. Aurillac"></label>
+        </div>
+        <div><h3>2. Nombre d'invités</h3><div class="opts" data-group="guests"></div></div>
+        <div>
+          <h3>3. Vos coordonnées</h3>
+          <div class="fgrid" style="margin-bottom:10px">
+            <input name="nom" placeholder="Nom et prénom" autocomplete="name" aria-label="Nom et prénom" required>
+            <input name="tel" type="tel" placeholder="Téléphone" autocomplete="tel" aria-label="Téléphone" required>
+          </div>
+          <textarea name="msg" placeholder="Votre projet en quelques mots : horaires, formule, nombre de burgers…" aria-label="Votre projet"></textarea>
+        </div>
+      </div>
+      <div class="form__bar">
+        <span data-ev-sum></span>
+        <button class="btn btn--gold" type="submit">Demander un devis <span class="arr">→</span></button>
+      </div>
+      <div class="form__ok" role="status">
+        <span style="width:56px;height:56px;border-radius:50%;background:var(--mustard);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:800">✓</span>
+        <b>C'est parti</b>
+        <p class="lead">Votre messagerie s'est ouverte avec la demande pré-remplie : il ne reste qu'à l'envoyer. On vous rappelle vite.</p>
+        <button class="btn btn--ghost" type="button" data-ev-reset>Nouvelle demande</button>
+      </div>
+    </form>
+  </div>
+</section>
+</main>
+
+<div data-site-footer></div>
+<script src="js/site.js"></script>
+<script>
+// Arrêts de la semaine
+(() => {
+  const t = todayIdx();
+  const stops = PLANNING.map((p, i) => ({ ...p, i })).filter(p => p.truck);
+  document.querySelector('[data-stops]').innerHTML = stops.map(p => `
+    <article class="stop${p.i === t ? ' is-today' : ''}">
+      <div class="stop__day"><span>${p.d}${p.i === t ? " · aujourd'hui" : ''}</span>${p.truck.isNew ? '<span class="new">Nouveau</span>' : ''}</div>
+      <h3>${p.truck.place}</h3>
+      <p>${p.truck.where.charAt(0).toUpperCase() + p.truck.where.slice(1)}</p>
+      <a href="https://www.openstreetmap.org/search?query=${encodeURIComponent(p.truck.place + ' Cantal')}" target="_blank" rel="noopener">Voir sur la carte ↗</a>
+    </article>`).join('') + `
+    <article class="stop stop--off"><div class="stop__day"><span>Les autres jours</span></div><h3>En cuisine<br>ou en fête</h3><p>Suivez <a href="https://www.instagram.com/les_deux_b/" target="_blank" rel="noopener" style="font-family:inherit;font-size:inherit;text-transform:none;letter-spacing:0;margin:0">@les_deux_b</a> pour les arrêts exceptionnels.</p></article>`;
+})();
+
+// Burger en éclaté
+const LAYERS = [
+  { key: 'top', cat: 'Pain', a: -.5, b: -1.42, s: 1, z: 5, opts: [{ n: 'Pain maison', img: 'img/bun-top.webp', d: 'Pétri et cuit dans notre cuisine.' }] },
+  { key: 'salad', cat: 'Salade', a: -.25, b: -.76, s: 1.06, z: 4, opts: [{ n: 'Salade fraîche', img: 'img/layer-a.webp', d: 'Du primeur, pas du sachet.' }] },
+  { key: 'cheese', cat: 'Fromage', a: -.03, b: -.13, s: .96, z: 3, opts: [
+      { n: 'Cheddar', img: 'img/layer-b.webp', d: 'Ou Cantal, chèvre, St-Nectaire, fromage du mois.' },
+      { n: 'Bleu', img: 'img/bleu.webp', d: 'Pour les amateurs de caractère.' }] },
+  { key: 'meat', cat: 'Viande', a: .17, b: .5, s: .92, z: 2, opts: [
+      { n: 'Steak haché', img: 'img/steak.webp', d: 'Salers ou Aubrac, origine France.' },
+      { n: 'Poulet pané', img: 'img/poulet.webp', d: 'Croustillant, pour changer du bœuf.' }] },
+  { key: 'bottom', cat: 'Sauce maison', a: .43, b: 1.14, s: 1, z: 1, opts: [
+      { n: 'La Pays Vert', img: 'img/bun-bottom.webp', d: 'Crème fraîche, ail et fines herbes.' },
+      { n: 'La Basque', img: 'img/bun-bottom.webp', d: 'Sur une base mayonnaise maison.' },
+      { n: 'La Poivre', img: 'img/bun-bottom.webp', d: 'Pour ceux qui aiment quand ça pique un peu.' },
+      { n: 'La Cantalou', img: 'img/bun-bottom.webp', d: 'Sauce fromagère au Cantal.' }] }
+];
+const sel = { top: 0, salad: 0, cheese: 0, meat: 0, bottom: 0 };
+const anat = document.querySelector('.anat'), stage = document.querySelector('[data-stage]');
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v)), lerp = (a, b, t) => a + (b - a) * t;
+const easeIO = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+document.querySelector('[data-layers]').innerHTML = LAYERS.map(l => `<div class="anat__layer" data-l="${l.key}" style="z-index:${l.z}"><img src="${l.opts[0].img}" alt="${l.cat}"></div>`).join('');
+document.querySelector('[data-labels]').innerHTML = LAYERS.map(l => `<div class="lbl" data-lb="${l.key}"><span class="lbl__line"></span><div class="lbl__box">
+  <span class="lbl__cat">${l.cat}${l.opts.length > 1 ? ` · <span data-cnt>1/${l.opts.length}</span>` : ''}</span>
+  <span class="lbl__name">${l.opts.length > 1 ? `<button class="sw" data-sw="${l.key}" data-dir="-1" aria-label="${l.cat} précédent">‹</button>` : ''}<span data-nm>${l.opts[0].n}</span>${l.opts.length > 1 ? `<button class="sw" data-sw="${l.key}" data-dir="1" aria-label="${l.cat} suivant">›</button>` : ''}</span>
+  <span class="lbl__desc" data-ds>${l.opts[0].d}</span></div></div>`).join('');
+stage.addEventListener('click', e => {
+  const b = e.target.closest('[data-sw]'); if (!b) return;
+  const L = LAYERS.find(l => l.key === b.dataset.sw), n = L.opts.length, dir = +b.dataset.dir;
+  sel[L.key] = (sel[L.key] + dir + n) % n; const o = L.opts[sel[L.key]];
+  const img = stage.querySelector(`[data-l="${L.key}"] img`), lb = stage.querySelector(`[data-lb="${L.key}"]`);
+  img.style.transition = 'none'; img.style.transform = `translateX(${dir * 30}px) scale(.94)`; img.style.opacity = .4;
+  requestAnimationFrame(() => { img.src = o.img; requestAnimationFrame(() => { img.style.transition = ''; img.style.transform = ''; img.style.opacity = 1; }); });
+  lb.querySelector('[data-nm]').textContent = o.n; lb.querySelector('[data-ds]').textContent = o.d;
+  lb.querySelector('[data-cnt]').textContent = `${sel[L.key] + 1}/${n}`;
+});
+function layout() {
+  const vw = innerWidth, sh = stage.clientHeight, wide = vw >= 900;
+  const r = anat.getBoundingClientRect(), p = clamp((72 - r.top) / (r.height - sh));
+  const e = easeIO(clamp((p - .04) / .55));
+  let W, cx, cy, lx;
+  if (wide) { W = Math.min(480, sh * .44, vw * .32); cx = vw * .56; cy = sh * .52; lx = cx + W * .56 + 18; }
+  else { W = Math.min(vw * .44, (sh - 170) / 1.9, 300); cx = vw * .06 + W / 2; cy = 150 + (sh - 150) / 2; lx = cx + W * .5 + 12; }
+  const H = W / 2, lineW = wide ? 30 : 10;
+  LAYERS.forEach((l, i) => {
+    const w = W * l.s, y = lerp(l.a, l.b, e);
+    const el = stage.querySelector(`[data-l="${l.key}"]`);
+    el.style.width = w + 'px'; el.style.transform = `translate(${cx - w / 2}px, ${cy + y * H - w / 4}px)`;
+    const lb = stage.querySelector(`[data-lb="${l.key}"]`), op = clamp((e - .45 - i * .07) / .25);
+    lb.style.transform = `translate(${lx}px, calc(${cy + y * H}px - 50%))`; lb.style.opacity = op;
+    lb.style.pointerEvents = op > .6 ? 'auto' : 'none'; lb.querySelector('.lbl__line').style.width = lineW * op + 'px';
+  });
+  const sd = stage.querySelector('[data-shadow]');
+  sd.style.width = W + 'px'; sd.style.transform = `translate(${cx - W / 2}px, ${cy + lerp(.43, 1.14, e) * H + H * .3}px)`;
+  document.querySelector('[data-prog]').style.width = clamp(p / .6) * 100 + '%';
+}
+let raf; const onScroll = () => { if (!raf) raf = requestAnimationFrame(() => { raf = null; layout(); }); };
+addEventListener('scroll', onScroll, { passive: true }); addEventListener('resize', onScroll); layout();
+
+// Formulaire événement : prépare un e-mail (pas de serveur nécessaire)
+const EV = { type: ['Mariage', 'Anniversaire', 'Entreprise', 'Fête de village', 'Autre'], guests: ['Moins de 50', '50 – 100', '100 – 200', 'Plus de 200'] };
+const evSt = { type: 'Mariage', guests: '50 – 100' };
+const form = document.querySelector('[data-ev-form]');
+function evRender() {
+  Object.entries(EV).forEach(([g, list]) => {
+    form.querySelector(`[data-group="${g}"]`).innerHTML = list.map(v => `<button type="button" class="opt" data-g="${g}" data-v="${v}" aria-pressed="${evSt[g] === v}">${v}</button>`).join('');
+  });
+  form.querySelector('[data-ev-sum]').textContent = `${evSt.type} · ${evSt.guests} invités`;
+}
+form.addEventListener('click', e => { const b = e.target.closest('[data-g]'); if (b) { evSt[b.dataset.g] = b.dataset.v; evRender(); } });
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  const f = new FormData(form);
+  if (!f.get('nom') || !f.get('tel')) { form.querySelector(f.get('nom') ? '[name=tel]' : '[name=nom]').focus(); return; }
+  const body = [`Type : ${evSt.type}`, `Invités : ${evSt.guests}`, `Date : ${f.get('date') || 'à définir'}`, `Commune : ${f.get('commune') || 'à définir'}`, '', f.get('msg') || '', '', `${f.get('nom')} · ${f.get('tel')}`].join('\n');
+  location.href = `mailto:${MAIL}?subject=${encodeURIComponent('Demande de devis · ' + evSt.type)}&body=${encodeURIComponent(body)}`;
+  form.classList.add('sent');
+});
+form.querySelector('[data-ev-reset]').addEventListener('click', () => { form.reset(); form.classList.remove('sent'); });
+evRender();
+</script>
+</body>
+</html>

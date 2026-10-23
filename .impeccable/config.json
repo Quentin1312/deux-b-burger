@@ -38,6 +38,24 @@
         ],
         "createdAt": "2026-10-23T21:48:35.155Z",
         "reason": "Claude: code-barres des tickets de caisse et pointillés de route, motifs signifiants"
+      },
+      {
+        "rule": "undersized-ui-text",
+        "value": "*",
+        "files": [
+          "camion.html"
+        ],
+        "createdAt": "2026-10-23T21:50:48.478Z",
+        "reason": "Claude: analyse statique lit .5em sans contexte; rendu réel 48-125px (scan URL sans finding)"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "camion.html"
+        ],
+        "createdAt": "2026-10-23T21:50:48.856Z",
+        "reason": "Claude: sections pleine largeur, retrait assuré par .wrap (padding var(--gut)) à l'intérieur"
       }
     ]
   }

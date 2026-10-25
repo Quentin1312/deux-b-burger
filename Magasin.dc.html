@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Big+Shoulders+Display:wght@700;800;900&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#ece3d5;color:#22170f;font-family:Archivo,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#22170f;text-decoration:none}
+a:hover{color:#3e7a8c}
+button{font:inherit;color:inherit}
+section{scroll-margin-top:72px}
+</style>
+</helmet>
+
+<header style="position:sticky;top:0;z-index:30;background:#22170f;color:#ece3d5">
+  <div style="max-width:1320px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:20px">
+    <a href="Accueil.dc.html" style="display:flex;align-items:center;gap:12px;color:#ece3d5"><img src="assets/logo.png" alt="Deux B" style="width:44px;height:44px;display:block"><span style="font-family:'Big Shoulders Display';font-weight:900;font-size:26px;letter-spacing:.02em;text-transform:uppercase;white-space:nowrap">Les Deux B</span></a>
+    <sc-if value="{{ notMobile }}" hint-placeholder-val="{{ true }}">
+      <nav style="display:flex;gap:22px;margin-left:auto;font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap">
+        <a href="Accueil.dc.html" style="color:#ece3d5;">Accueil</a>
+        <a href="Magasin.dc.html" style="color:#ece3d5;border-bottom:2px solid #8fbccb;padding-bottom:3px">Le magasin</a>
+        <a href="Leon.dc.html" style="color:#ece3d5;">Léon le camion</a>
+        <a href="#carte" style="color:#ece3d5;">La carte</a>
+      </nav>
+      <a href="Accueil.dc.html#contact" style="background:#ece3d5;color:#22170f;padding:10px 16px;border-radius:6px;font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap">Contact</a>
+    </sc-if>
+    <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+      <button onClick="{{ toggleMenu }}" aria-label="Menu" style="margin-left:auto;width:48px;height:48px;border-radius:8px;border:2px solid rgba(236,227,213,.5);background:transparent;color:#ece3d5;font-size:22px;font-weight:700;cursor:pointer">{{ menuIcon }}</button>
+    </sc-if>
+  </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <nav style="display:flex;flex-direction:column;padding:6px 20px 24px;border-top:1px solid rgba(236,227,213,.15)">
+      <a href="Accueil.dc.html" onClick="{{ closeMenu }}" style="color:#ece3d5;font-family:'Big Shoulders Display';font-weight:900;font-size:36px;line-height:1.1;text-transform:uppercase;padding:10px 0;border-bottom:1px solid rgba(236,227,213,.12)">Accueil</a>
+      <a href="Magasin.dc.html" onClick="{{ closeMenu }}" style="color:#8fbccb;font-family:'Big Shoulders Display';font-weight:900;font-size:36px;line-height:1.1;text-transform:uppercase;padding:10px 0;border-bottom:1px solid rgba(236,227,213,.12)">Le magasin</a>
+      <a href="Leon.dc.html" onClick="{{ closeMenu }}" style="color:#ece3d5;font-family:'Big Shoulders Display';font-weight:900;font-size:36px;line-height:1.1;text-transform:uppercase;padding:10px 0;border-bottom:1px solid rgba(236,227,213,.12)">Léon le camion</a>
+      <a href="#carte" onClick="{{ closeMenu }}" style="color:#ece3d5;font-family:'Big Shoulders Display';font-weight:900;font-size:36px;line-height:1.1;text-transform:uppercase;padding:10px 0;border-bottom:1px solid rgba(236,227,213,.12)">La carte</a>
+      <a href="Accueil.dc.html#contact" onClick="{{ closeMenu }}" style="margin-top:18px;text-align:center;background:#ece3d5;color:#22170f;padding:16px;border-radius:8px;font-weight:800;font-size:15px;letter-spacing:.08em;text-transform:uppercase">Contact · 06 61 99 88 33</a>
+    </nav>
+  </sc-if>
+</header>
+
+<section id="top" style="background:#22170f;color:#ece3d5;overflow:hidden;position:relative">
+  <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width:1100px;margin:0 auto;padding:36px 20px 0;text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px;position:relative;z-index:2">
+    <span style="display:flex;align-items:center;gap:10px;border:2px solid rgba(236,227,213,.35);padding:9px 14px;border-radius:999px;font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase"><span style="width:9px;height:9px;border-radius:50%;background:{{ shop.dot }}"></span>{{ shop.full }} · 14 av. des Raux, Jussac</span>
+    <h1 style="margin:0;font-family:'Big Shoulders Display';font-weight:900;text-transform:uppercase;font-size:clamp(48px,7vw,108px);line-height:1.02"><span style="display:block">Pizza <span style="color:#8fbccb">+</span> burger</span><span style="display:block"><span style="color:#8fbccb">+</span> <span style="color:transparent;-webkit-text-stroke:2px #ece3d5">dessert</span></span></h1>
+    <p style="margin:0;font-size:17px;line-height:1.55;max-width:540px;font-weight:500;opacity:.9">Pizzas maison Ø 31 cm, burgers sur pain fait maison, desserts du jour. Sur place ou à emporter, et le distributeur à côté, ouvert jour et nuit.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+      <a href="#carte" style="background:#ece3d5;color:#22170f;padding:18px 26px;border-radius:6px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:14px">Ouvrir la carte</a>
+      <a href="#infos" style="border:2px solid #ece3d5;color:#ece3d5;padding:16px 22px;border-radius:6px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:14px">Nous trouver →</a>
+    </div>
+  </div>
+  <div style="position:relative;height:clamp(170px,19vw,260px);margin-top:22px">
+    <div style="position:absolute;left:50%;top:0;width:min(420px,78vw);aspect-ratio:1/1;transform:translateX(-50%)">
+      <img ref="{{ spinRef }}" src="assets/web/pizza-ronde.png" alt="Pizza maison" style="position:absolute;inset:0;width:100%;height:100%;display:block;filter:drop-shadow(0 -8px 36px rgba(0,0,0,.45));will-change:transform">
+    </div>
+    
+  </div>
+</sc-if>
+  <sc-if value="{{ notMobile }}" hint-placeholder-val="{{ true }}">
+  <div style="max-width:1320px;margin:0 auto;padding:44px 28px 48px;display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(24px,4vw,64px);align-items:center">
+    <div style="position:relative;width:min(470px,36vw);aspect-ratio:1/1;justify-self:end;margin-left:-10%">
+      <div style="position:absolute;inset:-6%;border-radius:50%;background:#2c1f15"></div>
+      <img ref="{{ spinRefD }}" src="assets/web/pizza-ronde.png" alt="Pizza maison" style="position:absolute;inset:0;width:100%;height:100%;display:block;filter:drop-shadow(0 22px 30px rgba(0,0,0,.5));will-change:transform">
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-start;gap:18px">
+      <span style="display:flex;align-items:center;gap:10px;border:2px solid rgba(236,227,213,.35);padding:9px 14px;border-radius:999px;font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase"><span style="width:9px;height:9px;border-radius:50%;background:{{ shop.dot }}"></span>{{ shop.full }} · 14 av. des Raux, Jussac</span>
+      <h1 style="margin:0;font-family:'Big Shoulders Display';font-weight:900;text-transform:uppercase;font-size:clamp(56px,7vw,104px);line-height:1"><span style="display:block">Pizza <span style="color:#c29a6a">+</span> burger</span><span style="display:block"><span style="color:#c29a6a">+</span> <span style="color:transparent;-webkit-text-stroke:2px #ece3d5">dessert</span></span></h1>
+      <p style="margin:0;font-size:17px;line-height:1.55;max-width:520px;font-weight:500;opacity:.9">Pizzas maison Ø 31 cm, burgers sur pain fait maison, desserts du jour. Sur place ou à emporter, et le distributeur à côté, ouvert jour et nuit.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a href="#carte" style="background:#ece3d5;color:#22170f;padding:18px 26px;border-radius:6px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:14px">Ouvrir la carte</a>
+        <a href="#infos" style="border:2px solid #ece3d5;color:#ece3d5;padding:16px 22px;border-radius:6px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:14px">Nous trouver →</a>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+</section>
+
+<section id="carte" style="background:#f6f0e6;border-bottom:3px solid #22170f">
+  <div style="max-width:1320px;margin:0 auto;padding:80px 20px">
+    <div style="display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:14px;padding:0 4px">
+      <h2 style="margin:0;font-family:'Big Shoulders Display';font-weight:900;text-transform:uppercase;font-size:clamp(56px,8vw,120px);line-height:1;white-space:nowrap">La carte</h2>
+      <div style="display:flex;gap:6px;background:#22170f;padding:6px;border-radius:10px;flex-wrap:wrap">
+        <sc-for list="{{ tabs }}" as="t"><button onClick="{{ t.pick }}" style="border:0;padding:14px 20px;border-radius:6px;background:{{ t.bg }};color:{{ t.fg }};font-weight:800;font-size:13px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;white-space:nowrap">{{ t.n }}</button></sc-for>
+      </div>
+    </div>
+    <sc-if value="{{ isPizza }}" hint-placeholder-val="{{ true }}">
+      <p style="margin:0 0 24px;padding:0 4px;font-size:16px;font-weight:600">{{ boxHint }}</p>
+      <div ref="{{ carRef }}" onTouchStart="{{ tStart }}" onTouchEnd="{{ tEnd }}" style="overflow:{{ carOverflow }};margin:0 {{ carBleed }};padding:{{ carPad }};perspective:{{ carPersp }};-webkit-mask-image:{{ carMask }};mask-image:{{ carMask }}">
+        <div style="position:relative;height:{{ trackH }};display:grid;grid-template-columns:{{ boxCols }};grid-auto-flow:{{ boxFlow }};grid-auto-columns:{{ boxAuto }};gap:{{ boxGap }};transform:translateX({{ trackX }});transition:transform .55s cubic-bezier(.3,.9,.3,1)">
+          <sc-for list="{{ boxes }}" as="b" hint-placeholder-count="11">
+            <div onClick="{{ b.click }}" style="position:{{ b.pos }};left:{{ b.left }};top:0;width:{{ b.w }};margin-left:{{ b.ml }};z-index:{{ b.z }};pointer-events:{{ b.pe }};aspect-ratio:1/1;perspective:1100px;cursor:pointer;opacity:{{ b.op }};transform:{{ b.tf }};transition:opacity .45s,transform .6s cubic-bezier(.3,.9,.3,1)">
+              <div style="position:absolute;inset:0;border-radius:5px;background:{{ b.inside }};box-shadow:inset 0 0 0 8px {{ b.rim }},inset 0 0 0 10px rgba(34,23,15,.2),0 22px 26px -18px rgba(34,23,15,.75);overflow:hidden">
+                <div style="position:absolute;inset:13px;background:#f4ecdd;border-radius:2px;transform:rotate(-2.5deg)"></div>
+                <sc-if value="{{ b.p0 }}"><img src="assets/web/pizza-classique.png" alt="" style="position:absolute;left:19%;top:6%;width:62%;filter:drop-shadow(0 6px 6px rgba(0,0,0,.35))"></sc-if><sc-if value="{{ b.p1 }}"><img src="assets/web/pizza-vege.png" alt="" style="position:absolute;left:19%;top:6%;width:62%;filter:drop-shadow(0 6px 6px rgba(0,0,0,.35))"></sc-if><sc-if value="{{ b.p2 }}"><img src="assets/web/pizza-auvergnate.png" alt="" style="position:absolute;left:19%;top:6%;width:62%;filter:drop-shadow(0 6px 6px rgba(0,0,0,.35))"></sc-if><sc-if value="{{ b.p3 }}"><img src="assets/web/pizza-locale.png" alt="" style="position:absolute;left:19%;top:6%;width:62%;filter:drop-shadow(0 6px 6px rgba(0,0,0,.35))"></sc-if><sc-if value="{{ b.p4 }}"><img src="assets/web/pizza-3fromages.png" alt="" style="position:absolute;left:19%;top:6%;width:62%;filter:drop-shadow(0 6px 6px rgba(0,0,0,.35))"></sc-if><sc-if value="{{ b.p5 }}"><img src="assets/web/pizza-roca.png" alt="" style="position:absolute;left:19%;top:6%;width:62%;filter:drop-shadow(0 6px 6px rgba(0,0,0,.35))"></sc-if><sc-if value="{{ b.p6 }}"><img src="assets/web/pizza-tartiflette.png" alt="" style="position:absolute;left:19%;top:6%;width:62%;filter:drop-shadow(0 6px 6px rgba(0,0,0,.35))"></sc-if><sc-if value="{{ b.p7 }}"><img src="assets/web/pizza-piquante.png" alt="" style="position:absolute;left:19%;top:6%;width:62%;filter:drop-shadow(0 6px 6px rgba(0,0,0,.35))"></sc-if><sc-if value="{{ b.p8 }}"><img src="assets/web/pizza-indienne.png" alt="" style="position:absolute;left:19%;top:6%;width:62%;filter:drop-shadow(0 6px 6px rgba(0,0,0,.35))"></sc-if><sc-if value="{{ b.p9 }}"><img src="assets/web/pizza-burger.png" alt="" style="position:absolute;left:19%;top:6%;width:62%;filter:drop-shadow(0 6px 6px rgba(0,0,0,.35))"></sc-if>
+                <sc-if value="{{ b.custom }}"><span style="position:absolute;left:0;right:0;top:29%;display:flex;flex-direction:column;align-items:center;gap:2px;color:#22170f;text-align:center"><span style="font-family:'Big Shoulders Display';font-weight:900;font-size:clamp(36px,4vw,52px);line-height:.9">+3</span><span style="font-weight:800;font-size:11px;letter-spacing:.14em;text-transform:uppercase">ingrédients au choix</span></span></sc-if>
+                <div style="position:absolute;left:12px;right:12px;bottom:12px;background:#fffaf2;color:#22170f;padding:9px 11px;border-radius:3px;display:flex;flex-direction:column;gap:3px;box-shadow:0 2px 0 rgba(34,23,15,.15)"><span style="font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#22170f">{{ b.base }}</span><span style="font-size:12.5px;line-height:1.35;font-weight:600">{{ b.desc }}</span></div>
+              </div>
+              <div style="position:absolute;inset:0;transform-origin:50% 0;transform:rotateX({{ b.rot }});transition:transform .6s cubic-bezier(.3,1.2,.5,1);border-radius:5px;background:repeating-linear-gradient(90deg,rgba(34,23,15,.045) 0 1px,transparent 1px 5px),{{ b.lid }};color:{{ b.lidFg }};box-shadow:inset 0 -10px 0 {{ b.edge }},inset 0 0 0 1.5px rgba(34,23,15,.35),0 12px 18px -12px rgba(34,23,15,.6);display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:6px;padding:clamp(10px,1.2vw,14px) clamp(10px,1.2vw,14px) clamp(18px,1.9vw,24px);text-align:center">
+                <div style="position:absolute;left:36%;right:36%;bottom:0;height:10px;background:{{ b.tab }};border-radius:10px 10px 0 0"></div>
+                <div style="position:absolute;left:0;top:0;width:18%;height:18%;background:linear-gradient(135deg,rgba(34,23,15,.09) 50%,transparent 50%);border-radius:5px 0 0 0"></div>
+                <div style="position:absolute;right:0;top:0;width:18%;height:18%;background:linear-gradient(225deg,rgba(34,23,15,.09) 50%,transparent 50%);border-radius:0 5px 0 0"></div>
+                <div style="position:relative;width:100%;display:flex;justify-content:space-between;align-items:center"><span style="font-weight:800;font-size:11px;letter-spacing:.12em;opacity:.75">N° {{ b.num }}</span><span style="font-family:'Big Shoulders Display';font-weight:900;font-size:clamp(17px,1.8vw,22px);background:{{ b.tagBg }};color:{{ b.tagFg }};padding:4px 10px;border-radius:999px;transform:rotate(-7deg);white-space:nowrap;box-shadow:0 2px 0 rgba(34,23,15,.25)">{{ b.price }}</span></div>
+                <svg viewBox="0 0 100 100" style="position:relative;width:42%;flex:none;overflow:visible">
+                  <defs><path id="arc-{{ b.num }}" d="M50,50 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"></path></defs>
+                  <circle cx="50" cy="50" r="47" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".45"></circle>
+                  <circle cx="50" cy="50" r="29" fill="none" stroke="currentColor" stroke-width="1" opacity=".35"></circle>
+                  <text font-size="9.5" font-weight="800" fill="currentColor" opacity=".72" font-family="Archivo, sans-serif"><textPath href="#arc-{{ b.num }}" textLength="236" lengthAdjust="spacing">PIZZA MAISON · LES DEUX B · JUSSAC ·</textPath></text>
+                  <image href="assets/logo.png" x="29" y="29" width="42" height="42"></image>
+                </svg>
+                <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0"><span style="font-family:'Big Shoulders Display';font-weight:900;font-size:clamp(24px,2.6vw,34px);line-height:1;text-transform:uppercase;overflow-wrap:anywhere">{{ b.name }}</span><span style="font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;opacity:.7">{{ b.base }}</span></div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;max-width:{{ ctrlMax }};margin:0 auto">
+        <div style="display:grid;grid-template-columns:56px minmax(0,1fr) 56px;gap:12px;align-items:center;margin:0 0 36px">
+          <button onClick="{{ prevSlide }}" aria-label="Pizza précédente" style="width:56px;height:56px;border-radius:50%;border:0;background:#22170f;color:#ece3d5;font-size:28px;font-weight:700;line-height:1;cursor:pointer">‹</button>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center"><span style="font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.6">{{ slideCount }}</span><span style="font-family:'Big Shoulders Display';font-weight:900;font-size:26px;line-height:1.05;text-transform:uppercase">{{ slideName }}</span></div>
+          <button onClick="{{ nextSlide }}" aria-label="Pizza suivante" style="width:56px;height:56px;border-radius:50%;border:0;background:#22170f;color:#ece3d5;font-size:28px;font-weight:700;line-height:1;cursor:pointer">›</button>
+        </div>
+        <div>
+          <div style="background:#ece1cf;border-radius:6px;padding:24px 20px 22px;display:flex;flex-direction:column;gap:12px">
+            <div style="text-align:center;display:flex;flex-direction:column;gap:2px"><span style="font-family:'Big Shoulders Display';font-weight:900;font-size:32px;line-height:1.05;text-transform:uppercase">Toutes nos pizzas</span><span style="font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;opacity:.6">Ø 31 cm · pâte maison</span></div>
+            <div style="border-top:2px dashed rgba(34,23,15,.35)"></div>
+            <div style="display:grid;grid-template-columns:{{ listCols }};gap:4px 40px;align-items:start"><sc-for list="{{ pizzaLines }}" as="l"><div onClick="{{ l.go }}" style="position:relative;cursor:pointer;margin-top:16px;transform:rotate({{ l.rot }})"><div style="position:absolute;left:7px;top:8px;right:-7px;bottom:-7px;border-radius:4px 8px 5px 10px;background:repeating-linear-gradient(135deg,rgba(34,23,15,.55) 0 1.2px,transparent 1.2px 5px)"></div><div style="position:relative;background:#fffdf8;border:2px solid #22170f;border-radius:3px 7px 4px 9px / 7px 3px 9px 4px;padding:14px 18px 12px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;align-items:baseline"><span style="position:absolute;left:8px;top:6px;width:18px;height:5px;background:repeating-linear-gradient(90deg,#22170f 0 1px,transparent 1px 3px);opacity:.55"></span><span style="position:absolute;right:8px;bottom:6px;width:5px;height:16px;background:repeating-linear-gradient(180deg,#22170f 0 1px,transparent 1px 3px);opacity:.55"></span><span style="font-family:'Big Shoulders Display';font-weight:900;font-size:24px;line-height:1.05;text-transform:uppercase">{{ l.n }}</span><span style="font-family:'Big Shoulders Display';font-weight:900;font-size:24px;white-space:nowrap">{{ l.p }}</span><span style="grid-column:1 / -1;font-size:13px;line-height:1.4;opacity:.8">{{ l.d }}</span></div><span style="position:absolute;left:50%;top:-15px;width:28px;height:30px;transform:translateX(-50%);z-index:3;pointer-events:none"><span style="position:absolute;left:13px;top:18px;width:18px;height:9px;background:repeating-linear-gradient(120deg,rgba(34,23,15,.7) 0 1px,transparent 1px 3.5px);border-radius:50%"></span><span style="position:absolute;left:4px;top:11px;width:20px;height:13px;border-radius:50%;background:#e4d8c6;border:2px solid #22170f"></span><span style="position:absolute;left:6px;top:3px;width:16px;height:12px;border-radius:50%;background:#fffaf2;border:2px solid #22170f"></span></span></div></sc-for></div>
+            <div style="border-top:2px dashed rgba(34,23,15,.35)"></div>
+            <button onClick="{{ toggleCust }}" style="display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:52px;padding:0 16px;border-radius:10px;border:2px solid #22170f;background:{{ custBg }};color:{{ custFg }};cursor:pointer;font-weight:800;font-size:14px;letter-spacing:.06em;text-transform:uppercase;text-align:left"><span>Personnalisez votre pizza · 13 €</span><span style="font-size:20px;line-height:1">{{ custIcon }}</span></button>
+            <sc-if value="{{ custOpen }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-direction:column;gap:14px;padding:4px 2px">
+                <span style="font-size:13px;font-weight:700;line-height:1.4">3 ingrédients au choix dans viandes, fromages, légumes et p'tit plus. La base et « pour finir » sont compris.</span>
+                <div style="display:grid;grid-template-columns:{{ listCols }};gap:12px 40px">
+                  <sc-for list="{{ custom }}" as="c"><div style="display:flex;flex-direction:column;gap:2px"><span style="font-weight:800;font-size:14px;text-transform:uppercase;letter-spacing:.04em">{{ c.n }}</span><span style="font-size:13px;line-height:1.45;opacity:.8">{{ c.d }}</span></div></sc-for>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:4px;background:#f1e7d6;border-radius:8px;padding:12px 14px">
+                  <span style="font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.7">Suppléments</span>
+                  <sc-for list="{{ custSupp }}" as="s"><div style="display:flex;gap:8px;align-items:baseline"><span style="font-weight:700;font-size:14px">{{ s.n }}</span><span style="flex:1;border-bottom:2px dotted rgba(34,23,15,.35);transform:translateY(-4px)"></span><span style="font-family:'Big Shoulders Display';font-weight:900;font-size:20px;white-space:nowrap">{{ s.p }}</span></div></sc-for>
+                </div>
+              </div>
+            </sc-if>
+            <div style="border-top:2px dashed rgba(34,23,15,.35)"></div>
+            <span style="text-align:center;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase">{{ listFoot }}</span>
+          </div>
+          
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ notPizza }}" hint-placeholder-val="{{ false }}">
+      <div style="display:grid;grid-template-columns:{{ bbCols }};gap:28px 48px;align-items:center;margin-top:28px;padding:8px 0 40px;border-bottom:2px dashed rgba(34,23,15,.25);margin-bottom:12px">
+        <div style="display:flex;justify-content:center">
+          <div ref="{{ bbRef }}" onClick="{{ toggleBB }}" onMouseEnter="{{ openBB }}" style="position:relative;width:min(380px,78vw);aspect-ratio:1/1;cursor:pointer">
+            <div style="position:absolute;left:4%;right:4%;bottom:-2%;height:8%;border-radius:50%;background:radial-gradient(ellipse at center,rgba(34,23,15,.35),transparent 70%)"></div>
+            <div style="position:absolute;left:6%;right:6%;top:3%;height:47%;transform-origin:50% 100%;transform:scaleY({{ bbOpenS }});transition:transform .38s cubic-bezier(.3,.9,.4,1.15) {{ bbOpenD }};border-radius:46% 46% 6px 6px / 34% 34% 6px 6px;background:radial-gradient(ellipse at 50% 85%,#7f5b36,transparent 70%),linear-gradient(180deg,#a97f51,#93693f);box-shadow:inset 0 0 0 7px #c99d6b,inset 0 0 0 9px rgba(34,23,15,.25)"></div>
+            <div style="position:absolute;left:8%;right:8%;top:49%;height:15%;background:linear-gradient(180deg,#6f4f2f,#8a643d);border-radius:3px"></div>
+            <img src="assets/web/burger-box.png" alt="Le burger dans sa boîte" style="position:absolute;left:14%;width:72%;top:{{ bbTop }};transition:top .6s cubic-bezier(.3,1.3,.5,1) {{ bbOpenD }};filter:drop-shadow(0 10px 10px rgba(34,23,15,.35))">
+            <div style="position:absolute;inset:0;clip-path:polygon(8% 49%,0% 62%,11% 62%);background:#dcb588"></div>
+            <div style="position:absolute;inset:0;clip-path:polygon(92% 49%,100% 62%,89% 62%);background:#b98b5b"></div>
+            <div style="position:absolute;inset:0;clip-path:polygon(0 62%,100% 62%,95% 100%,5% 100%);background:repeating-linear-gradient(90deg,rgba(34,23,15,.035) 0 1px,transparent 1px 6px),linear-gradient(180deg,#d7ae7f,#c39565)"></div>
+            <div style="position:absolute;left:0;right:0;top:62%;height:3%;clip-path:polygon(0 0,100% 0,99.6% 100%,.4% 100%);background:#e3c093"></div>
+            <div style="position:absolute;left:42%;width:16%;top:62%;height:6%;border-radius:0 0 999px 999px;background:#9f7548;box-shadow:inset 0 3px 4px rgba(34,23,15,.35)"></div>
+            <div style="position:absolute;left:10%;right:10%;top:72%;bottom:6%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:#3a2a1d">
+              <span style="font-family:'Big Shoulders Display';font-weight:900;font-size:clamp(22px,2.6vw,30px);line-height:1;text-transform:uppercase">Les Deux B</span>
+              <span style="font-weight:800;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;opacity:.8">Pain burger fait maison</span>
+            </div>
+            <div style="position:absolute;left:0;right:0;top:5%;height:57%;transform-origin:50% 100%;transform:scaleY({{ bbClosedS }});transition:transform .38s cubic-bezier(.5,0,.7,.4) {{ bbClosedD }}">
+              <div style="position:absolute;inset:0;border-radius:48% 48% 8px 8px / 58% 58% 8px 8px;background:radial-gradient(ellipse at 40% 25%,rgba(255,240,215,.35),transparent 55%),repeating-linear-gradient(90deg,rgba(34,23,15,.035) 0 1px,transparent 1px 6px),linear-gradient(180deg,#d7ae7f,#c39565);box-shadow:inset 0 -8px 0 #b08455,inset 0 0 0 1.5px rgba(34,23,15,.2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding-top:8%">
+                <img src="assets/logo.png" alt="" style="width:28%;display:block;mix-blend-mode:multiply;opacity:.85">
+                <span style="font-weight:800;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#3a2a1d;opacity:.8">Street food · Jussac</span>
+              </div>
+              <div style="position:absolute;left:43%;width:14%;bottom:-7%;height:9%;border-radius:0 0 999px 999px;background:#c39565;box-shadow:inset 0 -2px 0 #a87e51"></div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <span style="font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.7">Notre burger</span>
+            <span style="font-family:'Big Shoulders Display';font-weight:900;font-size:clamp(40px,4.4vw,60px);line-height:1;text-transform:uppercase">Le 12 Balles · 12 €</span>
+            <span style="font-size:15px;font-weight:600">Burger + frites, sur notre pain burger fait maison.</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:14px 22px;border-top:2px solid #22170f;padding-top:14px">
+            <sc-for list="{{ burgerIn }}" as="c"><div style="display:flex;flex-direction:column;gap:3px"><span style="font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase">{{ c.n }}</span><span style="font-size:14px;line-height:1.45;opacity:.85">{{ c.d }}</span></div></sc-for>
+          </div>
+          <a href="Leon.dc.html#menu" style="align-self:flex-start;background:#22170f;color:#ece3d5;padding:15px 20px;border-radius:6px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:13px">Composer le vôtre avec Léon →</a>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:28px;align-items:start;margin-top:28px">
+        <sc-for list="{{ receipts }}" as="rc">
+          <div style="position:relative;margin-top:16px;transform:rotate({{ rc.rot }})">
+            <div style="position:absolute;left:7px;top:8px;right:-7px;bottom:-7px;border-radius:4px 8px 5px 10px;background:repeating-linear-gradient(135deg,rgba(34,23,15,.55) 0 1.2px,transparent 1.2px 5px)"></div>
+            <div style="position:relative;background:#fffdf8;border:2px solid #22170f;border-radius:3px 7px 4px 9px / 7px 3px 9px 4px;padding:28px 24px 20px;display:flex;flex-direction:column;gap:12px"><span style="position:absolute;left:8px;top:6px;width:18px;height:5px;background:repeating-linear-gradient(90deg,#22170f 0 1px,transparent 1px 3px);opacity:.55"></span><span style="position:absolute;right:8px;bottom:6px;width:5px;height:16px;background:repeating-linear-gradient(180deg,#22170f 0 1px,transparent 1px 3px);opacity:.55"></span>
+              <div style="text-align:center;display:flex;flex-direction:column;gap:2px"><span style="font-family:'Big Shoulders Display';font-weight:900;font-size:34px;line-height:1.05;text-transform:uppercase">{{ rc.t }}</span><span style="font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;opacity:.6">Les Deux B · Jussac</span></div>
+              <div style="border-top:2px dashed rgba(34,23,15,.35)"></div>
+              <sc-for list="{{ rc.lines }}" as="l"><div style="display:flex;flex-direction:column;gap:2px"><div style="display:flex;gap:8px;align-items:baseline"><span style="font-weight:800;font-size:16px;text-transform:uppercase;letter-spacing:.02em">{{ l.n }}</span><span style="flex:1;border-bottom:2px dotted rgba(34,23,15,.35);transform:translateY(-4px)"></span><span style="font-family:'Big Shoulders Display';font-weight:900;font-size:22px;white-space:nowrap">{{ l.p }}</span></div><span style="font-size:13px;opacity:.7">{{ l.d }}</span></div></sc-for>
+              <div style="border-top:2px dashed rgba(34,23,15,.35)"></div>
+              <span style="text-align:center;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase">{{ rc.foot }}</span>
+            </div>
+            <span style="position:absolute;left:50%;top:-15px;width:28px;height:30px;transform:translateX(-50%);z-index:3;pointer-events:none"><span style="position:absolute;left:13px;top:18px;width:18px;height:9px;background:repeating-linear-gradient(120deg,rgba(34,23,15,.7) 0 1px,transparent 1px 3.5px);border-radius:50%"></span><span style="position:absolute;left:4px;top:11px;width:20px;height:13px;border-radius:50%;background:#e4d8c6;border:2px solid #22170f"></span><span style="position:absolute;left:6px;top:3px;width:16px;height:12px;border-radius:50%;background:#fffaf2;border:2px solid #22170f"></span></span>
+          </div>
+        </sc-for>
+      </div>
+    </sc-if>
+  </div>
+</section>
+
+<section id="distributeur" style="background:#22170f;color:#ece3d5">
+  <div data-reveal="0" style="max-width:1120px;margin:0 auto;padding:72px 28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:48px;align-items:center">
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <span style="align-self:flex-start;border:2px solid #c29a6a;color:#c29a6a;padding:7px 12px;border-radius:4px;font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase">Le distributeur · à côté du magasin</span>
+      <span style="font-family:'Big Shoulders Display';font-weight:900;font-size:clamp(110px,14vw,190px);line-height:1;letter-spacing:-.01em;display:block;margin-bottom:6px">24/7</span>
+      <p style="margin:0;font-size:17px;line-height:1.55;font-weight:500;max-width:440px">Une petite faim ? Votre distributeur situé 14 avenue des Raux, 15250 Jussac (à côté de notre point de vente) est ouvert et à votre disposition 7J/7 &amp; 24H/24.</p>
+    </div>
+    <div style="position:relative;justify-self:center;width:min(100%,360px)">
+      <div style="position:relative;aspect-ratio:4/5;border-radius:20px;overflow:hidden;border:3px solid #ece3d5"><image-slot id="b-distrib" shape="rect" placeholder="Photo : le distributeur"></image-slot></div>
+      <div style="position:absolute;left:-22px;top:24px;background:#ece3d5;color:#22170f;border-radius:12px;padding:12px 16px;display:flex;flex-direction:column;gap:2px;box-shadow:6px 6px 0 #c29a6a;pointer-events:none">
+        <span style="display:flex;align-items:center;gap:7px;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase"><span style="width:8px;height:8px;border-radius:50%;background:#3e9b62"></span>Ouvert</span>
+        <span style="font-family:'Big Shoulders Display';font-weight:900;font-size:38px;line-height:1">{{ clock }}</span>
+        <span style="font-size:12px;font-weight:600">{{ clockDay }}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="infos" style="max-width:1320px;margin:0 auto;padding:88px 28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:40px;align-items:center">
+  <div data-reveal="0" style="display:flex;flex-direction:column;gap:26px">
+    <h2 style="margin:0;font-family:'Big Shoulders Display';font-weight:900;text-transform:uppercase;font-size:clamp(52px,6.4vw,92px);line-height:1">Nous trouver</h2>
+    <span style="font-family:'Big Shoulders Display';font-weight:800;font-size:36px;line-height:1.05;text-transform:uppercase">14 avenue des Raux<br>15250 Jussac</span>
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;max-width:460px">
+      <sc-for list="{{ hours }}" as="h"><div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 0;border-radius:8px;background:{{ h.bg }};color:{{ h.fg }}"><span style="font-weight:800;font-size:13px">{{ h.d }}</span><span style="font-size:11px;font-weight:600">{{ h.t }}</span></div></sc-for>
+    </div>
+    <span style="font-weight:600">Distributeur ouvert 7j/7 · 24h/24 · <a href="tel:0661998833" style="color:#22170f">06 61 99 88 33</a></span>
+  </div>
+  <div style="position:relative;background:#f6f0e6;border:3px solid #22170f;border-radius:20px;overflow:hidden;aspect-ratio:600/400">
+    <svg viewBox="0 0 600 400" style="position:absolute;inset:0;width:100%;height:100%">
+      <path d="M300 130 L300 40" fill="none" stroke="#22170f" stroke-width="6" stroke-linecap="round"></path>
+      <path d="M355 168 L600 196" fill="none" stroke="#22170f" stroke-width="6" stroke-linecap="round"></path>
+      <path d="M205 112 L130 240" fill="none" stroke="#22170f" stroke-width="6" stroke-linecap="round"></path>
+      <path d="M250 122 L262 300" fill="none" stroke="#22170f" stroke-width="6" stroke-linecap="round"></path>
+      <path d="M0 76 L250 122 Q330 136 360 176 Q380 210 384 400" fill="none" stroke="#22170f" stroke-width="12" stroke-linecap="round"></path>
+    </svg>
+    <span style="position:absolute;left:3%;top:6%;font-weight:800;font-size:12px;letter-spacing:.06em;text-transform:uppercase;line-height:1.2">Mauriac<br>St-Cernin</span>
+    <span style="position:absolute;left:12%;top:24%;font-weight:700;font-size:11px;color:#22170f">D922</span>
+    <span style="position:absolute;right:4%;bottom:6%;font-weight:800;font-size:12px;letter-spacing:.06em;text-transform:uppercase;text-align:right;line-height:1.2">Naucelles<br>Aurillac</span>
+    <span style="position:absolute;left:36%;top:4%;background:#22170f;color:#ece3d5;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:700">Marmanhac</span>
+    <span style="position:absolute;right:3%;top:44%;background:#22170f;color:#ece3d5;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:700">Reilhac</span>
+    <span style="position:absolute;left:14%;top:58%;background:#22170f;color:#ece3d5;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:700;text-align:center;line-height:1.1">Terrain<br>de foot</span>
+    <span style="position:absolute;left:37%;top:74%;background:#22170f;color:#ece3d5;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:700;text-align:center;line-height:1.1">Salle<br>polyvalente</span>
+    <span style="position:absolute;left:62%;top:20%;font-family:'Big Shoulders Display';font-weight:900;font-size:40px;letter-spacing:.04em">JUSSAC</span>
+    <div style="position:absolute;left:36%;top:30%;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center">
+      <img src="assets/logo.png" alt="Les Deux B" style="width:76px;filter:drop-shadow(0 6px 8px rgba(34,23,15,.3))">
+      <span style="width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-top:12px solid #22170f;margin-top:-4px"></span>
+    </div>
+    <a href="https://maps.google.com/?q=14+avenue+des+Raux+15250+Jussac" style="position:absolute;right:14px;top:14px;background:#22170f;color:#ece3d5;padding:11px 14px;border-radius:6px;font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase">Itinéraire →</a>
+  </div>
+</section>
+
+<a href="Leon.dc.html" style="display:block;background:#e0d4c2;color:#22170f;overflow:hidden;border-top:3px solid #22170f">
+  <div style="max-width:1320px;margin:0 auto;padding:48px 28px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <span style="font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#22170f">Pas à côté de Jussac ?</span>
+      <span style="font-family:'Big Shoulders Display';font-weight:900;font-size:clamp(40px,5vw,72px);line-height:1;text-transform:uppercase">Léon passe peut-être<br>dans votre village</span>
+      <span style="align-self:flex-start;margin-top:6px;background:#22170f;color:#ece3d5;padding:14px 20px;border-radius:6px;font-weight:800;text-transform:uppercase;font-size:13px;letter-spacing:.08em">La tournée →</span>
+    </div>
+    <img src="assets/web/leon-dessin.png" alt="Léon le camion" style="width:min(460px,100%);filter:drop-shadow(0 14px 16px rgba(0,0,0,.25))">
+  </div>
+</a>
+
+<footer style="background:#1a110b;color:#ece3d5">
+  <div style="max-width:1320px;margin:0 auto;padding:64px 28px 36px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:36px 32px">
+    <div style="display:flex;flex-direction:column;gap:14px;align-items:flex-start">
+      <img src="assets/logo.png" alt="Les Deux B" style="width:72px;display:block">
+      <p style="margin:0;font-size:15px;line-height:1.55;font-weight:500;max-width:260px;opacity:.8">Pizzas, burgers et desserts faits maison à Jussac, dans le Cantal.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;font-size:15px;line-height:1.45">
+      <span style="font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#c29a6a;margin-bottom:4px">Le magasin</span>
+      <span style="font-weight:700">14 avenue des Raux, 15250 Jussac</span>
+      <span>Mardi au samedi · 18h – 21h</span>
+      <span>Distributeur 7j/7 · 24h/24</span>
+      <a href="Magasin.dc.html" style="color:#ece3d5;font-weight:700;text-decoration:underline;text-underline-offset:4px;margin-top:4px">Voir la carte</a>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;font-size:15px;line-height:1.45">
+      <span style="font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#c29a6a;margin-bottom:4px">Léon le camion</span>
+      <span style="font-weight:700">Un village différent chaque soir</span>
+      <span>Mariages, fêtes, repas d'entreprise</span>
+      <a href="Leon.dc.html#tournee" style="color:#ece3d5;font-weight:700;text-decoration:underline;text-underline-offset:4px;margin-top:4px">La tournée de la semaine</a>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <span style="font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#c29a6a;margin-bottom:2px">Contact</span>
+      <a href="tel:0661998833" style="color:#ece3d5;font-family:'Big Shoulders Display';font-weight:900;font-size:34px;line-height:1">06 61 99 88 33</a>
+      <a href="mailto:contact@les-deux-b.com" style="color:#ece3d5;font-size:15px">contact@les-deux-b.com</a>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">
+        <a href="#top" style="border:2px solid rgba(236,227,213,.4);color:#ece3d5;padding:9px 14px;border-radius:999px;font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase">Facebook</a>
+        <a href="#top" style="border:2px solid rgba(236,227,213,.4);color:#ece3d5;padding:9px 14px;border-radius:999px;font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase">Instagram</a>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1320px;margin:0 auto;padding:0 28px">
+    <div style="border-top:1px solid rgba(236,227,213,.15);padding:20px 0 8px;font-family:'Big Shoulders Display';font-weight:900;text-transform:uppercase;font-size:clamp(64px,15vw,210px);line-height:.95;text-align:center;color:#c29a6a;white-space:nowrap">Les Deux B</div>
+  </div>
+  <div style="max-width:1320px;margin:0 auto;padding:12px 28px 28px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;font-weight:600;opacity:.6">
+    <span>© 2026 Les Deux B · Jussac, Cantal</span>
+    <a href="#top" style="color:#ece3d5">Mentions légales</a>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const PIZZAS = [
+  ['Classique', '11€50', 'Tomate, jambon, champignons, emmental, mozzarella'],
+  ['Végé', '11€50', 'Tomate, courgettes, poivrons marinés, champignon, oignons, emmental, mozzarella'],
+  ['Auvergnate', '12€50', 'Crème, jambon de pays, patates, cantal'],
+  ['Locale', '13€', 'Tomate, bleu, cantal, St-Nectaire, rocamadour'],
+  ['3 Fromages', '13€', 'Tomate, rocamadour, emmental, mozzarella bufflonne'],
+  ['Roca', '13€', 'Crème, rocamadour, miel, emmental, mozzarella'],
+  ['Tartiflette', '13€', 'Crème, reblochon, lardons, patates, emmental, mozzarella'],
+  ['Piquante', '13€', 'Tomates, chorizo, poivrons, paprika, emmental, mozzarella'],
+  ['Indienne', '13€50', 'Crème, poulet, lardons, champignons, curry, emmental, mozzarella'],
+  ['Burger', '13€50', 'Tomate, steak haché, cheddar, oignons, cornichons, emmental, mozzarella'],
+];
+const BURGERS = [
+  ['Le 12 Balles', '12€', 'Burger + frites, pain burger fait maison'],
+  ['Burger', '10€', 'Pain maison, viande ou végé, fromage, sauce maison'],
+  ['B-Croc', '6€', ''],
+  ['B-Wrap', '5€', ''],
+  ['Nuggets', '5 / 8 / 11€', 'Par 6, 10 ou 20'],
+  ['Lou Pitiou', '9€80', 'B-Croc ou nuggets, frites, B-Tea, moelleux ou B-Nut'],
+  ['Frites', '3€', ''],
+];
+const DESSERTS = [
+  ['Tiramisu', '4€', 'Spéculos ou Nutella'],
+  ['Moelleux', '4€', ''],
+  ['B-Nut', '4€', 'Panini Nutella'],
+  ['Panna cotta', '4€', 'Fruits rouges ou exotique'],
+  ['Dessert du mois', '4€', 'Demandez au comptoir'],
+];
+const CUSTOM = [
+  ['La base', 'Crème, tomate, rosée'],
+  ['Viandes', 'Jambon blanc, lardons, jambon de pays, bacon, poulet, merguez, lamelles de kebab, viande hachée, chorizo, magret de canard'],
+  ['Fromages', 'Bleu, cantal, roca, St-Nectaire, mozza, reblochon, fromage du mois'],
+  ['Légumes', 'Courgettes, oignons, champignons, poivrons, ravioles, pomme de terre, fondue de poireaux, marinade (poivrons, oignons, courgettes)'],
+  ["P'tit plus", 'Œuf (plat, brouillé), oignons frits, miel, cornichons'],
+  ['Pour finir', "Mozza, emmental râpé, cheddar râpé, cantal râpé, épices (poivre, curry, paprika, piment d'Espelette)"],
+];
+const CUST_SUPP = [['+1 ingrédient viande', '1€90'], ['+1 ingrédient fromage', '1€50'], ['+1 ingrédient légume', '0€90'], ["+1 ingrédient p'tit plus", '0€90'], ['+1 fromage à gratiner', '0€90']];
+const BURGER_IN = [
+  ['Pain burger', '', 'Fait maison'],
+  ['Fromages', '', 'Cantal, cheddar, bleu, chèvre, St-Nectaire, fromage du mois'],
+  ['Viandes / végé', '', 'Steak haché, poulet pané, croustifade'],
+  ['Sauces maison', '', 'La Pays Vert (crème fraîche, ail, fines herbes), La Basque (base mayo), La Poivre, La Cantalou (fromagère)'],
+];
+const SUPPS = [['+ de fromage', '1€50', ''], ['Croustifade', '3€', ''], ['Bacon', '1€50', ''], ['Œuf', '0€50', ''], ['Steak ou poulet', '3€50', ''], ['Pot de sauce', '0€80', '']];
+const TABS = ['Pizzas', 'Burgers & desserts'];
+const JOURS = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+const OPEN = { 2: 1, 3: 1, 4: 1, 5: 1, 6: 1 };
+
+function shopStatus(now) {
+  const d = now.getDay(), h = now.getHours() + now.getMinutes() / 60;
+  if (OPEN[d] && h >= 18 && h < 21) return { open: true, full: "Ouvert · jusqu'à 21h" };
+  let nd = d; const today = OPEN[d] && h < 18;
+  if (!today) { do { nd = (nd + 1) % 7; } while (!OPEN[nd]); }
+  const when = today ? 'ce soir' : nd === (d + 1) % 7 ? 'demain' : JOURS[nd].toLowerCase();
+  return { open: false, full: `Fermé · ouvre ${when} à 18h` };
+}
+
+class Component extends DCLogic {
+  state = { tab: 0, now: new Date(), box: -1, mobile: window.innerWidth < 820, menu: false, slide: 0, slideOpen: false };
+  spinRef = React.createRef(); spinRefD = React.createRef(); bbRef = React.createRef(); carRef = React.createRef();
+  goSlide(i) {
+    const n = PIZZAS.length + 1, s = (i + n) % n;
+    clearTimeout(this.openT); this.setState({ slide: s, slideOpen: false });
+    this.openT = setTimeout(() => this.setState({ slideOpen: true }), 560);
+  }
+  componentDidMount() {
+    import(new URL('./reveal.js?v=2', document.baseURI).href).then(m => { this.unreveal = m.initReveal(); });
+    this.openT = setTimeout(() => this.setState({ slideOpen: true }), 900);
+    this.tick = setInterval(() => this.setState({ now: new Date() }), 20000);
+    this.onResize = () => { const m = window.innerWidth < 820; if (m !== this.state.mobile) this.setState({ mobile: m, menu: false }); };
+    this.onScroll = () => { const r = `rotate(${(window.scrollY * 0.15).toFixed(1)}deg)`; if (this.spinRef.current) this.spinRef.current.style.transform = r; if (this.spinRefD.current) this.spinRefD.current.style.transform = r; };
+    window.addEventListener('resize', this.onResize); window.addEventListener('scroll', this.onScroll, { passive: true });
+    if (location.hash) setTimeout(() => { const el = document.getElementById(location.hash.slice(1)); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 70 }); }, 500);
+  }
+  componentDidUpdate() {
+    const el = this.bbRef.current;
+    if (el && el !== this.bbEl) {
+      this.bbEl = el; this.bbIO && this.bbIO.disconnect();
+      this.bbIO = new IntersectionObserver(es => { if (es[0].isIntersecting) { this.bbIO.disconnect(); setTimeout(() => this.setState({ bb: true }), 450); } }, { threshold: 0.5 });
+      this.bbIO.observe(el);
+    } else if (!el && this.bbEl) { this.bbEl = null; this.bbIO && this.bbIO.disconnect(); if (this.state.bb) this.setState({ bb: false }); }
+  }
+  componentWillUnmount() { this.bbIO && this.bbIO.disconnect(); this.unreveal && this.unreveal(); clearTimeout(this.openT); clearInterval(this.tick); window.removeEventListener('resize', this.onResize); window.removeEventListener('scroll', this.onScroll); }
+  renderVals() {
+    const st = this.state, now = st.now, shop = shopStatus(now), wd = now.getDay(), pizza = st.tab === 0;
+    return {
+      shop: { ...shop, dot: shop.open ? '#7fd0a0' : '#c29a6a' },
+      hours: [1, 2, 3, 4, 5, 6, 0].map(d => {
+        const open = !!OPEN[d], today = d === wd;
+        return { d: JOURS[d][0], t: open ? '18–21h' : 'Fermé', bg: today ? '#c29a6a' : open ? '#22170f' : 'rgba(34,23,15,.07)', fg: today ? '#22170f' : open ? '#ece3d5' : '#22170f' };
+      }),
+      tabs: TABS.map((t, i) => ({ n: t, bg: st.tab === i ? '#ece3d5' : 'transparent', fg: st.tab === i ? '#22170f' : '#ece3d5', pick: () => this.setState({ tab: i, box: -1 }) })),
+      isPizza: pizza, notPizza: !pizza, spinRef: this.spinRef,
+      isMobile: st.mobile, notMobile: !st.mobile, menuOpen: st.mobile && st.menu, menuIcon: st.menu ? '✕' : '☰',
+      toggleMenu: () => this.setState(p => ({ menu: !p.menu })), closeMenu: () => this.setState({ menu: false }),
+      boxHint: st.mobile ? 'Glissez ou utilisez les flèches : chaque boîte s’ouvre toute seule.' : 'Flèches ou clic sur une boîte : celle du milieu s’ouvre toute seule.',
+      spinRefD: this.spinRefD, listFoot: st.mobile ? 'Touchez une pizza pour voir sa boîte' : 'Cliquez sur une pizza pour voir sa boîte', carPersp: st.mobile ? 'none' : '1500px', carMask: st.mobile ? 'none' : 'linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)', trackH: st.mobile ? 'auto' : 'min(340px,30vw)', ctrlMax: st.mobile ? 'none' : '880px', listCols: st.mobile ? 'minmax(0,1fr)' : 'repeat(2,minmax(0,1fr))',
+      carRef: this.carRef, carOverflow: 'hidden', carBleed: st.mobile ? '-20px' : '-20px', carPad: st.mobile ? '8px 0 24px 27vw' : '24px 0 40px',
+      boxCols: st.mobile ? 'none' : 'none', boxFlow: 'column', boxAuto: st.mobile ? '46vw' : 'auto', boxGap: st.mobile ? '14px' : 'clamp(14px,2vw,26px)',
+      trackX: st.mobile ? `calc(${-st.slide} * (46vw + 14px))` : '0px',
+      tStart: e => { const t = e.touches[0]; this.tx = [t.clientX, t.clientY]; },
+      tEnd: e => { if (!this.tx) return; const t = e.changedTouches[0], dx = t.clientX - this.tx[0], dy = t.clientY - this.tx[1]; this.tx = null; if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) this.goSlide(st.slide + (dx < 0 ? 1 : -1)); },
+      prevSlide: () => this.goSlide(st.slide - 1), nextSlide: () => this.goSlide(st.slide + 1),
+      slideCount: `${String(st.slide + 1).padStart(2, '0')} / ${PIZZAS.length + 1}`, slideName: st.slide < PIZZAS.length ? PIZZAS[st.slide][0] : 'La vôtre !',
+      pizzaLines: [...PIZZAS.map(p => ({ n: p[0], p: p[1], d: p[2] })), { n: 'La vôtre !', p: '13€', d: 'Base crème, tomate ou rosée + 3 ingrédients' }].map((l, i) => ({ ...l, rot: ['-0.6deg', '0.5deg', '-0.3deg', '0.7deg', '-0.5deg'][i % 5], go: () => { this.goSlide(i); const c = this.carRef.current; if (c) window.scrollTo({ top: c.getBoundingClientRect().top + window.scrollY - 140, behavior: 'smooth' }); } })),
+      boxes: [...PIZZAS.map(p => ({ name: p[0], price: p[1], desc: p[2], custom: false })), { name: 'La vôtre !', price: '13€', desc: 'Base crème, tomate ou rosée + 3 ingrédients : viandes, fromages, légumes, p’tits plus.', custom: true }].map((p, i) => {
+        const cream = p.desc.startsWith('Crème'), cur = i === st.slide;
+        const on = cur && st.slideOpen, N = PIZZAS.length + 1;
+        let d = ((i - st.slide) % N + N) % N; if (d > N / 2) d -= N; const ad = Math.abs(d);
+        const geo = st.mobile ? { pos: 'relative', left: 'auto', w: 'auto', ml: '0', z: '1', pe: 'auto', tf: `scale(${cur ? 1 : .9})` }
+          : { pos: 'absolute', left: '50%', w: 'min(340px,30vw)', ml: 'calc(min(340px,30vw) / -2)', z: String(10 - ad), pe: ad > 2 ? 'none' : 'auto',
+              tf: `translateX(${d * (ad === 1 ? 98 : 88)}%) translateZ(${-ad * 140}px) rotateY(${d * 26}deg) scale(${ad ? .82 : 1})` };
+        const pal = p.custom ? { lid: '#22170f', lidFg: '#fff', edge: '#3a2a1d', tab: '#2c1f15', inside: '#c29a6a', rim: '#4a3626', tagBg: '#ece3d5', tagFg: '#22170f' }
+          : { lid: '#d8bd93', lidFg: '#22170f', edge: '#b8976a', tab: '#9f7f55', inside: '#a87d4f', rim: '#c29a6a', tagBg: cream ? '#ece3d5' : '#22170f', tagFg: cream ? '#22170f' : '#ece3d5' };
+        return { ...p, ...pal, isPizza: !p.custom, ...Object.fromEntries(PIZZAS.map((_, k) => ['p' + k, k === i])), num: String(i + 1).padStart(2, '0'), base: p.custom ? 'À composer' : cream ? 'Base crème' : 'Base tomate', rot: on ? '74deg' : '0deg',
+          ...geo, op: st.mobile ? (cur ? '1' : '.45') : ad > 2 ? '0' : ad === 2 ? '.45' : '1',
+          enter: () => { if (!st.mobile) this.setState({ box: i }); }, leave: () => { if (!st.mobile) this.setState({ box: -1 }); },
+          click: () => { if (cur) this.setState(s => ({ slideOpen: !s.slideOpen })); else this.goSlide(i); } };
+      }),
+      custOpen: !!st.cust, custIcon: st.cust ? '−' : '+', custBg: st.cust ? '#22170f' : 'transparent', custFg: st.cust ? '#ece3d5' : '#22170f', toggleCust: () => this.setState(p => ({ cust: !p.cust })),
+      custom: CUSTOM.map(c => ({ n: c[0], d: c[1] })), custSupp: CUST_SUPP.map(c => ({ n: c[0], p: c[1] })),
+      bbRef: this.bbRef, bbOpenS: st.bb ? '1' : '0', bbClosedS: st.bb ? '0' : '1', bbOpenD: st.bb ? '.32s' : '0s', bbClosedD: st.bb ? '0s' : '.3s', bbTop: st.bb ? '13%' : '24%', bbCols: st.mobile ? 'minmax(0,1fr)' : 'minmax(0,1fr) minmax(0,1.1fr)',
+      toggleBB: () => this.setState(s => ({ bb: !s.bb })), openBB: () => this.setState({ bb: true }),
+      burgerIn: BURGER_IN.slice(1).map(b => ({ n: b[0], d: b[2] })),
+      receipts: [
+        { t: 'Burgers & co', rot: '-0.8deg', foot: 'Pain burger fait maison · merci !', lines: BURGERS.map(b => ({ n: b[0], p: b[1], d: b[2] })) },
+        { t: 'Suppléments', rot: '-0.5deg', foot: 'À ajouter à votre burger', lines: SUPPS.map(b => ({ n: b[0], p: b[1], d: b[2] })) },
+        { t: 'Laisse-toi tenter !', rot: '0.7deg', foot: 'Desserts maison · 4 € pièce', lines: DESSERTS.map(b => ({ n: b[0], p: b[1], d: b[2] })) },
+      ],
+      clock: now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }), clockDay: JOURS[wd],
+    };
+  }
+}
+</script>
+</body>
+</html>

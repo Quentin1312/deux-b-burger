@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Big+Shoulders+Display:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#ece3d5;color:#173a44;font-family:Archivo,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#173a44;text-decoration:none}
+a:hover{color:#3e7a8c}
+input,textarea,select,button{font:inherit;color:inherit}
+::placeholder{color:rgba(255,255,255,.65)}
+section{scroll-margin-top:72px}
+</style>
+</helmet>
+
+<header style="position:sticky;top:0;z-index:30;background:#173a44;color:#ece3d5">
+  <div style="max-width:1320px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:20px">
+    <a href="Accueil.dc.html" style="display:flex;align-items:center;gap:12px;color:#ece3d5"><img src="assets/logo.png" alt="Deux B" style="width:44px;height:44px;display:block"><span style="font-family:'Big Shoulders Display';font-weight:900;font-size:26px;letter-spacing:.02em;text-transform:uppercase;white-space:nowrap">Les Deux B</span></a>
+    <sc-if value="{{ notMobile }}" hint-placeholder-val="{{ true }}">
+      <nav style="display:flex;gap:22px;margin-left:auto;font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap">
+        <a href="Accueil.dc.html" style="color:#ece3d5;">Accueil</a>
+        <a href="Magasin.dc.html" style="color:#ece3d5;">Le magasin</a>
+        <a href="Leon.dc.html" style="color:#ece3d5;border-bottom:2px solid #8fbccb;padding-bottom:3px">Léon le camion</a>
+        <a href="#evenements" style="color:#ece3d5;">Événements</a>
+      </nav>
+      <a href="Accueil.dc.html#contact" style="background:#ece3d5;color:#173a44;padding:10px 16px;border-radius:6px;font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap">Contact</a>
+    </sc-if>
+    <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+      <button onClick="{{ toggleMenu }}" aria-label="Menu" style="margin-left:auto;width:48px;height:48px;border-radius:8px;border:2px solid rgba(236,227,213,.5);background:transparent;color:#ece3d5;font-size:22px;font-weight:700;cursor:pointer">{{ menuIcon }}</button>
+    </sc-if>
+  </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <nav style="display:flex;flex-direction:column;padding:6px 20px 24px;border-top:1px solid rgba(236,227,213,.15)">
+      <a href="Accueil.dc.html" onClick="{{ closeMenu }}" style="color:#ece3d5;font-family:'Big Shoulders Display';font-weight:900;font-size:36px;line-height:1.1;text-transform:uppercase;padding:10px 0;border-bottom:1px solid rgba(236,227,213,.12)">Accueil</a>
+      <a href="Magasin.dc.html" onClick="{{ closeMenu }}" style="color:#ece3d5;font-family:'Big Shoulders Display';font-weight:900;font-size:36px;line-height:1.1;text-transform:uppercase;padding:10px 0;border-bottom:1px solid rgba(236,227,213,.12)">Le magasin</a>
+      <a href="Leon.dc.html" onClick="{{ closeMenu }}" style="color:#8fbccb;font-family:'Big Shoulders Display';font-weight:900;font-size:36px;line-height:1.1;text-transform:uppercase;padding:10px 0;border-bottom:1px solid rgba(236,227,213,.12)">Léon le camion</a>
+      <a href="#evenements" onClick="{{ closeMenu }}" style="color:#ece3d5;font-family:'Big Shoulders Display';font-weight:900;font-size:36px;line-height:1.1;text-transform:uppercase;padding:10px 0;border-bottom:1px solid rgba(236,227,213,.12)">Événements</a>
+      <a href="Accueil.dc.html#contact" onClick="{{ closeMenu }}" style="margin-top:18px;text-align:center;background:#ece3d5;color:#173a44;padding:16px;border-radius:8px;font-weight:800;font-size:15px;letter-spacing:.08em;text-transform:uppercase">Contact · 06 61 99 88 33</a>
+    </nav>
+  </sc-if>
+</header>
+
+<section id="top" style="background:#3e7a8c;color:#fff;overflow:hidden;position:relative">
+  <div style="max-width:1400px;margin:0 auto;padding:28px 20px 40px;position:relative">
+    <div style="display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center;position:relative;z-index:3">
+            <a href="#tournee" style="display:flex;align-items:center;gap:12px;background:#173a44;color:#ece3d5;border-radius:999px;padding:10px 18px 10px 14px">
+        <span style="width:10px;height:10px;border-radius:50%;background:#8fbccb;box-shadow:0 0 0 4px rgba(143,188,203,.3);flex:none"></span>
+        <span style="font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase">{{ tonight }}</span>
+      </a>
+    </div>
+    <h1 style="margin:8px 0 0;text-align:center;font-family:'Big Shoulders Display';font-weight:900;font-size:clamp(120px,24vw,360px);line-height:.86;color:#ece3d5;text-transform:uppercase;letter-spacing:-.01em">Léon</h1>
+    <div style="position:relative;z-index:2;display:grid;grid-template-columns:{{ heroCols }};gap:20px 40px;align-items:start;margin-top:16px">
+      <div style="display:flex;flex-direction:column;gap:14px;padding-bottom:8px">
+        <span style="font-family:'Big Shoulders Display';font-weight:900;font-size:clamp(34px,3.6vw,52px);line-height:1.04;text-transform:uppercase">Le camion à burgers</span>
+        <p style="margin:0;font-size:17px;line-height:1.55;font-weight:500;max-width:480px">Notre Type H fait la tournée des villages autour de Jussac et d'Aurillac. Un village différent chaque soir, et votre mariage ou votre fête si vous le réservez.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px">
+          <a href="#tournee" style="background:#173a44;color:#ece3d5;padding:17px 22px;border-radius:6px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:14px">La tournée</a>
+          <a href="#evenements" style="border:2px solid #fff;color:#fff;padding:15px 20px;border-radius:6px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:14px">Réserver Léon →</a>
+        </div>
+      </div>
+      <img src="assets/web/leon-dessin.png" alt="Léon le camion" style="order:{{ truckOrder }};margin-top:{{ heroOverlap }};display:block;width:100%;max-width:{{ truckMax }};justify-self:{{ truckJust }};transform:{{ truckIn }};transition:transform 1.8s cubic-bezier(.2,.8,.2,1);filter:drop-shadow(0 22px 18px rgba(0,0,0,.35))">
+    </div>
+  </div>
+</section>
+
+<section id="tournee" style="background:#173a44;color:#ece3d5;overflow:hidden">
+  <div style="max-width:1320px;margin:0 auto;padding:64px 20px 0">
+    <div style="display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:20px;padding:0 8px">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <span style="font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#8fbccb">La tournée des villages · {{ semaine }}</span>
+        <h2 style="margin:0;font-family:'Big Shoulders Display';font-weight:900;text-transform:uppercase;font-size:clamp(44px,5.6vw,84px);line-height:1.02">Léon <span style="color:#8fbccb">en tournée</span></h2>
+      </div>
+      <p style="margin:0;max-width:360px;font-size:16px;line-height:1.5;font-weight:500;opacity:.85">{{ tourHint }}</p>
+    </div>
+    <sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}">
+    <div style="display:flex;gap:6px;overflow-x:auto;padding:12px 8px 6px;scroll-snap-type:x mandatory;scrollbar-width:none">
+      <sc-for list="{{ week }}" as="w" hint-placeholder-count="7">
+        <button onClick="{{ w.go }}" style="position:relative;flex:1 0 120px;scroll-snap-align:start;display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:left;padding:14px 14px 16px;border-radius:10px;border:2px solid {{ w.bd }};background:{{ w.bg }};color:{{ w.fg }};cursor:{{ w.cursor }};transition:all .25s">
+          <span style="font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;opacity:.75">{{ w.jour }}</span>
+          <span style="font-family:'Big Shoulders Display';font-weight:900;font-size:22px;line-height:1.05;text-transform:uppercase">{{ w.village }}</span>
+          <span style="font-size:12px;font-weight:600;opacity:.75">{{ w.sub }}</span>
+          <sc-if value="{{ w.today }}"><span style="position:absolute;top:-10px;right:10px;background:#8fbccb;color:#173a44;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:3px 7px;border-radius:4px">Aujourd'hui</span></sc-if>
+        </button>
+      </sc-for>
+    </div>
+    </sc-if>
+  </div>
+  <sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}">
+  <div ref="{{ sceneRef }}" style="position:relative;max-width:1400px;margin:12px auto 0;aspect-ratio:{{ ar }}">
+      <svg viewBox="0 0 1200 400" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%">
+        <path d="M0 250 L90 190 L150 214 L260 120 L330 176 L400 150 L470 200 L560 110 L640 180 L720 140 L800 196 L900 100 L980 170 L1060 136 L1200 210 L1200 400 L0 400 Z" fill="#24505d"></path>
+        <path d="M260 120 L282 138 L268 136 L252 146 L240 136 Z" fill="#ece3d5" opacity=".4"></path>
+        <path d="M560 110 L584 130 L570 128 L554 138 L540 128 Z" fill="#ece3d5" opacity=".4"></path>
+        <path d="M900 100 L926 122 L910 120 L894 130 L880 120 Z" fill="#ece3d5" opacity=".4"></path>
+        <path d="M0 300 L140 250 L260 280 L380 236 L520 276 L660 240 L800 282 L940 244 L1080 276 L1200 252 L1200 400 L0 400 Z" fill="#2c5f6d"></path>
+      </svg>
+    <sc-if value="{{ hasTour }}" hint-placeholder-val="{{ false }}">
+      <svg viewBox="{{ vb }}" style="position:absolute;inset:0;width:100%;height:100%;overflow:visible">
+        <path d="{{ road }}" fill="none" stroke="#ece3d5" stroke-width="64" stroke-linecap="round" opacity=".9"></path>
+        <path d="{{ road }}" fill="none" stroke="#0e252c" stroke-width="56" stroke-linecap="round"></path>
+        <path ref="{{ pathRef }}" d="{{ road }}" fill="none" stroke="#ece3d5" stroke-width="3" stroke-dasharray="20 16" opacity=".7"></path>
+        <path ref="{{ progRef }}" d="{{ road }}" fill="none" stroke="#8fbccb" stroke-width="5" stroke-linecap="round" stroke-dasharray="0 99999"></path>
+      </svg>
+      <sc-for list="{{ signs }}" as="s">
+        <button onClick="{{ s.go }}" style="position:absolute;left:{{ s.px }};top:{{ s.py }};transform:{{ s.tf }};display:flex;flex-direction:column;align-items:center;background:none;border:0;padding:0;cursor:pointer;z-index:2">
+          <span style="display:flex;flex-direction:column;align-items:center;gap:2px;background:{{ s.bg }};color:{{ s.fg }};border:3px solid {{ s.bd }};box-shadow:0 0 0 3px {{ s.ring }};border-radius:6px;padding:7px 12px;white-space:nowrap;transform:scale({{ s.scale }});transform-origin:{{ s.origin }};transition:all .3s">
+            <span style="font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;opacity:.75">{{ s.short }} {{ s.dd }}</span>
+            <span style="font-weight:800;font-size:16px;text-transform:uppercase;letter-spacing:.02em">{{ s.village }}</span>
+          </span>
+          <span style="width:5px;height:{{ s.post }};background:#8fbccb"></span>
+        </button>
+      </sc-for>
+      <div ref="{{ truckRef }}" style="position:absolute;width:{{ truckW }};transform:translate(-50%,-80%);pointer-events:none;z-index:3"><img src="assets/web/leon-dessin.png" alt="Léon" style="display:block;width:100%;filter:drop-shadow(0 6px 6px rgba(0,0,0,.4))"></div>
+    </sc-if>
+  </div>
+  <div style="max-width:1320px;margin:0 auto;padding:0 20px 64px">
+    <div style="margin-top:8px;background:#ece3d5;color:#173a44;border-radius:18px;padding:26px 28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:20px;align-items:center;position:relative;z-index:4">
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <span style="font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#3e7a8c">{{ cur.jour }} {{ cur.date }}</span>
+        <span style="font-family:'Big Shoulders Display';font-weight:900;font-size:clamp(40px,4.4vw,60px);line-height:1;text-transform:uppercase">{{ cur.village }}</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px;font-size:16px"><span style="font-weight:700">{{ cur.lieu }}</span><span style="opacity:.75">{{ cur.adresse }}</span></div>
+      <span style="font-family:'Big Shoulders Display';font-weight:900;font-size:40px;line-height:1">{{ cur.heure }}</span>
+      <a href="{{ curMap }}" style="justify-self:start;background:#173a44;color:#ece3d5;padding:16px 22px;border-radius:6px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:14px;white-space:nowrap">Itinéraire →</a>
+    </div>
+  </div>
+  </sc-if>
+  <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+    <div ref="{{ tlRef }}" style="position:relative;padding:12px 20px 56px;display:flex;flex-direction:column;gap:10px">
+      <div style="position:absolute;left:46px;top:30px;bottom:86px;width:4px;background:repeating-linear-gradient(180deg,rgba(236,227,213,.35) 0 14px,transparent 14px 26px)"></div>
+      <div ref="{{ markRef }}" style="position:absolute;left:20px;top:12px;width:56px;height:56px;border-radius:50%;background:#8fbccb;border:3px solid #8fbccb;display:grid;place-items:center;overflow:hidden;z-index:3;transition:top .55s cubic-bezier(.5,0,.3,1);pointer-events:none;box-shadow:0 6px 14px rgba(0,0,0,.35)"><img src="assets/web/leon-dessin.png" alt="" style="width:120%;max-width:none;display:block"></div>
+      <sc-for list="{{ week }}" as="w" hint-placeholder-count="7">
+        <div data-tl-row="1" onClick="{{ w.pick }}" role="button" style="position:relative;display:grid;grid-template-columns:56px minmax(0,1fr);gap:12px;align-items:start;cursor:{{ w.cursor }}">
+          <span style="position:relative;width:56px;height:56px;border-radius:50%;background:{{ w.dotBg }};border:3px solid {{ w.dotBd }};display:grid;place-items:center;overflow:hidden;transition:background .25s">
+            <span style="font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:{{ w.dotFg }}">{{ w.abbr }}</span>
+          </span>
+          <div style="background:{{ w.bg }};color:{{ w.fg }};border:2px solid {{ w.bd }};border-radius:12px;padding:12px 16px;display:flex;flex-direction:column;gap:4px;transition:background .25s">
+            <span style="display:flex;justify-content:space-between;gap:8px;font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;opacity:.8"><span>{{ w.jour }} {{ w.date }}</span><sc-if value="{{ w.today }}"><span style="position:absolute;top:-11px;right:12px;background:#8fbccb;color:#173a44;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:5px 10px;border-radius:999px;box-shadow:0 0 0 3px #173a44">{{ w.todayTxt }}</span></sc-if></span>
+            <span style="font-family:'Big Shoulders Display';font-weight:900;font-size:28px;line-height:1.05;text-transform:uppercase">{{ w.village }}</span>
+            <span style="font-size:15px;font-weight:600">{{ w.sub2 }}</span>
+            <sc-if value="{{ w.on }}">
+              <span style="font-size:15px;line-height:1.45;margin-top:4px"><b>{{ w.lieu }}</b><br>{{ w.adresse }}</span>
+              <a href="{{ w.map }}" style="align-self:flex-start;margin-top:8px;background:#173a44;color:#ece3d5;padding:14px 18px;border-radius:6px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:13px">Itinéraire →</a>
+            </sc-if>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </sc-if>
+</section>
+
+<section id="menu" ref="{{ menuRef }}" style="position:relative">
+  <div style="max-width:1320px;margin:0 auto;padding:{{ menuPad }};display:grid;grid-template-columns:{{ menuCols }};gap:clamp(24px,3vw,48px);align-items:center">
+    <div data-reveal="0" style="display:flex;flex-direction:column;gap:16px">
+      <span style="align-self:flex-start;background:#3e7a8c;color:#fff;padding:8px 14px;border-radius:4px;font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase">Au menu de Léon</span>
+      <h2 style="margin:0;font-family:'Big Shoulders Display';font-weight:900;text-transform:uppercase;font-size:clamp(44px,4.4vw,72px);line-height:1.02"><span style="white-space:nowrap">Ce qu'il y a</span><br><span style="color:transparent;-webkit-text-stroke:2px #173a44">dedans.</span></h2>
+      <p style="margin:0;font-size:17px;line-height:1.55;font-weight:500;max-width:360px">Touchez un ingrédient pour le choisir. Le burger change en direct.</p>
+      <span style="font-family:'Big Shoulders Display';font-weight:900;font-size:32px;line-height:1.05">Le 12 Balles · 12 € <span style="font-family:Archivo;font-weight:600;font-size:15px">avec frites</span></span>
+    </div>
+    <sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:22px">
+        <div ref="{{ burgerRef }}" style="position:relative;width:min(300px,100%);flex:none">
+            <div style="padding-bottom:112%"></div>
+            <img src="assets/web/b-base.png" alt="" style="position:absolute;left:0;top:0;width:100%;transform:translateY({{ by.base }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:1">
+            <sc-if value="{{ m0 }}" hint-placeholder-val="{{ true }}"><img src="assets/web/b-steak.png" alt="" style="position:absolute;left:3%;top:0;width:94%;transform:translateY({{ by.meat }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:2"></sc-if>
+            <sc-if value="{{ m1 }}"><img src="assets/web/b-poulet.png" alt="" style="position:absolute;left:3%;top:0;width:94%;transform:translateY({{ by.meat }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:2"></sc-if>
+            <sc-if value="{{ m2 }}"><img src="assets/web/b-croustifade.png" alt="" style="position:absolute;left:3%;top:0;width:94%;transform:translateY({{ by.meat }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:2"></sc-if>
+            <sc-if value="{{ ch0 }}" hint-placeholder-val="{{ true }}"><img src="assets/web/b-cheddar.png" alt="" style="position:absolute;left:2%;top:0;width:96%;transform:translateY({{ by.cheese }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:3"></sc-if>
+            <sc-if value="{{ ch1 }}"><img src="assets/web/b-cantal.png" alt="" style="position:absolute;left:2%;top:0;width:96%;transform:translateY({{ by.cheese }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:3"></sc-if>
+            <sc-if value="{{ ch2 }}"><img src="assets/web/b-bleu.png" alt="" style="position:absolute;left:2%;top:0;width:96%;transform:translateY({{ by.cheese }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:3"></sc-if>
+            <sc-if value="{{ ch3 }}"><img src="assets/web/b-chevre.png" alt="" style="position:absolute;left:2%;top:0;width:96%;transform:translateY({{ by.cheese }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:3"></sc-if>
+            <sc-if value="{{ ch4 }}"><img src="assets/web/b-st-nectaire.png" alt="" style="position:absolute;left:2%;top:0;width:96%;transform:translateY({{ by.cheese }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:3"></sc-if>
+            <sc-if value="{{ ch5 }}"><img src="assets/web/b-fromage-du-mois.png" alt="" style="position:absolute;left:2%;top:0;width:96%;transform:translateY({{ by.cheese }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:3"></sc-if>
+            <sc-if value="{{ hasAndou }}"><img src="assets/web/b-andouillette.png" alt="" style="position:absolute;left:3%;top:0;width:94%;transform:translateY({{ by.andou }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:3"></sc-if>
+            <sc-if value="{{ hasTomate }}" hint-placeholder-val="{{ true }}"><img src="assets/web/b-tomate.png" alt="" style="position:absolute;left:3%;top:0;width:94%;transform:translateY({{ by.tomate }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:4"></sc-if>
+            <sc-if value="{{ hasOignon }}" hint-placeholder-val="{{ true }}"><img src="assets/web/b-oignon.png" alt="" style="position:absolute;left:2%;top:0;width:96%;transform:translateY({{ by.oignon }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:5"></sc-if>
+            <sc-if value="{{ hasSalade }}" hint-placeholder-val="{{ true }}"><img src="assets/web/b-salade.png" alt="" style="position:absolute;left:-4%;top:0;width:108%;transform:translateY({{ by.salade }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:6"></sc-if>
+            <sc-if value="{{ sc0 }}" hint-placeholder-val="{{ true }}"><img src="assets/web/b-sauce-pays-vert.png" alt="" style="position:absolute;left:3%;top:0;width:94%;transform:translateY({{ by.sauce }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:6"></sc-if>
+            <sc-if value="{{ sc2 }}"><img src="assets/web/b-sauce-poivre.png" alt="" style="position:absolute;left:3%;top:0;width:94%;transform:translateY({{ by.sauce }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:6"></sc-if>
+            <sc-if value="{{ sc1 }}"><img src="assets/web/b-sauce-basque.png" alt="" style="position:absolute;left:3%;top:0;width:94%;transform:translateY({{ by.sauce }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:6"></sc-if>
+            <sc-if value="{{ sc3 }}"><img src="assets/web/b-sauce-cantalou.png" alt="" style="position:absolute;left:3%;top:0;width:94%;transform:translateY({{ by.sauce }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:6"></sc-if>
+            <img src="assets/web/b-top.png" alt="Votre burger" style="position:absolute;left:0;top:0;width:100%;z-index:7;transform:translateY({{ by.top }});transition:transform .45s cubic-bezier(.3,1.2,.5,1)">
+            <div style="position:absolute;left:8%;right:8%;bottom:-4%;height:6%;border-radius:50%;background:radial-gradient(ellipse at center,rgba(23,58,68,.3),transparent 70%)"></div>
+          </div>
+        <p style="margin:0;max-width:300px;text-align:center;font-size:14px;line-height:1.45;font-weight:600">{{ summary }}</p>
+      </div>
+    </sc-if>
+    <div style="display:flex;flex-direction:column;min-width:0;grid-column:{{ sheetCol }};grid-row:{{ sheetRow }}">
+      <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+        <div style="background:#f6f0e6;border:2px solid #173a44;border-radius:22px;padding:22px 16px 16px;display:flex;flex-direction:column;align-items:center;gap:14px">
+          <div style="position:relative;width:min(230px,62vw);flex:none">
+            <div style="padding-bottom:112%"></div>
+            <img src="assets/web/b-base.png" alt="" style="position:absolute;left:0;top:0;width:100%;transform:translateY({{ by.base }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:1">
+            <sc-if value="{{ m0 }}" hint-placeholder-val="{{ true }}"><img src="assets/web/b-steak.png" alt="" style="position:absolute;left:3%;top:0;width:94%;transform:translateY({{ by.meat }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:2"></sc-if>
+            <sc-if value="{{ m1 }}"><img src="assets/web/b-poulet.png" alt="" style="position:absolute;left:3%;top:0;width:94%;transform:translateY({{ by.meat }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:2"></sc-if>
+            <sc-if value="{{ m2 }}"><img src="assets/web/b-croustifade.png" alt="" style="position:absolute;left:3%;top:0;width:94%;transform:translateY({{ by.meat }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:2"></sc-if>
+            <sc-if value="{{ ch0 }}" hint-placeholder-val="{{ true }}"><img src="assets/web/b-cheddar.png" alt="" style="position:absolute;left:2%;top:0;width:96%;transform:translateY({{ by.cheese }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:3"></sc-if>
+            <sc-if value="{{ ch1 }}"><img src="assets/web/b-cantal.png" alt="" style="position:absolute;left:2%;top:0;width:96%;transform:translateY({{ by.cheese }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:3"></sc-if>
+            <sc-if value="{{ ch2 }}"><img src="assets/web/b-bleu.png" alt="" style="position:absolute;left:2%;top:0;width:96%;transform:translateY({{ by.cheese }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:3"></sc-if>
+            <sc-if value="{{ ch3 }}"><img src="assets/web/b-chevre.png" alt="" style="position:absolute;left:2%;top:0;width:96%;transform:translateY({{ by.cheese }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:3"></sc-if>
+            <sc-if value="{{ ch4 }}"><img src="assets/web/b-st-nectaire.png" alt="" style="position:absolute;left:2%;top:0;width:96%;transform:translateY({{ by.cheese }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:3"></sc-if>
+            <sc-if value="{{ ch5 }}"><img src="assets/web/b-fromage-du-mois.png" alt="" style="position:absolute;left:2%;top:0;width:96%;transform:translateY({{ by.cheese }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:3"></sc-if>
+            <sc-if value="{{ hasAndou }}"><img src="assets/web/b-andouillette.png" alt="" style="position:absolute;left:3%;top:0;width:94%;transform:translateY({{ by.andou }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:3"></sc-if>
+            <sc-if value="{{ hasTomate }}" hint-placeholder-val="{{ true }}"><img src="assets/web/b-tomate.png" alt="" style="position:absolute;left:3%;top:0;width:94%;transform:translateY({{ by.tomate }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:4"></sc-if>
+            <sc-if value="{{ hasOignon }}" hint-placeholder-val="{{ true }}"><img src="assets/web/b-oignon.png" alt="" style="position:absolute;left:2%;top:0;width:96%;transform:translateY({{ by.oignon }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:5"></sc-if>
+            <sc-if value="{{ hasSalade }}" hint-placeholder-val="{{ true }}"><img src="assets/web/b-salade.png" alt="" style="position:absolute;left:-4%;top:0;width:108%;transform:translateY({{ by.salade }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:6"></sc-if>
+            <sc-if value="{{ sc0 }}" hint-placeholder-val="{{ true }}"><img src="assets/web/b-sauce-pays-vert.png" alt="" style="position:absolute;left:3%;top:0;width:94%;transform:translateY({{ by.sauce }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:6"></sc-if>
+            <sc-if value="{{ sc2 }}"><img src="assets/web/b-sauce-poivre.png" alt="" style="position:absolute;left:3%;top:0;width:94%;transform:translateY({{ by.sauce }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:6"></sc-if>
+            <sc-if value="{{ sc1 }}"><img src="assets/web/b-sauce-basque.png" alt="" style="position:absolute;left:3%;top:0;width:94%;transform:translateY({{ by.sauce }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:6"></sc-if>
+            <sc-if value="{{ sc3 }}"><img src="assets/web/b-sauce-cantalou.png" alt="" style="position:absolute;left:3%;top:0;width:94%;transform:translateY({{ by.sauce }});transition:transform .45s cubic-bezier(.3,1.2,.5,1);z-index:6"></sc-if>
+            <img src="assets/web/b-top.png" alt="Votre burger" style="position:absolute;left:0;top:0;width:100%;z-index:7;transform:translateY({{ by.top }});transition:transform .45s cubic-bezier(.3,1.2,.5,1)">
+            <div style="position:absolute;left:8%;right:8%;bottom:-4%;height:6%;border-radius:50%;background:radial-gradient(ellipse at center,rgba(23,58,68,.3),transparent 70%)"></div>
+          </div>
+          <p style="margin:0;text-align:center;font-size:15px;line-height:1.45;font-weight:600;max-width:320px">{{ summary }}</p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px">
+          <sc-for list="{{ burgerRows }}" as="r" hint-placeholder-count="6">
+            <button onClick="{{ r.open }}" style="min-height:84px;padding:12px 14px;border-radius:14px;border:2px solid #173a44;background:{{ r.tileBg }};color:#173a44;text-align:left;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;gap:4px">
+              <span style="font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;opacity:.7">{{ r.k }}</span>
+              <span style="font-family:'Big Shoulders Display';font-weight:900;font-size:20px;line-height:1.05;text-transform:uppercase">{{ r.v }}</span>
+              <span style="font-size:12px;font-weight:800;color:#3e7a8c">{{ r.cta }}</span>
+            </button>
+          </sc-for>
+        </div>
+        <sc-if value="{{ sheetOpen }}" hint-placeholder-val="{{ false }}">
+          <div onClick="{{ closeSheet }}" style="position:fixed;inset:0;z-index:80;background:rgba(14,37,44,.55);display:flex;align-items:flex-end">
+            <div onClick="{{ stop }}" style="width:100%;max-height:82vh;overflow:auto;background:#f6f0e6;color:#173a44;border-radius:22px 22px 0 0;padding:20px 18px 26px;display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:4px">
+                <div style="display:flex;flex-direction:column;gap:2px"><span style="font-family:'Big Shoulders Display';font-weight:900;font-size:32px;line-height:1;text-transform:uppercase">{{ sheet.k }}</span><span style="font-size:14px;opacity:.75">{{ sheet.d }}</span></div>
+                <button onClick="{{ closeSheet }}" aria-label="Fermer" style="width:44px;height:44px;flex:none;border-radius:50%;border:2px solid #173a44;background:transparent;color:#173a44;font-size:18px;font-weight:800;cursor:pointer">✕</button>
+              </div>
+              <sc-for list="{{ sheet.chips }}" as="c">
+                <button onClick="{{ c.toggle }}" style="min-height:56px;padding:0 16px;border-radius:14px;border:2px solid #173a44;background:{{ c.bg }};color:{{ c.fg }};display:flex;align-items:center;justify-content:space-between;gap:12px;font-weight:800;font-size:16px;letter-spacing:.03em;text-transform:uppercase;cursor:pointer;text-align:left">
+                  <span>{{ c.label }}</span>
+                  <span style="width:28px;height:28px;flex:none;border-radius:50%;border:2px solid currentColor;padding:4px;display:block"><sc-if value="{{ c.iPlus }}"><svg viewBox="0 0 24 24" style="width:100%;height:100%;display:block" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v12M6 12h12"></path></svg></sc-if><sc-if value="{{ c.iMinus }}"><svg viewBox="0 0 24 24" style="width:100%;height:100%;display:block" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12h12"></path></svg></sc-if><sc-if value="{{ c.iCheck }}"><svg viewBox="0 0 24 24" style="width:100%;height:100%;display:block" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12.5l4 4 8-9"></path></svg></sc-if></span>
+                </button>
+              </sc-for>
+              <button onClick="{{ closeSheet }}" style="margin-top:6px;min-height:56px;border-radius:14px;border:0;background:#173a44;color:#ece3d5;font-weight:800;font-size:15px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer">C'est bon</button>
+            </div>
+          </div>
+        </sc-if>
+      </sc-if>
+      <sc-if value="{{ notMobile }}" hint-placeholder-val="{{ true }}"><div style="display:flex;flex-direction:column;border-top:2px solid #173a44">
+        <sc-for list="{{ burgerRows }}" as="r" hint-placeholder-count="6">
+          <div style="display:grid;grid-template-columns:{{ rowCols }};gap:8px 18px;align-items:center;padding:12px 0;border-bottom:2px solid rgba(23,58,68,.16)">
+            <div style="display:flex;flex-direction:column;gap:2px;min-width:0">
+              <span style="font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase">{{ r.k }}</span>
+              <span style="font-size:12.5px;line-height:1.35;opacity:.75">{{ r.d }}</span>
+            </div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <sc-for list="{{ r.chips }}" as="c"><button onClick="{{ c.toggle }}" style="min-height:44px;padding:0 14px;border-radius:999px;border:2px solid #173a44;background:{{ c.bg }};color:{{ c.fg }};font-weight:800;font-size:13px;letter-spacing:.03em;text-transform:uppercase;cursor:{{ c.cur }};white-space:nowrap;display:inline-flex;align-items:center;gap:8px;transition:background .2s,color .2s">{{ c.label }}<sc-if value="{{ c.isThumb }}"><span style="width:22px;height:22px;flex:none;border-radius:50%;border:2px solid currentColor;padding:3px;display:block"><sc-if value="{{ c.iPlus }}"><svg viewBox="0 0 24 24" style="width:100%;height:100%;display:block" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v12M6 12h12"></path></svg></sc-if><sc-if value="{{ c.iMinus }}"><svg viewBox="0 0 24 24" style="width:100%;height:100%;display:block" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12h12"></path></svg></sc-if><sc-if value="{{ c.iCheck }}"><svg viewBox="0 0 24 24" style="width:100%;height:100%;display:block" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12.5l4 4 8-9"></path></svg></sc-if></span></sc-if></button></sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div></sc-if>
+    </div>
+  </div>
+</section>
+
+<section style="max-width:1320px;margin:0 auto;padding:0 28px 80px">
+  <div data-reveal="0" style="border-top:3px solid #173a44">
+    <sc-for list="{{ rows }}" as="r" hint-placeholder-count="6">
+      <div onMouseEnter="{{ r.hover }}" style="display:grid;grid-template-columns:48px minmax(0,1fr) auto;gap:18px;align-items:center;padding:14px 12px;border-bottom:2px solid #173a44;background:{{ r.bg }};transition:background .2s">
+        <span style="font-family:'Big Shoulders Display';font-weight:800;font-size:20px;opacity:.5">{{ r.num }}</span>
+        <div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;min-width:0">
+          <span style="font-family:'Big Shoulders Display';font-weight:900;font-size:clamp(28px,3.4vw,44px);line-height:1.05;text-transform:uppercase">{{ r.name }}</span>
+          <span style="font-size:15px;line-height:1.4;max-width:520px;opacity:.85">{{ r.desc }}</span>
+        </div>
+        <span style="font-family:'Big Shoulders Display';font-weight:900;font-size:clamp(26px,3vw,38px);white-space:nowrap">{{ r.price }}</span>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<section id="evenements" style="background:#3e7a8c;color:#fff">
+  <div style="max-width:1320px;margin:0 auto;padding:96px 28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:56px">
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <span style="align-self:flex-start;border:2px solid #fff;padding:7px 12px;border-radius:4px;font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase">Événementiel · mariage, fête, réception…</span>
+      <h2 style="margin:0;font-family:'Big Shoulders Display';font-weight:900;text-transform:uppercase;font-size:clamp(56px,7vw,104px);line-height:1">Réservez<br>Léon</h2>
+      <p style="margin:0;font-size:18px;line-height:1.55;font-weight:500;max-width:440px">Le camion se déplace avec ses burgers maison sur vos mariages, anniversaires, fêtes de village et repas d'entreprise.</p>
+      <img src="assets/web/leon-dessin.png" alt="Léon le camion" style="width:min(420px,90%);margin-top:8px;filter:drop-shadow(0 14px 16px rgba(0,0,0,.25))">
+    </div>
+    <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:16px;justify-content:center"><span style="font-family:'Big Shoulders Display';font-weight:900;font-size:72px;line-height:1;text-transform:uppercase">Bien reçu !</span><span style="font-size:18px;font-weight:600">On vous rappelle très vite pour votre {{ evtLower }}.</span><button onClick="{{ reset }}" style="align-self:flex-start;border:2px solid #fff;background:transparent;padding:14px 20px;border-radius:6px;font-weight:800;cursor:pointer;text-transform:uppercase;letter-spacing:.08em">Nouvelle demande</button></div>
+    </sc-if>
+    <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+      <form onSubmit="{{ submit }}" style="display:flex;flex-direction:column;gap:28px">
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><sc-for list="{{ evts }}" as="e"><button type="button" onClick="{{ e.pick }}" style="padding:12px 16px;border-radius:6px;border:2px solid #fff;background:{{ e.bg }};color:{{ e.fg }};cursor:pointer;font-weight:800;font-size:13px;line-height:1;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap">{{ e.n }}</button></sc-for></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px">
+          <input required placeholder="Nom" style="background:transparent;border:0;border-bottom:2px solid rgba(255,255,255,.7);padding:12px 0;font-size:20px;font-weight:600;outline:none">
+          <input required type="tel" placeholder="Téléphone" style="background:transparent;border:0;border-bottom:2px solid rgba(255,255,255,.7);padding:12px 0;font-size:20px;font-weight:600;outline:none">
+          <input placeholder="Date de l'événement" style="background:transparent;border:0;border-bottom:2px solid rgba(255,255,255,.7);padding:12px 0;font-size:20px;font-weight:600;outline:none">
+          <input placeholder="Nombre d'invités" style="background:transparent;border:0;border-bottom:2px solid rgba(255,255,255,.7);padding:12px 0;font-size:20px;font-weight:600;outline:none">
+        </div>
+        <input placeholder="Lieu (commune, salle…)" style="background:transparent;border:0;border-bottom:2px solid rgba(255,255,255,.7);padding:12px 0;font-size:20px;font-weight:600;outline:none">
+        <textarea rows="3" placeholder="Dites-nous tout" style="background:transparent;border:0;border-bottom:2px solid rgba(255,255,255,.7);padding:12px 0;font-size:20px;font-weight:600;outline:none;resize:vertical"></textarea>
+        <button type="submit" style="align-self:flex-start;background:#173a44;color:#ece3d5;border:0;padding:20px 30px;border-radius:6px;font-weight:800;font-size:15px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer">Envoyer la demande →</button>
+      </form>
+    </sc-if>
+  </div>
+</section>
+
+<footer style="background:#102c34;color:#ece3d5">
+  <div style="max-width:1320px;margin:0 auto;padding:64px 28px 36px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:36px 32px">
+    <div style="display:flex;flex-direction:column;gap:14px;align-items:flex-start">
+      <img src="assets/logo.png" alt="Les Deux B" style="width:72px;display:block">
+      <p style="margin:0;font-size:15px;line-height:1.55;font-weight:500;max-width:260px;opacity:.8">Pizzas, burgers et desserts faits maison à Jussac, dans le Cantal.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;font-size:15px;line-height:1.45">
+      <span style="font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#8fbccb;margin-bottom:4px">Le magasin</span>
+      <span style="font-weight:700">14 avenue des Raux, 15250 Jussac</span>
+      <span>Mardi au samedi · 18h – 21h</span>
+      <span>Distributeur 7j/7 · 24h/24</span>
+      <a href="Magasin.dc.html" style="color:#ece3d5;font-weight:700;text-decoration:underline;text-underline-offset:4px;margin-top:4px">Voir la carte</a>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;font-size:15px;line-height:1.45">
+      <span style="font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#8fbccb;margin-bottom:4px">Léon le camion</span>
+      <span style="font-weight:700">Un village différent chaque soir</span>
+      <span>Mariages, fêtes, repas d'entreprise</span>
+      <a href="Leon.dc.html#tournee" style="color:#ece3d5;font-weight:700;text-decoration:underline;text-underline-offset:4px;margin-top:4px">La tournée de la semaine</a>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <span style="font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#8fbccb;margin-bottom:2px">Contact</span>
+      <a href="tel:0661998833" style="color:#ece3d5;font-family:'Big Shoulders Display';font-weight:900;font-size:34px;line-height:1">06 61 99 88 33</a>
+      <a href="mailto:contact@les-deux-b.com" style="color:#ece3d5;font-size:15px">contact@les-deux-b.com</a>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">
+        <a href="#top" style="border:2px solid rgba(236,227,213,.4);color:#ece3d5;padding:9px 14px;border-radius:999px;font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase">Facebook</a>
+        <a href="#top" style="border:2px solid rgba(236,227,213,.4);color:#ece3d5;padding:9px 14px;border-radius:999px;font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase">Instagram</a>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1320px;margin:0 auto;padding:0 28px">
+    <div style="border-top:1px solid rgba(236,227,213,.15);padding:20px 0 8px;font-family:'Big Shoulders Display';font-weight:900;text-transform:uppercase;font-size:clamp(64px,15vw,210px);line-height:.95;text-align:center;color:#3e7a8c;white-space:nowrap">Les Deux B</div>
+  </div>
+  <div style="max-width:1320px;margin:0 auto;padding:12px 28px 28px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;font-weight:600;opacity:.6">
+    <span>© 2026 Les Deux B · Jussac, Cantal</span>
+    <a href="#top" style="color:#ece3d5">Mentions légales</a>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const MENU = [
+  ['Le 12 Balles', '12€', 'Burger + frites, pain burger fait maison'],
+  ['Burger', '10€', 'Pain maison, viande ou végé, fromage, sauce maison'],
+  ['B-Croc', '6€', ''],
+  ['B-Wrap', '5€', ''],
+  ['Nuggets', '5 / 8 / 11€', 'Par 6, 10 ou 20'],
+  ['Lou Pitiou', '9€80', 'B-Croc ou nuggets, frites, B-Tea, moelleux ou B-Nut'],
+  ['Frites', '3€', ''],
+  ['Desserts', '4€', 'Tiramisu, moelleux, B-Nut, panna cotta, dessert du mois'],
+];
+const FROMAGES = ['Cheddar', 'Cantal', 'Bleu', 'Chèvre', 'St-Nectaire', 'Fromage du mois'];
+const VIANDES = [['Steak haché', 'Supplément steak : 3€50'], ['Poulet pané', 'Supplément poulet : 3€50'], ['Croustifade', 'La version végé']];
+const SAUCES = [['La Pays Vert', 'Crème fraîche, ail et fines herbes'], ['La Basque', 'Base mayo'], ['La Poivre', 'Au poivre'], ['La Cantalou', 'Fromagère']];
+const GARNI = [{ id: 'salade', n: 'Salade' }, { id: 'tomate', n: 'Tomate' }, { id: 'oignon', n: 'Oignon' }];
+// Fromages : assets/web/b-<nom>.png dans l'ordre de FROMAGES. À venir : poulet pané, croustifade, tomate, oignon, andouillette, sauces.
+const IMG = { fromage: { 'Cheddar': 'assets/web/b-cheddar.png' }, viande: { 'Steak haché': 'assets/web/b-steak.png' } };
+const JOURS = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+const WEEK = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+const EVTS = ['Mariage', 'Anniversaire', 'Fête de village', 'Entreprise', 'Autre'];
+
+function smooth(p) {
+  let d = `M${p[0].x} ${p[0].y}`;
+  for (let i = 0; i < p.length - 1; i++) {
+    const a = p[i - 1] || p[i], b = p[i], c = p[i + 1], e = p[i + 2] || c, t = 0.2;
+    d += ` C${(b.x + (c.x - a.x) * t).toFixed(1)} ${(b.y + (c.y - a.y) * t).toFixed(1)} ${(c.x - (e.x - b.x) * t).toFixed(1)} ${(c.y - (e.y - b.y) * t).toFixed(1)} ${c.x} ${c.y}`;
+  }
+  return d;
+}
+
+class Component extends DCLogic {
+  state = { sheet: null, w: window.innerWidth, raw: [], semaine: '', day: 0, mobile: window.innerWidth < 820, menu: false, arrived: false, hover: -1, evt: 0, sent: false, f: 0, v: 0, s: 0, g: { salade: true, tomate: true, oignon: true }, andou: false };
+  pathRef = React.createRef(); progRef = React.createRef(); truckRef = React.createRef(); burgerRef = React.createRef(); sceneRef = React.createRef(); menuRef = React.createRef(); tlRef = React.createRef(); markRef = React.createRef();
+
+  componentDidMount() {
+    import(new URL('./tournee.js?v=3', document.baseURI).href).then(m => {
+      this.mod = m;
+      const idx = Math.max(0, m.TOURNEE.findIndex(s => s.jour === JOURS[new Date().getDay()]));
+      this.setState({ raw: m.TOURNEE, semaine: m.SEMAINE, day: idx }, () => this.measure(true));
+    });
+    this.onResize = () => { if (Math.abs(window.innerWidth - this.state.w) > 20) this.setState({ w: window.innerWidth }); const mobile = window.innerWidth < 820; if (mobile !== this.state.mobile) this.setState({ mobile, menu: false }, () => { this._tries = 0; if (!mobile) this.measure(false); }); };
+    import(new URL('./reveal.js?v=2', document.baseURI).href).then(m => { this.unreveal = m.initReveal(); });
+    this.io = new IntersectionObserver(es => { if (es[0].isIntersecting) { this.animP(1); this.io.disconnect(); } }, { threshold: 0.4 });
+    if (this.burgerRef.current) { this.io.observe(this.burgerRef.current); this.ioOn = true; }
+    setTimeout(() => this.setState({ arrived: true }), 250);
+    window.addEventListener('resize', this.onResize);
+    if (location.hash) setTimeout(() => { const el = document.getElementById(location.hash.slice(1)); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 70 }); }, 500);
+  }
+  componentDidUpdate() {
+    const tl = this.tlRef.current, mk = this.markRef.current;
+    if (tl && mk) {
+      const cur = this.state.raw[this.state.day], rows = tl.querySelectorAll('[data-tl-row]'), r = cur && rows[WEEK.indexOf(cur.jour)];
+      if (r) mk.style.top = r.offsetTop + 'px';
+      if (!this.tlIO && this.state.raw.length) {
+        this.tlIO = new IntersectionObserver(es => { if (!es[0].isIntersecting) return; this.tlIO.disconnect(); this.tourAnim(); }, { threshold: 0.25 });
+        this.tlIO.observe(tl);
+      }
+    }
+    if (!this.ioOn && this.io && this.burgerRef.current) { this.io.observe(this.burgerRef.current); this.ioOn = true; }
+    const t = this.truckRef.current;
+    if (t && t._pos && t.style.left !== t._pos[0]) { t.style.left = t._pos[0]; t.style.top = t._pos[1]; if (t.firstElementChild) t.firstElementChild.style.transform = t.dataset.flip === '1' ? 'scaleX(-1)' : 'none'; }
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this.onResize); this.io && this.io.disconnect(); this.unreveal && this.unreveal(); cancelAnimationFrame(this.pr); }
+  animP(to) {
+    const sec = this.menuRef.current; if (!sec) return;
+    const from = this.p || 0, t0 = performance.now(), ms = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 1 : 1400;
+    cancelAnimationFrame(this.pr);
+    const step = n => { const k = Math.min(1, (n - t0) / ms), e = 1 - Math.pow(1 - k, 3); this.p = from + (to - from) * e; sec.style.setProperty('--p', this.p.toFixed(3)); if (k < 1) this.pr = requestAnimationFrame(step); };
+    this.pr = requestAnimationFrame(step);
+  }
+
+  geo() {
+    const raw = this.state.raw, n = raw.length, W = 1200, H = 330;
+    const stops = raw.map((s, i) => ({ ...s, x: Math.round(n > 1 ? 150 + i * 900 / (n - 1) : 600), y: i % 2 ? 270 : 228 }));
+    return { W, H, stops, road: smooth([{ x: -80, y: 246 }, ...stops, { x: W + 80, y: 246 }]) };
+  }
+  measure(first) {
+    requestAnimationFrame(() => {
+      const path = this.pathRef.current, truck = this.truckRef.current;
+      if (!path || !truck || !this.mod) { if ((this._tries = (this._tries || 0) + 1) < 40) setTimeout(() => this.measure(first), 120); return; }
+      const g = this.geo(), L = path.getTotalLength(), N = 800, samp = [];
+      for (let i = 0; i <= N; i++) { const l = L * i / N, q = path.getPointAtLength(l); samp.push([l, q.x, q.y]); }
+      this.lens = g.stops.map(s => samp.reduce((b, c) => (c[1] - s.x) ** 2 + (c[2] - s.y) ** 2 < (b[1] - s.x) ** 2 + (b[2] - s.y) ** 2 ? c : b)[0]);
+      this.cur = this.lens[this.state.day];
+      this.mod.drive({ path, progress: this.progRef.current, truck: this.truckRef.current, from: first ? 0 : this.cur, to: this.cur, W: g.W, H: g.H, ms: first ? 2000 : 1 });
+    });
+  }
+  goDay(i) {
+    if (!this.lens || this.driving || i < 0) return;
+    const g = this.geo(), from = this.cur; this.cur = this.lens[i]; this.driving = true; this.setState({ day: i });
+    this.mod.drive({ path: this.pathRef.current, progress: this.progRef.current, truck: this.truckRef.current, from, to: this.cur, W: g.W, H: g.H, ms: 700 + Math.abs(this.cur - from) * 1.6, onDone: () => { this.driving = false; } });
+  }
+  tourAnim() {
+    const target = this.state.day, n = this.state.raw.length, path = [];
+    for (let k = 0; k < n; k++) path.push(k);
+    if (target < n - 1) for (let k = n - 2; k >= target; k--) path.push(k);
+    let i = 0; this.setState({ day: 0 });
+    clearInterval(this.tourT); this.tourT = setInterval(() => { i++; if (i >= path.length) return clearInterval(this.tourT); this.setState({ day: path[i] }); }, 480);
+  }
+  cycle(key, len, d) { this.setState(p => ({ [key]: (p[key] + d + len) % len })); }
+
+  renderVals() {
+    const st = this.state, g = this.geo(), mob = st.mobile, todayName = JOURS[new Date().getDay()];
+    const tour = g.stops, today = tour.find(s => s.jour === todayName);
+    const next = tour.find(s => WEEK.indexOf(s.jour) > WEEK.indexOf(todayName)) || tour[0];
+    const cur = tour[st.day] || { jour: '', date: '', village: '', lieu: '', adresse: '', heure: '' };
+    const by = (() => {
+      const W = { base: 1, meat: .94, cheese: .96, andou: .94, tomate: .94, oignon: .96, salade: 1.08, sauce: .94, top: 1 };
+      const y = { base: .62 }; y.meat = y.base - .141; y.cheese = y.meat - .081; let cur = y.cheese, gap = .30;
+      if (st.andou) { cur -= .045; y.andou = cur; gap = .26; } else y.andou = cur;
+      if (st.g.tomate) { cur -= .045; y.tomate = cur; gap = .25; } else y.tomate = cur;
+      if (st.g.oignon) { cur -= .05; y.oignon = cur; gap = .24; } else y.oignon = cur;
+      if (st.g.salade) { cur -= .065; y.salade = cur; gap = .20; } else y.salade = cur;
+      y.top = cur - gap; y.sauce = y.top + .10;
+      const o = {}; for (const k in W) o[k] = (y[k] / (W[k] * .5) * 100).toFixed(1) + '%'; return o;
+    })();
+    const BR = (() => {
+        const pick = (arr, key, get) => arr.map((x, i) => ({ label: get(x), bg: st[key] === i ? '#173a44' : 'transparent', fg: st[key] === i ? '#ece3d5' : '#173a44', cur: 'pointer', isThumb: false, iCheck: st[key] === i, iPlus: false, iMinus: false, toggle: () => this.setState({ [key]: i }) }));
+        const tog = (on, label, fn) => ({ label, isThumb: true, iPlus: !on, iMinus: on, iCheck: false, bg: on ? '#173a44' : 'transparent', fg: on ? '#ece3d5' : 'rgba(23,58,68,.6)', cur: 'pointer', toggle: fn });
+        const garni = GARNI.filter(x => st.g[x.id]).map(x => x.n);
+        const rows = [
+          { k: 'Pain', d: 'Élaboré par nos soins', v: 'Pain maison', cta: 'Fait maison', fixed: true, chips: [{ label: 'Pain maison', bg: '#173a44', fg: '#ece3d5', cur: 'default', isThumb: false, toggle: () => {} }] },
+          { k: 'Garniture', d: '− pour retirer, + pour ajouter', v: garni.length === 3 ? 'Complète' : garni.join(', ') || 'Sans', chips: GARNI.map(x => tog(st.g[x.id], x.n, () => this.setState(p => ({ g: { ...p.g, [x.id]: !p.g[x.id] } })))) },
+          { k: 'Fromage', d: '+ de fromage : 1€50', v: FROMAGES[st.f], chips: pick(FROMAGES, 'f', x => x) },
+          { k: 'Viande / végé', d: VIANDES[st.v][1], v: VIANDES[st.v][0], chips: pick(VIANDES, 'v', x => x[0]) },
+          { k: 'Sauce maison', d: SAUCES[st.s][1], v: SAUCES[st.s][0], chips: pick(SAUCES, 's', x => x[0]) },
+          { k: 'Supplément', d: 'Si vous le souhaitez', v: st.andou ? 'Andouillette' : 'Aucun', chips: [tog(st.andou, 'Andouillette', () => this.setState(p => ({ andou: !p.andou })))] },
+        ];
+        return rows.map((r, i) => ({ ...r, cta: r.fixed ? r.cta : 'Changer ›', tileBg: r.fixed ? 'rgba(23,58,68,.06)' : '#f6f0e6', open: () => { if (!r.fixed) this.setState({ sheet: i }); } }));
+    })();
+    return {
+      tonight: today ? `Ce soir : ${today.village}, ${today.heure}` : next ? `${next.jour} : ${next.village}, ${next.heure}` : 'Tournée à venir',
+      semaine: st.semaine, hasTour: tour.length > 0, desktop: !mob, road: g.road, vb: `0 0 ${g.W} ${g.H}`, ar: `${g.W} / ${g.H}`,
+      truckW: 'min(170px,14%)', tourHint: mob ? 'Touchez un jour pour voir où se gare Léon. Planning mis à jour chaque semaine.' : "Choisissez un jour : Léon prend la route jusqu'au village. Planning mis à jour chaque semaine.",
+      heroCols: mob || st.w < 1100 ? 'minmax(0,1fr)' : 'minmax(0,.72fr) minmax(0,1.28fr)', truckOrder: mob || st.w < 1100 ? '-1' : '0', truckMax: mob ? '920px' : st.w < 1100 ? 'min(600px,74%)' : '920px', truckJust: !mob && st.w < 1100 ? 'center' : 'end', heroOverlap: mob || st.w < 1100 ? '-8vw' : 'clamp(-170px,-11vw,-72px)',
+      burgerHint: mob ? 'Changez le fromage, la viande ou la sauce avec les flèches.' : "Le burger s'ouvre couche par couche. Changez le fromage, la viande ou la sauce avec les flèches.",
+      pathRef: this.pathRef, progRef: this.progRef, truckRef: this.truckRef, burgerRef: this.burgerRef, sceneRef: this.sceneRef,
+      week: WEEK.map(j => {
+        const i = tour.findIndex(s => s.jour === j), s = tour[i], on = i === st.day && i >= 0;
+        return { jour: j, village: s ? s.village : 'Repos', sub: s ? `${s.date} · ${s.heure}` : 'ou événement privé', today: j === todayName, todayTxt: s ? 'Léon est là aujourd’hui' : 'Aujourd’hui · repos',
+          on, off: !on, abbr: j.slice(0, 3), date: s ? s.date : '', sub2: s ? s.heure : 'ou événement privé', lieu: s ? s.lieu : '', adresse: s ? s.adresse : '',
+          map: s ? `https://maps.google.com/?q=${encodeURIComponent(s.adresse + ' ' + s.village)}` : '#', todayC: on ? '#3e7a8c' : '#8fbccb',
+          dotBg: on ? '#8fbccb' : '#173a44', dotBd: on ? '#8fbccb' : s ? '#ece3d5' : 'rgba(236,227,213,.25)', dotFg: s ? '#ece3d5' : 'rgba(236,227,213,.45)',
+          pick: () => { if (s && mob) { clearInterval(this.tourT); this.setState({ day: i }); } },
+          bg: on ? '#ece3d5' : 'transparent', fg: on ? '#173a44' : s ? '#ece3d5' : 'rgba(236,227,213,.4)', bd: on ? '#ece3d5' : s ? 'rgba(236,227,213,.35)' : 'rgba(236,227,213,.12)',
+          cursor: s ? 'pointer' : 'default', go: () => this.goDay(i) };
+      }),
+      signs: tour.map((s, i) => {
+        const on = i === st.day;
+        return { ...s, short: s.jour.slice(0, 3), dd: s.date.split(' ')[0],
+          px: (s.x / g.W * 100) + '%', py: ((s.y - 30) / g.H * 100) + '%', tf: 'translate(-50%,-100%)', post: '56px', origin: 'bottom center',
+          bg: on ? '#3e7a8c' : '#f6f0e6', fg: on ? '#fff' : '#173a44', bd: on ? '#fff' : '#173a44', ring: on ? '#3e7a8c' : '#f6f0e6', scale: on ? 1.08 : 0.94, go: () => this.goDay(i) };
+      }),
+      cur, curMap: `https://maps.google.com/?q=${encodeURIComponent(cur.adresse + ' ' + cur.village)}`,
+      isMobile: mob, notMobile: !mob, menuOpen: mob && st.menu, menuIcon: st.menu ? '✕' : '☰',
+      toggleMenu: () => this.setState(p => ({ menu: !p.menu })), closeMenu: () => this.setState({ menu: false }),
+      truckIn: st.arrived ? 'translateX(0)' : 'translateX(-110%)', menuRef: this.menuRef,
+      menuCols: mob ? 'minmax(0,1fr)' : st.w < 1180 ? 'minmax(0,.62fr) minmax(0,1fr)' : 'minmax(0,.8fr) minmax(0,.7fr) minmax(0,1.35fr)', burgerMax: mob ? '300px' : '340px', labelGap: mob ? '16px' : '22px',
+      tlRef: this.tlRef, markRef: this.markRef,
+      summary: ['Pain maison', GARNI.filter(x => st.g[x.id]).map(x => x.n.toLowerCase()).join(', ') || 'sans garniture', FROMAGES[st.f], VIANDES[st.v][0], SAUCES[st.s][0]].concat(st.andou ? ['andouillette'] : []).join(' · '),
+      menuPad: mob ? '48px 20px 56px' : '56px 20px 64px', sheetCol: !mob && st.w < 1180 ? '2' : 'auto', sheetRow: !mob && st.w < 1180 ? '1 / span 2' : 'auto', rowCols: mob || st.w < 1180 ? 'minmax(0,1fr)' : '110px minmax(0,1fr)',
+      burgerRows: BR, by,
+      sheet: BR[st.sheet] || { k: '', d: '', chips: [] }, sheetOpen: mob && st.sheet != null, closeSheet: () => this.setState({ sheet: null }), stop: e => e.stopPropagation(),
+      sc0: st.s === 0, sc2: st.s === 2, sc1: st.s === 1, sc3: st.s === 3, hasAndou: st.andou, m0: st.v === 0, m1: st.v === 1, m2: st.v === 2, hasTomate: st.g.tomate, hasOignon: st.g.oignon,
+      ch0: st.f === 0, ch1: st.f === 1, ch2: st.f === 2, ch3: st.f === 3, ch4: st.f === 4, ch5: st.f === 5,
+      hasSalade: st.g.salade, cheeseImg: IMG.fromage[FROMAGES[st.f]] || 'assets/web/b-cheddar.png', meatImg: IMG.viande[VIANDES[st.v][0]] || 'assets/web/b-steak.png',
+      layers: [
+        { k: 'Pain', v: 'Pain maison', d: 'Élaboré par nos soins.', delay: '0.05', hasImg: true, i_top: true },
+        { k: 'Garniture', v: GARNI.filter(x => st.g[x.id]).map(x => x.n).join(', ') || 'Sans garniture', d: 'Pouce en haut : dedans. Pouce en bas : sans.', delay: '0.17', hasImg: true, i_salade: true, hasChips: true,
+          chips: GARNI.map(x => ({ label: x.n, sign: st.g[x.id] ? '−' : '+', bg: st.g[x.id] ? '#173a44' : 'transparent', fg: st.g[x.id] ? '#ece3d5' : 'rgba(23,58,68,.6)', toggle: () => this.setState(p => ({ g: { ...p.g, [x.id]: !p.g[x.id] } })) })) },
+        { k: `Fromage · ${st.f + 1}/${FROMAGES.length}`, v: FROMAGES[st.f], d: '+ de fromage : 1€50', arrows: true, delay: '0.29', hasImg: true, i_cheddar: true, prev: () => this.cycle('f', FROMAGES.length, -1), next: () => this.cycle('f', FROMAGES.length, 1) },
+        { k: `Viande / végé · ${st.v + 1}/${VIANDES.length}`, v: VIANDES[st.v][0], d: VIANDES[st.v][1], arrows: true, delay: '0.41', hasImg: true, i_steak: true, prev: () => this.cycle('v', VIANDES.length, -1), next: () => this.cycle('v', VIANDES.length, 1) },
+        { k: `Sauce maison · ${st.s + 1}/${SAUCES.length}`, v: SAUCES[st.s][0], d: SAUCES[st.s][1], arrows: true, delay: '0.53', isSauce: true, prev: () => this.cycle('s', SAUCES.length, -1), next: () => this.cycle('s', SAUCES.length, 1) },
+        { k: 'Supplément', v: 'Andouillette', d: st.andou ? 'Ajoutée à votre burger.' : 'En plus, si vous le souhaitez.', delay: '0.65', isSauce: false, hasChips: true,
+          chips: [{ label: 'Andouillette', sign: st.andou ? '−' : '+', bg: st.andou ? '#173a44' : 'transparent', fg: st.andou ? '#ece3d5' : 'rgba(23,58,68,.6)', toggle: () => this.setState(p => ({ andou: !p.andou })) }] },
+      ],
+      rows: MENU.map((p, i) => ({ num: String(i + 1).padStart(2, '0'), name: p[0], price: p[1], desc: p[2], bg: st.hover === i ? '#dfe6e1' : 'transparent', hover: () => this.setState({ hover: i }) })),
+      evts: EVTS.map((e, i) => ({ n: e, bg: st.evt === i ? '#fff' : 'transparent', fg: st.evt === i ? '#3e7a8c' : '#fff', pick: () => this.setState({ evt: i }) })),
+      evtLower: EVTS[st.evt].toLowerCase(), sent: st.sent, notSent: !st.sent,
+      submit: e => { e.preventDefault(); const f = e.target, lines = [`Type de demande : ${EVTS[st.evt]}`]; f.querySelectorAll('input,textarea').forEach(el => { if (el.value.trim()) lines.push(`${el.placeholder} : ${el.value.trim()}`); }); window.location.href = 'mailto:contact@les-deux-b.com?subject=' + encodeURIComponent(`Demande ${EVTS[st.evt].toLowerCase()} – site Les Deux B`) + '&body=' + encodeURIComponent(lines.join('\n')); this.setState({ sent: true }); }, reset: () => this.setState({ sent: false }),
+    };
+  }
+}
+</script>
+</body>
+</html>

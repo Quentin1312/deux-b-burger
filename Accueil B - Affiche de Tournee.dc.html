@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Big+Shoulders+Display:wght@700;800;900&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<script src="./leon-truck.js"></script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#fff3df;color:#0e2a2e;font-family:Archivo,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#0e2a2e;text-decoration:none}
+a:hover{color:#ff5233}
+input,textarea,select,button{font:inherit;color:inherit}
+::placeholder{color:rgba(255,243,223,.6)}
+</style>
+</helmet>
+
+<header style="position:sticky;top:0;z-index:30;background:#0e2a2e;color:#fff3df">
+  <div style="max-width:1320px;margin:0 auto;padding:10px 28px;display:flex;align-items:center;gap:24px;flex-wrap:wrap">
+    <a href="#top" style="display:flex;align-items:center;gap:12px;color:#fff3df"><img src="assets/logo.png" alt="Deux B" style="width:46px;height:46px;display:block"><span style="font-family:'Big Shoulders Display';font-weight:900;font-size:28px;letter-spacing:.02em;text-transform:uppercase">Les Deux B</span></a>
+    <nav style="display:flex;gap:24px;flex-wrap:wrap;margin-left:auto;font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase">
+      <a href="#choix" style="color:#fff3df">Le magasin</a><a href="#leon" style="color:#fff3df">Léon</a><a href="#carte" style="color:#fff3df">La carte</a><a href="#evenements" style="color:#fff3df">Événements</a><a href="#infos" style="color:#fff3df">Infos</a>
+    </nav>
+    <a href="tel:0661998833" style="background:#ffc53d;color:#0e2a2e;padding:10px 16px;border-radius:6px;font-weight:800;font-size:14px">06 61 99 88 33</a>
+  </div>
+</header>
+
+<section id="top" style="background:#17a2b2;color:#fff3df;overflow:hidden">
+  <div style="max-width:1320px;margin:0 auto;padding:48px 28px 72px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,480px),1fr));gap:36px;align-items:center">
+    <div style="display:flex;flex-direction:column;gap:24px;position:relative;z-index:2">
+      <span style="align-self:flex-start;background:#0e2a2e;color:#ffc53d;padding:8px 14px;border-radius:4px;font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase">Street food · Jussac, Cantal</span>
+      <h1 style="margin:0;font-family:'Big Shoulders Display';font-weight:900;text-transform:uppercase;font-size:clamp(84px,12vw,184px);line-height:.8;letter-spacing:-.01em">
+        <span style="display:block">Pizza.</span>
+        <span style="display:block;color:#0e2a2e">Burger.</span>
+        <span style="display:block;color:#ffc53d">Léon.</span>
+      </h1>
+      <p style="margin:0;font-size:19px;line-height:1.5;max-width:470px;font-weight:500">Tout est fait maison, du pain burger aux desserts. À manger au magasin de Jussac, au distributeur 24h/24, ou quand Léon passe dans votre village.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a href="#carte" style="background:#0e2a2e;color:#fff3df;padding:18px 26px;border-radius:6px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:14px">Voir la carte</a>
+        <a href="#leon" style="background:#fff3df;color:#0e2a2e;padding:18px 26px;border-radius:6px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:14px">La tournée de Léon →</a>
+      </div>
+    </div>
+    <div style="position:relative;justify-self:center;width:min(100%,520px)">
+      <div style="border-radius:999px 999px 24px 24px;overflow:hidden;border:6px solid #0e2a2e;aspect-ratio:4/5;background:#0e2a2e"><img src="assets/leon.avif" alt="Léon le camion" style="display:block;width:100%;height:100%;object-fit:cover"></div>
+      <div style="position:absolute;left:-30px;bottom:40px;width:150px;height:150px;background:#ff5233;color:#fff3df;clip-path:polygon(50% 0,61% 15%,79% 9%,80% 28%,98% 33%,88% 50%,98% 67%,80% 72%,79% 91%,61% 85%,50% 100%,39% 85%,21% 91%,20% 72%,2% 67%,12% 50%,2% 33%,20% 28%,21% 9%,39% 15%);display:grid;place-items:center;text-align:center;transform:rotate(-12deg)"><span style="font-family:'Big Shoulders Display';font-weight:900;font-size:26px;line-height:.9;text-transform:uppercase">Burger<br><span style="font-size:44px">300 g</span></span></div>
+    </div>
+  </div>
+</section>
+<div style="background:#ffc53d;border-top:4px solid #0e2a2e;border-bottom:4px solid #0e2a2e;transform:rotate(-1.2deg);margin:-14px -20px 0;position:relative;z-index:3;overflow:hidden">
+  <div style="display:flex;gap:28px;padding:14px 0;white-space:nowrap;font-family:'Big Shoulders Display';font-weight:900;font-size:34px;text-transform:uppercase;justify-content:center">
+    <span>Pain burger fait maison</span><span style="color:#ff5233">●</span><span>Pizzas Ø 31 cm</span><span style="color:#ff5233">●</span><span>B-Tea maison</span><span style="color:#ff5233">●</span><span>Distributeur 24h/24</span><span style="color:#ff5233">●</span><span>Produits du Cantal</span><span style="color:#ff5233">●</span><span>Mariages &amp; fêtes</span>
+  </div>
+</div>
+
+<section id="choix" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));margin-top:48px">
+  <a href="#carte" style="background:#0e2a2e;color:#fff3df;padding:56px 40px;display:flex;flex-direction:column;gap:24px;min-height:620px;position:relative;overflow:hidden">
+    <span style="font-family:'Big Shoulders Display';font-weight:900;font-size:200px;line-height:.7;color:#17a2b2;position:absolute;right:24px;top:40px;opacity:.9">01</span>
+    <span style="font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#ffc53d">Le magasin · 14 av. des Raux, Jussac</span>
+    <h2 style="margin:0;font-family:'Big Shoulders Display';font-weight:900;text-transform:uppercase;font-size:clamp(60px,7vw,104px);line-height:.85;position:relative">Pizza<br>+ burger<br>+ dessert</h2>
+    <div style="position:relative;flex:1;min-height:200px;border-radius:12px;overflow:hidden;border:3px solid #fff3df"><image-slot id="b-choix-magasin" shape="rect" placeholder="Photo : le magasin de Jussac"></image-slot></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font-weight:700"><span>Mar – Sam · 18h – 21h · sur place ou à emporter</span><span style="background:#ffc53d;color:#0e2a2e;padding:12px 18px;border-radius:6px;font-weight:800;text-transform:uppercase;font-size:13px;letter-spacing:.08em">Le magasin →</span></div>
+  </a>
+  <a href="#leon" style="background:#ff5233;color:#fff3df;padding:56px 40px;display:flex;flex-direction:column;gap:24px;min-height:620px;position:relative;overflow:hidden">
+    <span style="font-family:'Big Shoulders Display';font-weight:900;font-size:200px;line-height:.7;color:#0e2a2e;position:absolute;right:24px;top:40px;opacity:.9">02</span>
+    <span style="font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#0e2a2e">Léon le camion · tournée des villages</span>
+    <h2 style="margin:0;font-family:'Big Shoulders Display';font-weight:900;text-transform:uppercase;font-size:clamp(60px,7vw,104px);line-height:.85;position:relative">Le burger<br>vient<br>chez vous</h2>
+    <div style="flex:1;min-height:200px;display:flex;align-items:flex-end;position:relative">
+      <div style="position:absolute;left:-40px;right:-40px;bottom:10px;height:36px;background:#0e2a2e;background-image:linear-gradient(90deg,#fff3df 50%,transparent 50%);background-size:46px 4px;background-repeat:repeat-x;background-position:0 16px"></div>
+      <leon-truck body="#17a2b2" roof="#fff3df" ink="#0e2a2e" glass="#bfe9ee" style="width:min(400px,86%);position:relative;margin-bottom:22px"></leon-truck>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font-weight:700"><span>Un village différent chaque soir · 18h – 22h</span><span style="background:#0e2a2e;color:#fff3df;padding:12px 18px;border-radius:6px;font-weight:800;text-transform:uppercase;font-size:13px;letter-spacing:.08em">La tournée →</span></div>
+  </a>
+</section>
+
+<section id="carte" style="max-width:1320px;margin:0 auto;padding:96px 28px">
+  <div style="display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:32px">
+    <h2 style="margin:0;font-family:'Big Shoulders Display';font-weight:900;text-transform:uppercase;font-size:clamp(72px,10vw,150px);line-height:.8">La carte</h2>
+    <div style="display:flex;gap:6px;background:#0e2a2e;padding:6px;border-radius:10px;flex-wrap:wrap">
+      <sc-for list="{{ tabs }}" as="t"><button onClick="{{ t.pick }}" style="border:0;padding:14px 22px;border-radius:6px;background:{{ t.bg }};color:{{ t.fg }};font-weight:800;font-size:14px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;white-space:nowrap">{{ t.n }}</button></sc-for>
+    </div>
+  </div>
+  <div style="border-top:4px solid #0e2a2e">
+    <sc-for list="{{ rows }}" as="r" hint-placeholder-count="8">
+      <div onMouseEnter="{{ r.hover }}" style="display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:20px;align-items:center;padding:16px 12px;border-bottom:2px solid #0e2a2e;background:{{ r.bg }};transition:background .2s">
+        <span style="font-family:'Big Shoulders Display';font-weight:800;font-size:22px;opacity:.5">{{ r.num }}</span>
+        <div style="display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;min-width:0">
+          <span style="font-family:'Big Shoulders Display';font-weight:900;font-size:clamp(34px,4.4vw,58px);line-height:.95;text-transform:uppercase">{{ r.name }}</span>
+          <span style="font-size:15px;line-height:1.4;max-width:520px;opacity:.85">{{ r.desc }}</span>
+        </div>
+        <span style="font-family:'Big Shoulders Display';font-weight:900;font-size:clamp(30px,3.6vw,46px);white-space:nowrap">{{ r.price }}</span>
+      </div>
+    </sc-for>
+  </div>
+  <div style="margin-top:44px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px">
+    <div style="border:4px dashed #0e2a2e;border-radius:18px;padding:28px 32px;display:flex;align-items:center;gap:24px;background:#ffc53d;flex-wrap:wrap">
+      <span style="font-family:'Big Shoulders Display';font-weight:900;font-size:150px;line-height:.75">12</span>
+      <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:200px"><span style="font-family:'Big Shoulders Display';font-weight:900;font-size:46px;line-height:.9;text-transform:uppercase">Le 12 Balles</span><span style="font-size:16px;line-height:1.45;font-weight:500">Burger + frites, pain fait maison. Steak haché, poulet pané ou croustifade · Cantal, cheddar, bleu, chèvre, St-Nectaire · sauce maison.</span></div>
+    </div>
+    <div style="border:4px solid #0e2a2e;border-radius:18px;padding:28px 32px;display:flex;flex-direction:column;gap:10px;background:#fff">
+      <span style="font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#ff5233">Pizza à composer · 13 €</span>
+      <span style="font-family:'Big Shoulders Display';font-weight:900;font-size:46px;line-height:.9;text-transform:uppercase">Votre base + 3 ingrédients</span>
+      <span style="font-size:15px;line-height:1.5">Base crème, tomate ou rosée. Viandes, fromages, légumes, p'tits plus : vous choisissez, on enfourne.</span>
+    </div>
+  </div>
+</section>
+
+<section id="leon" style="background:#0e2a2e;color:#fff3df;overflow:hidden">
+  <div style="max-width:1320px;margin:0 auto;padding:96px 28px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:40px;align-items:end;margin-bottom:56px">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <span style="font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#ffc53d">{{ semaine }}</span>
+        <h2 style="margin:0;font-family:'Big Shoulders Display';font-weight:900;text-transform:uppercase;font-size:clamp(72px,10vw,150px);line-height:.8">Léon<br><span style="color:#17a2b2">en tournée</span></h2>
+      </div>
+      <div style="display:flex;flex-direction:column;border-top:2px solid rgba(255,243,223,.3)">
+        <sc-for list="{{ stops }}" as="s" hint-placeholder-count="5">
+          <button onClick="{{ s.go }}" style="display:grid;grid-template-columns:90px 1fr auto;gap:16px;align-items:center;text-align:left;padding:12px 4px;border:0;border-bottom:2px solid rgba(255,243,223,.3);background:transparent;color:{{ s.fg }};cursor:pointer">
+            <span style="font-family:'Big Shoulders Display';font-weight:800;font-size:22px;text-transform:uppercase">{{ s.short }} {{ s.dd }}</span>
+            <span style="font-family:'Big Shoulders Display';font-weight:900;font-size:30px;text-transform:uppercase;line-height:1">{{ s.village }}</span>
+            <span style="font-size:13px;font-weight:600;opacity:.8">{{ s.heure }}</span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+    <div style="overflow-x:auto;margin:0 -28px;padding:0 28px">
+      <div style="position:relative;min-width:920px;height:380px">
+        <sc-for list="{{ stops }}" as="s">
+          <button onClick="{{ s.go }}" style="position:absolute;left:{{ s.left }};top:0;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0;background:none;border:0;padding:0;cursor:pointer;z-index:2">
+            <span style="background:#fff;color:#111;border:5px solid #d8262d;border-radius:8px;padding:10px 14px;font-family:Archivo;font-weight:800;font-size:17px;text-transform:uppercase;white-space:nowrap;box-shadow:0 0 0 3px #fff;transform:scale({{ s.scale }});transition:transform .3s">{{ s.village }}</span>
+            <span style="width:6px;height:120px;background:#8b9a9c"></span>
+          </button>
+        </sc-for>
+        <div style="position:absolute;left:-28px;right:-28px;top:190px;height:110px;background:#26393c;border-top:4px solid #fff3df;border-bottom:4px solid #fff3df">
+          <div style="position:absolute;left:0;right:0;top:50%;height:5px;margin-top:-2px;background-image:linear-gradient(90deg,#ffc53d 55%,transparent 55%);background-size:60px 5px"></div>
+        </div>
+        <div style="position:absolute;top:142px;left:{{ truckLeft }};width:200px;transform:translateX(-50%);transition:left 1.4s cubic-bezier(.65,0,.35,1);z-index:3;pointer-events:none">
+          <leon-truck body="#17a2b2" roof="#fff3df" ink="#0e2a2e" glass="#bfe9ee" style="display:block;transform:{{ truckFlip }}"></leon-truck>
+        </div>
+        <sc-for list="{{ stops }}" as="s">
+          <div style="position:absolute;left:{{ s.left }};top:316px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px;opacity:{{ s.op }};transition:opacity .3s;white-space:nowrap">
+            <span style="font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#ffc53d">{{ s.jour }} {{ s.date }}</span>
+            <span style="font-size:14px;font-weight:600">{{ s.lieu }}</span>
+            <span style="font-size:12px;opacity:.75">{{ s.adresse }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="distributeur" style="background:#ffc53d;overflow:hidden">
+  <div style="max-width:1320px;margin:0 auto;padding:96px 28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:48px;align-items:center">
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <span style="align-self:flex-start;background:#0e2a2e;color:#ffc53d;padding:8px 14px;border-radius:4px;font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase">Le distributeur</span>
+      <span style="font-family:'Big Shoulders Display';font-weight:900;font-size:clamp(150px,22vw,300px);line-height:.9;letter-spacing:-.02em;display:block;margin:4px 0 10px">24/7</span>
+      <p style="margin:0;font-size:18px;line-height:1.55;font-weight:500;max-width:480px">Une petite faim ? Votre distributeur situé 14 avenue des Raux, 15250 Jussac (à côté de notre point de vente) est ouvert et à votre disposition 7J/7 &amp; 24H/24.</p>
+      <div style="align-self:flex-start;display:flex;align-items:center;gap:14px;background:#0e2a2e;color:#fff3df;border-radius:10px;padding:14px 18px">
+        <span style="width:12px;height:12px;border-radius:50%;background:#3ddc6c;box-shadow:0 0 0 4px rgba(61,220,108,.25)"></span>
+        <span style="font-family:'Big Shoulders Display';font-weight:900;font-size:30px;text-transform:uppercase;white-space:nowrap">{{ clockDay }} {{ clock }} · ouvert</span>
+      </div>
+    </div>
+    <div style="justify-self:center;width:min(100%,400px);background:#0e2a2e;border-radius:28px;padding:22px;box-shadow:16px 16px 0 #ff5233">
+      <div style="display:flex;justify-content:space-between;align-items:center;color:#fff3df;margin-bottom:16px"><span style="font-family:'Big Shoulders Display';font-weight:900;font-size:26px;text-transform:uppercase">Deux B · Pizzas</span><span style="width:12px;height:12px;border-radius:50%;background:#3ddc6c"></span></div>
+      <div style="position:relative;aspect-ratio:3/4;border-radius:14px;overflow:hidden;border:4px solid #26393c"><image-slot id="b-distrib" shape="rect" placeholder="Photo : le distributeur"></image-slot></div>
+      <div style="display:grid;grid-template-columns:1fr 70px;gap:14px;margin-top:16px;align-items:center"><div style="height:40px;border-radius:8px;background:#26393c"></div><div style="height:40px;border-radius:8px;background:#26393c;display:grid;place-items:center"><span style="width:28px;height:6px;border-radius:3px;background:#0e2a2e"></span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="nous" style="max-width:1320px;margin:0 auto;padding:110px 28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:56px;align-items:center">
+  <div style="display:flex;gap:18px;justify-content:center;align-items:flex-start">
+    <div style="background:#0e2a2e;padding:12px;display:flex;flex-direction:column;gap:10px;width:min(46%,220px);transform:rotate(-3deg);box-shadow:10px 10px 0 #17a2b2">
+      <div style="position:relative;aspect-ratio:1/1"><image-slot id="b-nous-1" shape="rect" placeholder="Les Deux B"></image-slot></div>
+      <div style="position:relative;aspect-ratio:1/1"><image-slot id="b-nous-2" shape="rect" placeholder="Le pain maison"></image-slot></div>
+      <div style="position:relative;aspect-ratio:1/1"><image-slot id="b-nous-3" shape="rect" placeholder="La boutique"></image-slot></div>
+      <span style="color:#fff3df;font-family:'Big Shoulders Display';font-weight:800;text-transform:uppercase;text-align:center;font-size:18px;letter-spacing:.1em">Deux B · Jussac</span>
+    </div>
+    <img src="assets/logo.png" alt="" style="width:min(46%,240px);margin-top:80px;transform:rotate(8deg)">
+  </div>
+  <div style="display:flex;flex-direction:column;gap:24px">
+    <span style="align-self:flex-start;background:#17a2b2;color:#fff3df;padding:8px 14px;border-radius:4px;font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase">Originaires du Cantal</span>
+    <h2 style="margin:0;font-family:'Big Shoulders Display';font-weight:900;text-transform:uppercase;font-size:clamp(60px,8vw,112px);line-height:.82">Fini le goût<br>industriel !</h2>
+    <p style="margin:0;font-size:18px;line-height:1.6;font-weight:500;max-width:540px">Après avoir lancé le concept des burgers dans le restaurant de mes parents, nous avons pris notre envol en proposant nos propres produits. Les Deux B, c'est des pizzas maison, Léon le camion à burgers, et une boutique pleine de produits locaux et de fabrication artisanale !</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <span style="border:3px solid #0e2a2e;padding:10px 14px;border-radius:6px;font-weight:700">Des pains élaborés par mes soins</span>
+      <span style="border:3px solid #0e2a2e;padding:10px 14px;border-radius:6px;font-weight:700">Boissons locales &amp; B-Tea maison</span>
+      <span style="border:3px solid #0e2a2e;padding:10px 14px;border-radius:6px;font-weight:700">Un burger de 300 g</span>
+    </div>
+  </div>
+</section>
+
+<section id="avis" style="background:#17a2b2;color:#fff3df">
+  <div style="max-width:1320px;margin:0 auto;padding:96px 28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:48px;align-items:center">
+    <div style="display:flex;flex-direction:column;gap:20px;align-items:flex-start">
+      <h2 style="margin:0;font-family:'Big Shoulders Display';font-weight:900;text-transform:uppercase;font-size:clamp(60px,7vw,100px);line-height:.82">Ils en<br>parlent</h2>
+      <div style="width:170px;height:170px;background:#ffc53d;color:#0e2a2e;clip-path:polygon(50% 0,61% 15%,79% 9%,80% 28%,98% 33%,88% 50%,98% 67%,80% 72%,79% 91%,61% 85%,50% 100%,39% 85%,21% 91%,20% 72%,2% 67%,12% 50%,2% 33%,20% 28%,21% 9%,39% 15%);display:grid;place-items:center;text-align:center;transform:rotate(8deg)"><span style="display:flex;flex-direction:column;line-height:.9"><span style="font-family:'Big Shoulders Display';font-weight:900;font-size:58px">4,9</span><span style="font-weight:800;font-size:12px;letter-spacing:.12em">AVIS GOOGLE</span></span></div>
+    </div>
+    <div style="grid-column:span 2;min-width:0;display:flex;flex-direction:column;gap:28px">
+      <span style="color:#ffc53d;font-size:30px;letter-spacing:4px">★★★★★</span>
+      <p style="margin:0;font-family:'Big Shoulders Display';font-weight:800;font-size:clamp(38px,4.6vw,64px);line-height:1;text-transform:uppercase;text-wrap:balance">« {{ review.s }} »</p>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
+        <span style="display:flex;flex-direction:column"><span style="font-weight:800;font-size:18px">{{ review.n }}</span><span style="font-size:14px;opacity:.85">{{ review.tag }} · {{ review.t }}</span></span>
+        <div style="display:flex;gap:10px;align-items:center">
+          <span style="font-family:'Big Shoulders Display';font-weight:800;font-size:22px;margin-right:8px">{{ reviewPos }}</span>
+          <button onClick="{{ prevReview }}" style="width:56px;height:56px;border-radius:8px;border:3px solid #fff3df;background:transparent;font-size:22px;cursor:pointer;color:#fff3df">←</button>
+          <button onClick="{{ nextReview }}" style="width:56px;height:56px;border-radius:8px;border:3px solid #0e2a2e;background:#0e2a2e;font-size:22px;cursor:pointer;color:#fff3df">→</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="infos" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr))">
+  <div style="padding:80px 40px;display:flex;flex-direction:column;gap:28px;background:#fff3df">
+    <h2 style="margin:0;font-family:'Big Shoulders Display';font-weight:900;text-transform:uppercase;font-size:clamp(60px,7vw,100px);line-height:.82">Le magasin</h2>
+    <span style="font-family:'Big Shoulders Display';font-weight:800;font-size:40px;line-height:1;text-transform:uppercase">14 avenue des Raux<br>15250 Jussac</span>
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;max-width:460px">
+      <sc-for list="{{ hours }}" as="h"><div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 0;border-radius:8px;background:{{ h.bg }};color:{{ h.fg }}"><span style="font-weight:800;font-size:13px">{{ h.d }}</span><span style="font-size:11px;font-weight:600">{{ h.t }}</span></div></sc-for>
+    </div>
+    <span style="font-weight:600">Distributeur ouvert 7j/7 · 24h/24 · <a href="tel:0661998833" style="color:#ff5233">06 61 99 88 33</a></span>
+  </div>
+  <div style="position:relative;min-height:480px;background:#0e2a2e">
+    <iframe title="Carte Les Deux B Jussac" src="https://maps.google.com/maps?q=14%20avenue%20des%20Raux%2015250%20Jussac&amp;z=14&amp;output=embed" style="position:absolute;inset:0;width:100%;height:100%;border:0;filter:grayscale(1) contrast(1.1)" loading="lazy"></iframe>
+    <div style="position:absolute;inset:0;background:#17a2b2;mix-blend-mode:multiply;pointer-events:none"></div>
+  </div>
+</section>
+
+<section id="evenements" style="background:#ff5233;color:#fff3df">
+  <div style="max-width:1320px;margin:0 auto;padding:96px 28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:56px">
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <span style="align-self:flex-start;background:#0e2a2e;color:#ffc53d;padding:8px 14px;border-radius:4px;font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase">Mariage · fête · réception</span>
+      <h2 style="margin:0;font-family:'Big Shoulders Display';font-weight:900;text-transform:uppercase;font-size:clamp(64px,8vw,120px);line-height:.82">Réservez<br>Léon</h2>
+      <p style="margin:0;font-size:18px;line-height:1.55;font-weight:500;max-width:440px">Le camion se déplace avec ses burgers maison sur vos mariages, anniversaires, fêtes de village et repas d'entreprise.</p>
+    </div>
+    <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:16px;justify-content:center"><span style="font-family:'Big Shoulders Display';font-weight:900;font-size:80px;line-height:.85;text-transform:uppercase">Bien reçu !</span><span style="font-size:18px;font-weight:600">On vous rappelle très vite.</span><button onClick="{{ reset }}" style="align-self:flex-start;border:3px solid #fff3df;background:transparent;padding:14px 20px;border-radius:6px;font-weight:800;cursor:pointer;text-transform:uppercase;letter-spacing:.08em">Nouvelle demande</button></div>
+    </sc-if>
+    <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+      <form onSubmit="{{ submit }}" style="display:flex;flex-direction:column;gap:26px">
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><sc-for list="{{ evts }}" as="e"><button type="button" onClick="{{ e.pick }}" style="padding:12px 16px;border-radius:6px;border:3px solid #0e2a2e;background:{{ e.bg }};color:{{ e.fg }};cursor:pointer;font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap">{{ e.n }}</button></sc-for></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:22px">
+          <input required placeholder="Nom" style="background:transparent;border:0;border-bottom:3px solid #fff3df;padding:10px 0;font-size:22px;font-weight:600;outline:none">
+          <input required type="tel" placeholder="Téléphone" style="background:transparent;border:0;border-bottom:3px solid #fff3df;padding:10px 0;font-size:22px;font-weight:600;outline:none">
+          <input placeholder="Date de l'événement" style="background:transparent;border:0;border-bottom:3px solid #fff3df;padding:10px 0;font-size:22px;font-weight:600;outline:none">
+          <input placeholder="Nombre d'invités" style="background:transparent;border:0;border-bottom:3px solid #fff3df;padding:10px 0;font-size:22px;font-weight:600;outline:none">
+        </div>
+        <input placeholder="Lieu (commune, salle…)" style="background:transparent;border:0;border-bottom:3px solid #fff3df;padding:10px 0;font-size:22px;font-weight:600;outline:none">
+        <textarea rows="3" placeholder="Dites-nous tout" style="background:transparent;border:0;border-bottom:3px solid #fff3df;padding:10px 0;font-size:22px;font-weight:600;outline:none;resize:vertical"></textarea>
+        <button type="submit" style="align-self:flex-start;background:#0e2a2e;color:#fff3df;border:0;padding:20px 30px;border-radius:6px;font-weight:800;font-size:15px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer">Envoyer la demande →</button>
+      </form>
+    </sc-if>
+  </div>
+</section>
+
+<footer style="background:#0e2a2e;color:#fff3df;overflow:hidden">
+  <div style="max-width:1320px;margin:0 auto;padding:56px 28px 0;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;font-weight:700;font-size:14px;letter-spacing:.06em;text-transform:uppercase">
+    <span>14 av. des Raux · 15250 Jussac · contact@les-deux-b.com</span>
+    <span style="display:flex;gap:20px"><a href="#top" style="color:#ffc53d">Facebook</a><a href="#top" style="color:#ffc53d">Instagram</a></span>
+  </div>
+  <div style="font-family:'Big Shoulders Display';font-weight:900;text-transform:uppercase;font-size:clamp(90px,19vw,290px);line-height:.8;text-align:center;color:#17a2b2;padding:30px 0 0;margin-bottom:-.12em;white-space:nowrap">Les Deux B</div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const PIZZAS = [
+  ['Classique', '11€50', 'Tomate, jambon, champignons, emmental, mozzarella'],
+  ['Végé', '11€50', 'Tomate, courgettes, poivrons marinés, champignon, oignons, emmental, mozzarella'],
+  ['Auvergnate', '12€50', 'Crème, jambon de pays, patates, cantal'],
+  ['Locale', '13€', 'Tomate, bleu, cantal, St-Nectaire, rocamadour'],
+  ['3 Fromages', '13€', 'Tomate, rocamadour, emmental, mozzarella bufflonne'],
+  ['Roca', '13€', 'Crème, rocamadour, miel, emmental, mozzarella'],
+  ['Tartiflette', '13€', 'Crème, reblochon, lardons, patates, emmental, mozzarella'],
+  ['Piquante', '13€', 'Tomates, chorizo, poivrons, paprika, emmental, mozzarella'],
+  ['Indienne', '13€50', 'Crème, poulet, lardons, champignons, curry, emmental, mozzarella'],
+  ['Burger', '13€50', 'Tomate, steak haché, cheddar, oignons, cornichons, emmental, mozzarella'],
+];
+const BURGERS = [
+  ['Le 12 Balles', '12€', 'Burger + frites, pain burger fait maison'],
+  ['Burger', '10€', 'Pain maison, viande ou végé, fromage, sauce maison'],
+  ['B-Croc', '6€', ''],
+  ['B-Wrap', '5€', ''],
+  ['Nuggets', '5 / 8 / 11€', 'Par 6, 10 ou 20'],
+  ['Lou Pitiou', '9€80', 'B-Croc ou nuggets, frites, B-Tea, moelleux ou B-Nut'],
+  ['Frites', '3€', ''],
+];
+const DESSERTS = [
+  ['Tiramisu', '4€', 'Spéculos ou Nutella'],
+  ['Moelleux', '4€', ''],
+  ['B-Nut', '4€', 'Panini Nutella'],
+  ['Panna cotta', '4€', 'Fruits rouges ou exotique'],
+  ['Dessert du mois', '4€', 'Demandez au comptoir'],
+];
+const TABS = [['Pizzas', PIZZAS], ['Burgers', BURGERS], ['Desserts', DESSERTS]];
+const REVIEWS = [
+  { n: 'Camille R.', t: 'il y a 2 semaines', tag: 'Léon', s: "Le pain maison fait toute la différence. On guette le camion chaque mercredi !" },
+  { n: 'Sophie L.', t: 'il y a 3 mois', tag: 'Mariage', s: "Léon est venu à notre mariage, tout le monde a adoré." },
+  { n: 'Thomas B.', t: 'il y a 1 mois', tag: 'Distributeur', s: "Le distributeur m'a sauvé un dimanche à 23h. La Roca au miel, validée." },
+  { n: 'Julien M.', t: 'il y a 1 mois', tag: 'Magasin', s: "La Locale avec les fromages du coin, une tuerie." },
+];
+const JOURS = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+const EVTS = ['Mariage', 'Anniversaire', 'Fête de village', 'Entreprise', 'Autre'];
+const HOURS = [['L', 'Fermé'], ['M', '18–21h'], ['M', '18–21h'], ['J', '18–21h'], ['V', '18–21h'], ['S', '18–21h'], ['D', 'Fermé']];
+
+class Component extends DCLogic {
+  state = { tab: 0, hover: -1, tour: [], semaine: '', day: 0, flip: false, now: new Date(), rv: 0, evt: 0, sent: false };
+  componentDidMount() {
+    import(new URL('./tournee.js', document.baseURI).href).then(m => {
+      const today = JOURS[new Date().getDay()];
+      this.setState({ tour: m.TOURNEE, semaine: m.SEMAINE, day: Math.max(0, m.TOURNEE.findIndex(s => s.jour === today)) });
+    });
+    this.tick = setInterval(() => this.setState({ now: new Date() }), 20000);
+  }
+  componentWillUnmount() { clearInterval(this.tick); }
+  renderVals() {
+    const st = this.state, n = st.tour.length, pos = i => n > 1 ? 9 + i * 82 / (n - 1) : 50;
+    const now = st.now, wd = (now.getDay() + 6) % 7;
+    const r = REVIEWS[st.rv];
+    return {
+      tabs: TABS.map((t, i) => ({ n: t[0], bg: st.tab === i ? '#ffc53d' : 'transparent', fg: st.tab === i ? '#0e2a2e' : '#fff3df', pick: () => this.setState({ tab: i, hover: -1 }) })),
+      rows: TABS[st.tab][1].map((p, i) => ({ num: String(i + 1).padStart(2, '0'), name: p[0], price: p[1], desc: p[2], bg: st.hover === i ? '#ffc53d' : 'transparent', hover: () => this.setState({ hover: i }) })),
+      semaine: st.semaine,
+      stops: st.tour.map((s, i) => ({ ...s, short: s.jour.slice(0, 3), dd: s.date.split(' ')[0], left: pos(i) + '%', fg: i === st.day ? '#ffc53d' : '#fff3df', scale: i === st.day ? 1.12 : 0.92, op: i === st.day ? 1 : 0.45,
+        go: () => this.setState(p => ({ day: i, flip: i < p.day ? true : i > p.day ? false : p.flip })) })),
+      truckLeft: pos(st.day) + '%', truckFlip: st.flip ? 'scaleX(-1)' : 'none',
+      clock: now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }), clockDay: JOURS[now.getDay()],
+      review: r, reviewPos: `${st.rv + 1} / ${REVIEWS.length}`,
+      prevReview: () => this.setState(p => ({ rv: (p.rv + REVIEWS.length - 1) % REVIEWS.length })),
+      nextReview: () => this.setState(p => ({ rv: (p.rv + 1) % REVIEWS.length })),
+      hours: HOURS.map((h, i) => ({ d: h[0], t: h[1], bg: i === wd ? '#ff5233' : h[1] === 'Fermé' ? 'rgba(14,42,46,.08)' : '#0e2a2e', fg: i === wd || h[1] !== 'Fermé' ? '#fff3df' : '#0e2a2e' })),
+      evts: EVTS.map((e, i) => ({ n: e, bg: st.evt === i ? '#0e2a2e' : 'transparent', fg: st.evt === i ? '#fff3df' : '#0e2a2e', pick: () => this.setState({ evt: i }) })),
+      sent: st.sent, notSent: !st.sent,
+      submit: e => { e.preventDefault(); this.setState({ sent: true }); }, reset: () => this.setState({ sent: false }),
+    };
+  }
+}
+</script>
+</body>
+</html>

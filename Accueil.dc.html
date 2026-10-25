@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Big+Shoulders+Display:wght@700;800;900&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#ece3d5;color:#22170f;font-family:Archivo,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#22170f;text-decoration:none}
+a:hover{color:#3e7a8c}
+input,textarea,select,button{font:inherit;color:inherit}
+::placeholder{color:rgba(236,227,213,.55)}
+section{scroll-margin-top:72px}
+</style>
+</helmet>
+
+<header style="position:sticky;top:0;z-index:30;background:#22170f;color:#ece3d5">
+  <div style="max-width:1320px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:20px">
+    <a href="Accueil.dc.html" style="display:flex;align-items:center;gap:12px;color:#ece3d5"><img src="assets/logo.png" alt="Deux B" style="width:44px;height:44px;display:block"><span style="font-family:'Big Shoulders Display';font-weight:900;font-size:26px;letter-spacing:.02em;text-transform:uppercase;white-space:nowrap">Les Deux B</span></a>
+    <sc-if value="{{ notMobile }}" hint-placeholder-val="{{ true }}">
+      <nav style="display:flex;gap:22px;margin-left:auto;font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap">
+        <a href="Accueil.dc.html" style="color:#ece3d5;border-bottom:2px solid #8fbccb;padding-bottom:3px">Accueil</a>
+        <a href="Magasin.dc.html" style="color:#ece3d5;">Le magasin</a>
+        <a href="Leon.dc.html" style="color:#ece3d5;">Léon le camion</a>
+        <a href="#faq" style="color:#ece3d5;">FAQ</a>
+      </nav>
+      <a href="#contact" style="background:#ece3d5;color:#22170f;padding:10px 16px;border-radius:6px;font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap">Contact</a>
+    </sc-if>
+    <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+      <button onClick="{{ toggleMenu }}" aria-label="Menu" style="margin-left:auto;width:48px;height:48px;border-radius:8px;border:2px solid rgba(236,227,213,.5);background:transparent;color:#ece3d5;font-size:22px;font-weight:700;cursor:pointer">{{ menuIcon }}</button>
+    </sc-if>
+  </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <nav style="display:flex;flex-direction:column;padding:6px 20px 24px;border-top:1px solid rgba(236,227,213,.15)">
+      <a href="Accueil.dc.html" onClick="{{ closeMenu }}" style="color:#8fbccb;font-family:'Big Shoulders Display';font-weight:900;font-size:36px;line-height:1.1;text-transform:uppercase;padding:10px 0;border-bottom:1px solid rgba(236,227,213,.12)">Accueil</a>
+      <a href="Magasin.dc.html" onClick="{{ closeMenu }}" style="color:#ece3d5;font-family:'Big Shoulders Display';font-weight:900;font-size:36px;line-height:1.1;text-transform:uppercase;padding:10px 0;border-bottom:1px solid rgba(236,227,213,.12)">Le magasin</a>
+      <a href="Leon.dc.html" onClick="{{ closeMenu }}" style="color:#ece3d5;font-family:'Big Shoulders Display';font-weight:900;font-size:36px;line-height:1.1;text-transform:uppercase;padding:10px 0;border-bottom:1px solid rgba(236,227,213,.12)">Léon le camion</a>
+      <a href="#faq" onClick="{{ closeMenu }}" style="color:#ece3d5;font-family:'Big Shoulders Display';font-weight:900;font-size:36px;line-height:1.1;text-transform:uppercase;padding:10px 0;border-bottom:1px solid rgba(236,227,213,.12)">FAQ</a>
+      <a href="#contact" onClick="{{ closeMenu }}" style="margin-top:18px;text-align:center;background:#ece3d5;color:#22170f;padding:16px;border-radius:8px;font-weight:800;font-size:15px;letter-spacing:.08em;text-transform:uppercase">Contact · 06 61 99 88 33</a>
+    </nav>
+  </sc-if>
+</header>
+
+<section id="top" style="position:relative;overflow:hidden;background:#ece3d5">
+  <div style="max-width:1320px;margin:0 auto;padding:clamp(24px,3.4vw,44px) 20px 0;display:flex;flex-direction:column;align-items:center;text-align:center">
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:clamp(14px,2vw,24px)">
+      <span style="border:2px solid #22170f;padding:7px 12px;border-radius:4px;font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase">Street food · Jussac, Cantal</span>
+    </div>
+    <sc-if value="{{ notHeroSmall }}" hint-placeholder-val="{{ true }}"><h1 style="position:relative;z-index:1;margin:0;font-family:'Big Shoulders Display';font-weight:900;text-transform:uppercase;font-size:clamp(56px,10.6vw,170px);line-height:.86;letter-spacing:-.005em;white-space:nowrap">Pizza. Burger. <span style="color:transparent;-webkit-text-stroke:3px #22170f">Léon.</span></h1></sc-if>
+    <sc-if value="{{ heroSmall }}" hint-placeholder-val="{{ false }}"><h1 style="position:relative;z-index:1;margin:0;font-family:'Big Shoulders Display';font-weight:900;text-transform:uppercase;line-height:.88;letter-spacing:-.005em;display:flex;flex-direction:column;align-items:center"><span style="font-size:15vw;white-space:nowrap">Pizza. Burger.</span><span style="font-size:33vw;color:transparent;-webkit-text-stroke:2.5px #22170f">Léon.</span></h1></sc-if>
+    <sc-if value="{{ heroSide }}" hint-placeholder-val="{{ true }}">
+    <div style="position:relative;z-index:2;width:100%;display:grid;grid-template-columns:minmax(0,1fr) min(600px,46%) minmax(0,1fr);gap:clamp(16px,2.4vw,36px);align-items:end;margin-top:{{ heroOverlap }}">
+      <p style="margin:0 0 96px;text-align:left;font-size:17px;line-height:1.5;font-weight:500;max-width:310px;justify-self:start;text-wrap:pretty">Tout est fait maison, du pain burger aux desserts. Au magasin de Jussac, au distributeur 24h/24, ou quand Léon passe dans votre village.</p>
+      <img src="assets/web/leon-photo.png" alt="Léon le camion" style="position:relative;width:100%;display:block;margin-bottom:-56px;filter:drop-shadow(0 24px 18px rgba(34,23,15,.28))">
+      <div style="display:flex;flex-direction:column;gap:10px;justify-self:end;margin-bottom:96px">
+        <a href="Magasin.dc.html" style="background:#22170f;color:#ece3d5;padding:17px 24px;border-radius:6px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:14px;text-align:center;white-space:nowrap">Le magasin</a>
+        <a href="Leon.dc.html" style="background:#3e7a8c;color:#fff;padding:17px 24px;border-radius:6px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:14px;text-align:center;white-space:nowrap">Léon le camion →</a>
+      </div>
+    </div>
+    </sc-if>
+    <sc-if value="{{ notHeroSide }}" hint-placeholder-val="{{ false }}">
+    <div style="position:relative;z-index:2;width:100%;display:flex;justify-content:center;margin-top:{{ heroOverlap }}">
+      <img src="assets/web/leon-photo.png" alt="Léon le camion" style="position:relative;width:{{ heroTruckW }};display:block;margin-bottom:-36px;filter:drop-shadow(0 24px 18px rgba(34,23,15,.28))">
+    </div>
+    </sc-if>
+  </div>
+  <div style="position:relative;z-index:1;background:#22170f;color:#ece3d5">
+    <sc-if value="{{ notHeroSide }}" hint-placeholder-val="{{ false }}">
+    <div style="padding:56px 20px 24px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px">
+      <p style="margin:0;font-size:16px;line-height:1.5;max-width:420px;font-weight:500;text-wrap:pretty">Tout est fait maison, du pain burger aux desserts. Au magasin de Jussac, au distributeur 24h/24, ou quand Léon passe dans votre village.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+        <a href="Magasin.dc.html" style="background:#ece3d5;color:#22170f;padding:17px 22px;border-radius:6px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:14px">Le magasin</a>
+        <a href="Leon.dc.html" style="background:#3e7a8c;color:#fff;padding:17px 22px;border-radius:6px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:14px">Léon le camion →</a>
+      </div>
+    </div>
+    </sc-if>
+    <sc-if value="{{ heroSide }}" hint-placeholder-val="{{ true }}"><div style="height:64px"></div></sc-if>
+  </div>
+</section>
+
+<section id="choix" style="background:#22170f;color:#ece3d5">
+  <div style="max-width:1320px;margin:0 auto;padding:40px 20px 64px;border-top:1px solid rgba(236,227,213,.14)">
+    <div style="display:flex;justify-content:space-between;align-items:end;gap:16px 32px;flex-wrap:wrap;margin-bottom:24px;padding:0 8px">
+      <h2 style="margin:0;font-family:'Big Shoulders Display';font-weight:900;text-transform:uppercase;font-size:clamp(40px,5vw,72px);line-height:1.04">Deux façons<br><span style="color:#8fbccb">de manger Deux B</span></h2>
+      <p style="margin:0;max-width:380px;font-size:16px;line-height:1.55;font-weight:500;opacity:.85">Le magasin de Jussac pour les pizzas, burgers et desserts. Léon pour les burgers dans votre village et vos événements.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:16px">
+      <a href="Magasin.dc.html" style="position:relative;overflow:hidden;background:#ece3d5;color:#22170f;border-radius:18px;padding:24px 26px;min-height:200px;display:flex;flex-direction:column;gap:14px">
+        <img src="assets/web/pizza.png" alt="" style="position:absolute;right:-70px;bottom:-60px;width:min(300px,62%);pointer-events:none">
+        <div style="position:relative;display:flex;flex-direction:column;gap:10px;max-width:62%">
+          <span style="font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#3e7a8c">01 · Le magasin, Jussac</span>
+          <span style="font-family:'Big Shoulders Display';font-weight:900;font-size:clamp(34px,3.8vw,50px);line-height:1.02;text-transform:uppercase">Pizza, burger &amp; dessert</span>
+        </div>
+        <div style="position:relative;display:flex;flex-direction:column;gap:12px;align-items:flex-start;max-width:62%;margin-top:auto">
+          <span style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600"><span style="flex:none;width:9px;height:9px;border-radius:50%;background:{{ shop.dot }}"></span>{{ shop.full }}</span>
+          <span style="background:#22170f;color:#ece3d5;padding:11px 16px;border-radius:6px;font-weight:800;text-transform:uppercase;font-size:12px;letter-spacing:.08em;white-space:nowrap">Voir le magasin →</span>
+        </div>
+      </a>
+      <a href="Leon.dc.html" style="position:relative;overflow:hidden;background:#3e7a8c;color:#fff;border-radius:18px;padding:24px 26px;min-height:200px;display:flex;flex-direction:column;gap:14px">
+        <img src="assets/web/leon-dessin.png" alt="" style="position:absolute;right:-60px;bottom:-10px;width:min(340px,68%);pointer-events:none">
+        <div style="position:relative;display:flex;flex-direction:column;gap:10px;max-width:60%">
+          <span style="font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#e3eef1">02 · Léon le camion</span>
+          <span style="font-family:'Big Shoulders Display';font-weight:900;font-size:clamp(34px,3.8vw,50px);line-height:1.02;text-transform:uppercase">Le burger vient chez vous</span>
+        </div>
+        <div style="position:relative;display:flex;flex-direction:column;gap:12px;align-items:flex-start;max-width:58%;margin-top:auto">
+          <span style="font-size:14px;font-weight:600">{{ tonight }}</span>
+          <span style="background:#22170f;color:#ece3d5;padding:11px 16px;border-radius:6px;font-weight:800;text-transform:uppercase;font-size:12px;letter-spacing:.08em;white-space:nowrap">Voir la tournée →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="gouts" style="overflow:hidden">
+  <div data-reveal="0" style="max-width:1320px;margin:0 auto;padding:72px 28px 32px;display:flex;flex-direction:column;align-items:flex-start;gap:14px">
+    <span style="border:2px solid #22170f;padding:7px 12px;border-radius:4px;font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase">Tout est fait maison</span>
+    <h2 style="margin:0;font-family:'Big Shoulders Display';font-weight:900;text-transform:uppercase;font-size:clamp(40px,5.2vw,80px);line-height:1.02">Ce soir, team <span style="color:#22170f">pizza</span><br>ou team <span style="color:transparent;-webkit-text-stroke:2px #22170f">burger</span> ?</h2>
+  </div>
+  <div style="position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,540px),1fr))">
+    <div style="position:relative;background:#e0d4c2;padding:40px clamp(20px,3.5vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:24px 32px;align-items:center;overflow:hidden">
+      <div style="position:relative;width:100%;max-width:280px;justify-self:center;aspect-ratio:1/1">
+                <img ref="{{ spinRef }}" src="assets/web/pizza-ronde.png" alt="Pizza maison" style="position:absolute;inset:0;width:100%;height:100%;display:block;filter:drop-shadow(0 16px 14px rgba(34,23,15,.3));will-change:transform">
+        <span style="position:absolute;right:-6px;top:-8px;width:76px;height:76px;border-radius:50%;background:#22170f;color:#ece3d5;display:grid;place-items:center;text-align:center;font-family:'Big Shoulders Display';font-weight:900;font-size:24px;line-height:1;transform:rotate(-8deg)">Ø 31<br><span style="font-size:13px">cm</span></span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:18px;min-width:0">
+      <div style="display:flex;flex-direction:column;border-top:2px solid #22170f">
+        <div style="display:flex;gap:14px;align-items:baseline;padding:11px 0;border-bottom:2px solid #22170f"><span style="font-family:'Big Shoulders Display';font-weight:900;font-size:20px;color:#22170f">01</span><span style="font-weight:700;font-size:15px">10 recettes, et la vôtre à composer</span></div>
+        <div style="display:flex;gap:14px;align-items:baseline;padding:11px 0;border-bottom:2px solid #22170f"><span style="font-family:'Big Shoulders Display';font-weight:900;font-size:20px;color:#22170f">02</span><span style="font-weight:700;font-size:15px">Bleu, cantal, St-Nectaire, rocamadour</span></div>
+        <div style="display:flex;gap:14px;align-items:baseline;padding:11px 0;border-bottom:2px solid #22170f"><span style="font-family:'Big Shoulders Display';font-weight:900;font-size:20px;color:#22170f">03</span><span style="font-weight:700;font-size:15px">Au magasin et au distributeur 24h/24</span></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <span style="font-family:'Big Shoulders Display';font-weight:900;font-size:36px;line-height:1">dès 11€50</span>
+        <a href="Magasin.dc.html#carte" style="background:#22170f;color:#ece3d5;padding:15px 20px;border-radius:6px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:13px">Les pizzas →</a>
+      </div>
+      </div>
+    </div>
+    <div style="position:relative;background:#22170f;color:#ece3d5;padding:40px clamp(20px,3.5vw,48px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:24px 32px;align-items:center;overflow:hidden">
+      <div style="position:relative;width:100%;max-width:300px;justify-self:center;aspect-ratio:1/0.8;display:grid;place-items:center">
+        <div style="position:absolute;left:6%;right:6%;top:0;bottom:0;border-radius:50%;background:#33251a"></div>
+        <img ref="{{ bobRef }}" src="assets/web/burger.png" alt="Burger maison" style="position:relative;width:86%;display:block;filter:drop-shadow(0 22px 18px rgba(0,0,0,.45));will-change:transform">
+        <span style="position:absolute;left:-6px;top:-8px;width:76px;height:76px;border-radius:50%;background:#ece3d5;color:#22170f;display:grid;place-items:center;text-align:center;font-family:'Big Shoulders Display';font-weight:900;font-size:26px;line-height:1;transform:rotate(8deg)">300<br><span style="font-size:12px">grammes</span></span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:18px;min-width:0">
+      <div style="display:flex;flex-direction:column;border-top:2px solid #ece3d5">
+        <div style="display:flex;gap:14px;align-items:baseline;padding:11px 0;border-bottom:2px solid rgba(236,227,213,.5)"><span style="font-family:'Big Shoulders Display';font-weight:900;font-size:20px;color:#e0d4c2">01</span><span style="font-weight:700;font-size:15px">Pain burger fait maison</span></div>
+        <div style="display:flex;gap:14px;align-items:baseline;padding:11px 0;border-bottom:2px solid rgba(236,227,213,.5)"><span style="font-family:'Big Shoulders Display';font-weight:900;font-size:20px;color:#e0d4c2">02</span><span style="font-weight:700;font-size:15px">4 sauces maison, dont la Cantalou</span></div>
+        <div style="display:flex;gap:14px;align-items:baseline;padding:11px 0;border-bottom:2px solid rgba(236,227,213,.5)"><span style="font-family:'Big Shoulders Display';font-weight:900;font-size:20px;color:#e0d4c2">03</span><span style="font-weight:700;font-size:15px">Au magasin et dans le camion de Léon</span></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+        <span style="font-family:'Big Shoulders Display';font-weight:900;font-size:36px;line-height:1">Le 12 Balles · 12€</span>
+        <a href="Leon.dc.html#menu" style="background:#ece3d5;color:#22170f;padding:15px 20px;border-radius:6px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:13px">Les burgers →</a>
+      </div>
+      </div>
+    </div>
+    <span style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:84px;height:84px;border-radius:50%;background:#ece3d5;color:#22170f;border:3px solid #22170f;display:{{ duelOu }};place-items:center;font-family:'Big Shoulders Display';font-weight:900;font-size:34px;z-index:2">OU</span>
+  </div>
+</section>
+
+<section id="nous" style="max-width:1320px;margin:0 auto;padding:96px 28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:56px;align-items:center">
+  <div data-reveal="0" style="display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:16px;align-items:center;max-width:540px;width:100%;justify-self:center;padding:8px 6px">
+    <div style="background:#fffaf2;padding:7px;box-shadow:0 14px 26px -14px rgba(34,23,15,.5);transform:rotate(-2.5deg)"><div style="position:relative;aspect-ratio:3/4;overflow:hidden"><image-slot id="b-nous-2" shape="rect" placeholder="Photo : le pain maison" style="position:absolute;inset:0"></image-slot></div></div>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="background:#fffaf2;padding:7px;box-shadow:0 14px 26px -14px rgba(34,23,15,.5);transform:rotate(2deg)"><div style="position:relative;aspect-ratio:16/10;overflow:hidden"><image-slot id="b-nous-1" shape="rect" placeholder="Photo : Léon le camion" style="position:absolute;inset:0"></image-slot></div></div>
+      <div style="background:#fffaf2;padding:7px;box-shadow:0 14px 26px -14px rgba(34,23,15,.5);transform:rotate(-1.5deg)"><div style="position:relative;aspect-ratio:4/3;overflow:hidden"><image-slot id="b-nous-3" shape="rect" placeholder="Photo : la boutique" style="position:absolute;inset:0"></image-slot></div></div>
+    </div>
+  </div>
+  <div data-reveal="120" style="display:flex;flex-direction:column;gap:24px">
+    <span style="align-self:flex-start;background:#22170f;color:#fff;padding:8px 14px;border-radius:4px;font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase">Originaires du Cantal</span>
+    <h2 style="margin:0;font-family:'Big Shoulders Display';font-weight:900;text-transform:uppercase;font-size:clamp(52px,6.6vw,96px);line-height:1.04">Fini le goût<br>industriel !</h2>
+    <p style="margin:0;font-size:18px;line-height:1.6;font-weight:500;max-width:540px">Après avoir lancé le concept des burgers dans le restaurant de mes parents, nous avons pris notre envol en proposant nos propres produits. Les Deux B, c'est des pizzas maison, Léon le camion à burgers, et une boutique pleine de produits locaux et de fabrication artisanale !</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <span style="border:2px solid #22170f;padding:10px 14px;border-radius:6px;font-weight:700">Des pains élaborés par mes soins</span>
+      <span style="border:2px solid #22170f;padding:10px 14px;border-radius:6px;font-weight:700">Boissons locales &amp; B-Tea maison</span>
+      <span style="border:2px solid #22170f;padding:10px 14px;border-radius:6px;font-weight:700">Un burger de 300 g</span>
+    </div>
+  </div>
+</section>
+
+<section id="avis" style="background:#e0d4c2;border-top:3px solid #22170f;border-bottom:3px solid #22170f;overflow:hidden">
+  <div style="max-width:1320px;margin:0 auto;padding:72px 28px 8px">
+    <div data-reveal="0" style="display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap">
+      <h2 style="margin:0;font-family:'Big Shoulders Display';font-weight:900;text-transform:uppercase;font-size:clamp(44px,5.2vw,80px);line-height:1.04">Les tickets<br>du comptoir</h2>
+      <div style="display:flex;align-items:center;gap:16px;background:#f6f0e6;border:2px solid #22170f;border-radius:14px;padding:14px 20px">
+        <svg viewBox="0 0 48 48" style="width:40px;height:40px;flex:none"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.6-.4-3.5z"></path><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"></path><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"></path><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.5z"></path></svg>
+        <span style="display:flex;flex-direction:column;gap:2px"><span style="font-family:'Big Shoulders Display';font-weight:900;font-size:40px;line-height:.9">4,6 / 5</span><span style="font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase">★★★★★ · Avis Google</span></span>
+      </div>
+    </div>
+  </div>
+  <div onMouseEnter="{{ pauseMq }}" onMouseLeave="{{ playMq }}" onTouchStart="{{ pauseMq }}" onTouchEnd="{{ playMq }}" style="overflow:hidden;padding:28px 0 36px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)">
+    <div ref="{{ trackRef }}" style="display:flex;gap:24px;width:max-content;align-items:flex-start;will-change:transform">
+      <sc-for list="{{ reviewsLoop }}" as="r" hint-placeholder-count="6">
+        <div style="flex:none;width:300px;transform:rotate({{ r.rot }});filter:drop-shadow(0 10px 14px rgba(34,23,15,.14))">
+          <div style="background:#f6f0e6;padding:22px 22px 18px;display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase">
+              <span style="opacity:.6">Ticket n° {{ r.num }}</span>
+              <span style="padding:4px 9px;border-radius:4px;background:{{ r.tagBg }};color:{{ r.tagFg }};border:2px solid {{ r.tagBd }}">{{ r.tag }}</span>
+            </div>
+            <div style="border-top:2px dashed rgba(34,23,15,.3)"></div>
+            <span style="letter-spacing:3px;font-size:16px">★★★★★</span>
+            <p style="margin:0;font-family:'Big Shoulders Display';font-weight:800;font-size:24px;line-height:1.05;text-transform:uppercase;text-wrap:pretty">{{ r.s }}</p>
+            <div style="border-top:2px dashed rgba(34,23,15,.3)"></div>
+            <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:600"><span>{{ r.n }}</span><span style="opacity:.6">{{ r.t }}</span></div>
+          </div>
+          <div style="height:10px;background:radial-gradient(circle at 8px 10px,transparent 6.5px,#f6f0e6 7px) 0 0/16px 10px repeat-x"></div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  <div style="max-width:1320px;margin:0 auto;padding:0 28px 64px">
+    <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap">
+      <a href="https://www.google.com/maps/search/Les+Deux+B+Jussac" style="display:flex;align-items:center;gap:12px;background:#22170f;color:#ece3d5;padding:18px 26px;border-radius:6px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:14px">Laisser un avis sur Google →</a>
+      <a href="https://www.google.com/maps/search/Les+Deux+B+Jussac" style="border:2px solid #22170f;padding:16px 24px;border-radius:6px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:14px">Voir tous les avis</a>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="background:#e0d4c2;border-top:3px solid #22170f">
+  <div style="max-width:1320px;margin:0 auto;padding:{{ faqPad }};display:grid;grid-template-columns:{{ faqCols }};gap:{{ faqGap }};align-items:start">
+    <div data-reveal="0" style="display:flex;flex-direction:column;gap:22px;position:{{ faqPos }};top:96px;padding:0 8px">
+      <span style="align-self:flex-start;border:2px solid #22170f;padding:7px 12px;border-radius:4px;font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase">FAQ</span>
+      <div style="display:grid;grid-template-columns:{{ faqHead }};gap:{{ faqHeadGap }};align-items:end">
+      <h2 style="margin:0;font-family:'Big Shoulders Display';font-weight:900;text-transform:uppercase;font-size:clamp(40px,6vw,92px);line-height:1.02">Vos<br>questions,<br><span style="color:#22170f">nos réponses</span></h2>
+      <div style="background:#22170f;color:#ece3d5;border-radius:14px;padding:clamp(14px,2vw,22px) clamp(14px,2vw,24px);display:flex;flex-direction:column;gap:clamp(6px,1vw,12px);max-width:380px">
+        <span style="font-weight:700;font-size:clamp(13px,1.2vw,15px);line-height:1.3">Pas trouvé votre réponse ?</span>
+        <a href="tel:0661998833" style="font-family:'Big Shoulders Display';font-weight:900;font-size:clamp(24px,6.2vw,36px);line-height:1;color:#ece3d5;white-space:nowrap">06 61 99 88 33</a>
+        <sc-if value="{{ notMobile }}" hint-placeholder-val="{{ true }}"><a href="#contact" style="align-self:flex-start;background:#ece3d5;color:#22170f;padding:12px 16px;border-radius:6px;font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase">Nous écrire →</a></sc-if>
+      </div>
+      </div>
+    </div>
+    <div style="min-width:0;display:flex;flex-direction:column;gap:12px">
+      <sc-for list="{{ faq }}" as="q" hint-placeholder-count="6">
+        <div style="border:2px solid #22170f;border-radius:14px;background:#f6f0e6;overflow:hidden">
+          <button onClick="{{ q.toggle }}" style="width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:center;padding:18px 20px 18px 24px;background:none;border:0;cursor:pointer;text-align:left;color:inherit">
+            <span style="font-family:'Big Shoulders Display';font-weight:800;font-size:clamp(22px,2.3vw,28px);line-height:1.1;text-transform:uppercase">{{ q.q }}</span>
+            <span style="width:42px;height:42px;border-radius:50%;border:2px solid #22170f;background:{{ q.iconBg }};color:{{ q.iconFg }};display:grid;place-items:center;transform:rotate({{ q.rot }});transition:transform .3s,background .25s,color .25s"><svg viewBox="0 0 20 20" style="width:16px;height:16px;display:block"><path d="M10 3v14M3 10h14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"></path></svg></span>
+          </button>
+          <sc-if value="{{ q.open }}"><p style="margin:0;padding:0 72px 22px 24px;font-size:17px;line-height:1.6;font-weight:500">{{ q.a }}</p></sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="background:#22170f;color:#ece3d5">
+  <div style="max-width:1320px;margin:0 auto;padding:96px 28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:56px">
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <span style="align-self:flex-start;border:2px solid #e0d4c2;color:#e0d4c2;padding:7px 12px;border-radius:4px;font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase">Contact · mariage · fête · réception</span>
+      <h2 style="margin:0;font-family:'Big Shoulders Display';font-weight:900;text-transform:uppercase;font-size:clamp(52px,6.4vw,96px);line-height:1.04">Une question ?<br><span style="color:#e0d4c2">Un événement ?</span></h2>
+      <p style="margin:0;font-size:18px;line-height:1.55;font-weight:500;max-width:440px">Léon se déplace sur vos mariages, anniversaires, fêtes de village et repas d'entreprise. Écrivez-nous, on vous rappelle.</p>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-top:8px;font-weight:700">
+        <a href="tel:0661998833" style="color:#ece3d5;font-family:'Big Shoulders Display';font-weight:900;font-size:40px;line-height:1">06 61 99 88 33</a>
+        <a href="mailto:contact@les-deux-b.com" style="color:#e0d4c2">contact@les-deux-b.com</a>
+      </div>
+    </div>
+    <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:16px;justify-content:center"><span style="font-family:'Big Shoulders Display';font-weight:900;font-size:72px;line-height:1.04;text-transform:uppercase">Bien reçu !</span><span style="font-size:18px;font-weight:600">On vous rappelle très vite.</span><button onClick="{{ reset }}" style="align-self:flex-start;border:2px solid #ece3d5;background:transparent;padding:14px 20px;border-radius:6px;font-weight:800;cursor:pointer;text-transform:uppercase;letter-spacing:.08em">Nouvelle demande</button></div>
+    </sc-if>
+    <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+      <form onSubmit="{{ submit }}" style="display:flex;flex-direction:column;gap:28px">
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><sc-for list="{{ evts }}" as="e"><button type="button" onClick="{{ e.pick }}" style="padding:12px 16px;border-radius:6px;border:2px solid #ece3d5;background:{{ e.bg }};color:{{ e.fg }};cursor:pointer;font-weight:800;font-size:13px;line-height:1;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap">{{ e.n }}</button></sc-for></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px">
+          <input required placeholder="Nom" style="background:transparent;border:0;border-bottom:2px solid rgba(236,227,213,.6);padding:12px 0;font-size:20px;font-weight:600;outline:none">
+          <input required type="tel" placeholder="Téléphone" style="background:transparent;border:0;border-bottom:2px solid rgba(236,227,213,.6);padding:12px 0;font-size:20px;font-weight:600;outline:none">
+          <input placeholder="Date (si événement)" style="background:transparent;border:0;border-bottom:2px solid rgba(236,227,213,.6);padding:12px 0;font-size:20px;font-weight:600;outline:none">
+          <input placeholder="Nombre d'invités" style="background:transparent;border:0;border-bottom:2px solid rgba(236,227,213,.6);padding:12px 0;font-size:20px;font-weight:600;outline:none">
+        </div>
+        <textarea rows="3" placeholder="Votre message" style="background:transparent;border:0;border-bottom:2px solid rgba(236,227,213,.6);padding:12px 0;font-size:20px;font-weight:600;outline:none;resize:vertical"></textarea>
+        <button type="submit" style="align-self:flex-start;background:#ece3d5;color:#22170f;border:0;padding:20px 30px;border-radius:6px;font-weight:800;font-size:15px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer">Envoyer →</button>
+      </form>
+    </sc-if>
+  </div>
+</section>
+
+<footer style="background:#1a110b;color:#ece3d5">
+  <div style="max-width:1320px;margin:0 auto;padding:64px 28px 36px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:36px 32px">
+    <div style="display:flex;flex-direction:column;gap:14px;align-items:flex-start">
+      <img src="assets/logo.png" alt="Les Deux B" style="width:72px;display:block">
+      <p style="margin:0;font-size:15px;line-height:1.55;font-weight:500;max-width:260px;opacity:.8">Pizzas, burgers et desserts faits maison à Jussac, dans le Cantal.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;font-size:15px;line-height:1.45">
+      <span style="font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#8fbccb;margin-bottom:4px">Le magasin</span>
+      <span style="font-weight:700">14 avenue des Raux, 15250 Jussac</span>
+      <span>Mardi au samedi · 18h – 21h</span>
+      <span>Distributeur 7j/7 · 24h/24</span>
+      <a href="Magasin.dc.html" style="color:#ece3d5;font-weight:700;text-decoration:underline;text-underline-offset:4px;margin-top:4px">Voir la carte</a>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;font-size:15px;line-height:1.45">
+      <span style="font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#8fbccb;margin-bottom:4px">Léon le camion</span>
+      <span style="font-weight:700">Un village différent chaque soir</span>
+      <span>Mariages, fêtes, repas d'entreprise</span>
+      <a href="Leon.dc.html#tournee" style="color:#ece3d5;font-weight:700;text-decoration:underline;text-underline-offset:4px;margin-top:4px">La tournée de la semaine</a>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <span style="font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#8fbccb;margin-bottom:2px">Contact</span>
+      <a href="tel:0661998833" style="color:#ece3d5;font-family:'Big Shoulders Display';font-weight:900;font-size:34px;line-height:1">06 61 99 88 33</a>
+      <a href="mailto:contact@les-deux-b.com" style="color:#ece3d5;font-size:15px">contact@les-deux-b.com</a>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">
+        <a href="#top" style="border:2px solid rgba(236,227,213,.4);color:#ece3d5;padding:9px 14px;border-radius:999px;font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase">Facebook</a>
+        <a href="#top" style="border:2px solid rgba(236,227,213,.4);color:#ece3d5;padding:9px 14px;border-radius:999px;font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase">Instagram</a>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1320px;margin:0 auto;padding:0 28px">
+    <div style="border-top:1px solid rgba(236,227,213,.15);padding:20px 0 8px;font-family:'Big Shoulders Display';font-weight:900;text-transform:uppercase;font-size:clamp(64px,15vw,210px);line-height:.95;text-align:center;color:#3e7a8c;white-space:nowrap">Les Deux B</div>
+  </div>
+  <div style="max-width:1320px;margin:0 auto;padding:12px 28px 28px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;font-weight:600;opacity:.6">
+    <span>© 2026 Les Deux B · Jussac, Cantal</span>
+    <a href="#top" style="color:#ece3d5">Mentions légales</a>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+// Vrais avis Google (fiche « Les Deux B - Pizzeria / Burger / Distributeur »). Ajouter les autres ici, texte tel quel.
+const REVIEWS = [
+  { n: 'Renaud S-A', t: 'il y a 6 mois', tag: 'Distributeur', s: "Une pizza vraiment excellente, artisanale et généreuse et surtout visiblement réalisée le jour même, car la fraîcheur est incontestable." },
+  { n: 'Patrick Rolland', t: 'il y a 7 mois', tag: 'Magasin', s: "nous nous sommes régaler nous vous recommander, contents merci nous allons essayer le burgers!!!!" },
+];
+const FAQ = [
+  { q: 'Où trouver Léon cette semaine ?', a: "Le planning de la tournée est sur la page Léon le camion, mis à jour chaque semaine. On le publie aussi sur Facebook et Instagram." },
+  { q: 'Le distributeur est-il vraiment ouvert la nuit ?', a: "Oui. Le distributeur est au 14 avenue des Raux à Jussac, à côté du magasin. Il est ouvert 7j/7 et 24h/24." },
+  { q: 'Sur place ou à emporter ?', a: "Les deux : vous pouvez manger au magasin ou emporter vos pizzas et burgers." },
+  { q: 'Peut-on commander par téléphone ?', a: "Appelez-nous au 06 61 99 88 33 pendant les horaires d'ouverture." },
+  { q: 'Léon peut-il venir à notre mariage ?', a: "Oui, Léon se déplace pour les mariages, fêtes, réceptions et repas d'entreprise. Remplissez le formulaire de contact et on vous rappelle." },
+  { q: 'Avez-vous des options végétariennes ?', a: "Oui : la pizza Végé, et le burger en version végé." },
+];
+const JOURS = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+const WEEK = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+const OPEN = { 2: 1, 3: 1, 4: 1, 5: 1, 6: 1 };
+const EVTS = ['Question', 'Mariage', 'Anniversaire', 'Fête de village', 'Entreprise'];
+
+function shopStatus(now) {
+  const d = now.getDay(), h = now.getHours() + now.getMinutes() / 60;
+  if (OPEN[d] && h >= 18 && h < 21) return { open: true, full: "Ouvert ce soir jusqu'à 21h" };
+  let nd = d; const today = OPEN[d] && h < 18;
+  if (!today) { do { nd = (nd + 1) % 7; } while (!OPEN[nd]); }
+  const when = today ? 'ce soir' : nd === (d + 1) % 7 ? 'demain' : JOURS[nd].toLowerCase();
+  return { open: false, full: `Ouvre ${when} à 18h · distributeur 24h/24` };
+}
+
+class Component extends DCLogic {
+  state = { now: new Date(), tour: [], evt: 0, sent: false, faq: 0, mobile: window.innerWidth < 820, menu: false, w: window.innerWidth };
+  spinRef = React.createRef(); heroSpinRef = React.createRef(); heroBobRef = React.createRef(); bobRef = React.createRef(); trackRef = React.createRef(); mq = { x: 0, paused: false, t: 0, v: 0.045 };
+  componentDidMount() {
+    import(new URL('./reveal.js?v=2', document.baseURI).href).then(m => { this.unreveal = m.initReveal(); });
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const loop = t => {
+      const el = this.trackRef.current, dt = this.mq.t ? Math.min(64, t - this.mq.t) : 0; this.mq.t = t;
+      if (el && !still) {
+        this.mq.v += ((this.mq.paused ? 0.007 : 0.045) - this.mq.v) * 0.06; this.mq.x -= dt * this.mq.v;
+        const half = (el.scrollWidth + 24) / 2; if (half > 30 && -this.mq.x >= half) this.mq.x += half;
+        el.style.transform = `translateX(${this.mq.x.toFixed(1)}px)`;
+      }
+      this.raf = requestAnimationFrame(loop);
+    };
+    this.raf = requestAnimationFrame(loop);
+    import(new URL('./tournee.js?v=3', document.baseURI).href).then(m => this.setState({ tour: m.TOURNEE }));
+    this.tick = setInterval(() => this.setState({ now: new Date() }), 30000);
+    this.onResize = () => { if (window.innerWidth !== this.state.w) this.setState({ w: window.innerWidth }); const m = window.innerWidth < 820; if (m !== this.state.mobile) this.setState({ mobile: m, menu: false }); };
+    this.onScroll = () => { const y = window.scrollY; if (this.spinRef.current) this.spinRef.current.style.transform = `rotate(${(y * 0.12).toFixed(1)}deg)`; if (this.heroSpinRef.current) this.heroSpinRef.current.style.transform = `rotate(${(y * 0.25).toFixed(1)}deg)`; if (this.heroBobRef.current) this.heroBobRef.current.style.transform = `translateY(${(-y * 0.08).toFixed(1)}px) rotate(${(-4 + y * 0.02).toFixed(1)}deg)`; if (this.bobRef.current) this.bobRef.current.style.transform = `translateY(${(Math.sin(y / 120) * 10).toFixed(1)}px) rotate(${(Math.sin(y / 200) * 3).toFixed(1)}deg)`; };
+    window.addEventListener('resize', this.onResize); window.addEventListener('scroll', this.onScroll, { passive: true });
+    if (location.hash) setTimeout(() => { const el = document.getElementById(location.hash.slice(1)); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 70 }); }, 500);
+  }
+  componentWillUnmount() { cancelAnimationFrame(this.raf); this.unreveal && this.unreveal(); clearInterval(this.tick); window.removeEventListener('resize', this.onResize); window.removeEventListener('scroll', this.onScroll); }
+  renderVals() {
+    const st = this.state, now = st.now, shop = shopStatus(now), todayName = JOURS[now.getDay()];
+    const today = st.tour.find(s => s.jour === todayName);
+    const next = st.tour.find(s => WEEK.indexOf(s.jour) > WEEK.indexOf(todayName)) || st.tour[0];
+    return {
+      shop: { ...shop, dot: shop.open ? '#7fd0a0' : '#8fbccb' },
+      tonight: today ? `Ce soir : ${today.village} · ${today.heure}` : next ? `Prochain arrêt : ${next.jour.toLowerCase()}, ${next.village}` : 'Un village différent chaque soir',
+      pauseMq: () => { this.mq.paused = true; }, playMq: () => { this.mq.paused = false; }, trackRef: this.trackRef,
+      reviewsLoop: (() => { const half = []; while (half.length < 6) half.push(...REVIEWS); return [...half, ...half]; })().map((r, j) => {
+        const i = j % 6;
+        const strong = r.tag === 'Léon' || r.tag === 'Magasin';
+        return { ...r, num: String(142 + i * 37).padStart(4, '0'), rot: ['-1deg', '0.8deg', '-0.4deg', '1.1deg', '-0.9deg', '0.5deg'][i],
+          tagBg: r.tag === 'Léon' ? '#3e7a8c' : r.tag === 'Magasin' ? '#22170f' : 'transparent', tagFg: strong ? '#fff' : '#22170f', tagBd: r.tag === 'Léon' ? '#3e7a8c' : '#22170f' };
+      }),
+      isMobile: st.mobile, notMobile: !st.mobile, heroSmall: st.w < 640, notHeroSmall: st.w >= 640, menuOpen: st.mobile && st.menu, menuIcon: st.menu ? '✕' : '☰',
+      toggleMenu: () => this.setState(p => ({ menu: !p.menu })), closeMenu: () => this.setState({ menu: false }),
+      spinRef: this.spinRef, bobRef: this.bobRef, heroSpinRef: this.heroSpinRef, heroBobRef: this.heroBobRef,
+      heroSide: st.w >= 1100, notHeroSide: st.w < 1100, heroTruckW: st.w < 640 ? '88%' : 'min(560px,64%)', heroSideW: st.w < 640 ? '34%' : 'min(300px,24%)', heroSideL: st.w < 640 ? '-8%' : '4%', heroOverlap: st.w < 640 ? '-19vw' : 'clamp(-90px,-5.4vw,-30px)',
+      faqPad: st.mobile ? '56px 20px 64px' : '96px 20px', faqGap: st.mobile ? '24px' : '40px', faqHead: st.mobile ? 'minmax(0,1.15fr) minmax(0,1fr)' : 'minmax(0,1fr)', faqHeadGap: st.mobile ? '14px' : '22px', duelOu: window.innerWidth >= 860 ? 'grid' : 'none', faqPos: st.mobile ? 'static' : 'sticky', faqCols: st.mobile ? 'minmax(0,1fr)' : 'minmax(0,0.8fr) minmax(0,1.4fr)',
+      faq: FAQ.map((f, i) => ({ ...f, open: st.faq === i, rot: st.faq === i ? '45deg' : '0deg', iconBg: st.faq === i ? '#22170f' : 'transparent', iconFg: st.faq === i ? '#ece3d5' : '#22170f', toggle: () => this.setState(p => ({ faq: p.faq === i ? -1 : i })) })),
+      evts: EVTS.map((e, i) => ({ n: e, bg: st.evt === i ? '#ece3d5' : 'transparent', fg: st.evt === i ? '#22170f' : '#ece3d5', pick: () => this.setState({ evt: i }) })),
+      sent: st.sent, notSent: !st.sent,
+      submit: e => { e.preventDefault(); const f = e.target, lines = [`Type de demande : ${EVTS[st.evt]}`]; f.querySelectorAll('input,textarea').forEach(el => { if (el.value.trim()) lines.push(`${el.placeholder} : ${el.value.trim()}`); }); window.location.href = 'mailto:contact@les-deux-b.com?subject=' + encodeURIComponent(`Demande ${EVTS[st.evt].toLowerCase()} – site Les Deux B`) + '&body=' + encodeURIComponent(lines.join('\n')); this.setState({ sent: true }); }, reset: () => this.setState({ sent: false }),
+    };
+  }
+}
+</script>
+</body>
+</html>
